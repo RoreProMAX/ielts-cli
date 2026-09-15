@@ -81,22 +81,23 @@ class FakeUpdater:
 
 
 class UpdateTuiTests(unittest.TestCase):
+    @contextlib.contextmanager
     def make_app(self, directory):
-        store = StateStore(directory)
-        store.__enter__()
-        library = StudyLibrary(CATALOG, store)
-        planner = StudyPlanner(directory)
-        routine = Routine(directory)
-        updater = FakeUpdater(directory)
-        app = ielts.TerminalStudy(library.session, store, library=library, planner=planner,
-                                  routine=routine, update_manager=updater,
-                                  audio_settings=AudioSettings(directory), pronouncer=FakePronouncer())
-        self.addCleanup(planner.close)
-        self.addCleanup(store.__exit__, None, None, None)
-        app.start_quiz('mixed', limit=1)
-        app.round.set_draft('can')
-        app.dirty = True
-        return app, updater
+        with StateStore(directory) as store:
+            library = StudyLibrary(CATALOG, store)
+            planner = StudyPlanner(directory)
+            try:
+                routine = Routine(directory)
+                updater = FakeUpdater(directory)
+                app = ielts.TerminalStudy(library.session, store, library=library, planner=planner,
+                                          routine=routine, update_manager=updater,
+                                          audio_settings=AudioSettings(directory), pronouncer=FakePronouncer())
+                app.start_quiz('mixed', limit=1)
+                app.round.set_draft('can')
+                app.dirty = True
+                yield app, updater
+            finally:
+                planner.close()
 
     def choose(self, app, value):
         index = next(i for i, row in enumerate(app.picker_rows) if row['value'] == value)
@@ -104,8 +105,7 @@ class UpdateTuiTests(unittest.TestCase):
         app.handle('\n')
 
     def test_available_update_is_only_a_banner_and_keeps_current_question(self):
-        with tempfile.TemporaryDirectory() as directory:
-            app, updater = self.make_app(directory)
+        with tempfile.TemporaryDirectory() as directory, self.make_app(directory) as (app, updater):
             before = app.round.snapshot()
             updater.status = {'state': 'available', 'version': '3.4.0', 'message': '发现稳定版 3.4.0'}
             app.poll_updates()
@@ -120,8 +120,7 @@ class UpdateTuiTests(unittest.TestCase):
             self.assertEqual(app.round.snapshot(), before)
 
     def test_automatic_check_obeys_setting_bypass_and_test_environment(self):
-        with tempfile.TemporaryDirectory() as directory, patch.dict(os.environ, {'IELTS_DISABLE_UPDATE_CHECK': '0'}):
-            app, updater = self.make_app(directory)
+        with tempfile.TemporaryDirectory() as directory, self.make_app(directory) as (app, updater), patch.dict(os.environ, {'IELTS_DISABLE_UPDATE_CHECK': '0'}):
             updater.auto_check = False
             self.assertFalse(app.start_update_check())
             updater.auto_check = True
@@ -134,8 +133,7 @@ class UpdateTuiTests(unittest.TestCase):
             self.assertEqual(updater.checks, 1)
 
     def test_menu_ten_and_learning_plan_toggle_keep_progress_and_allow_manual_check(self):
-        with tempfile.TemporaryDirectory() as directory:
-            app, updater = self.make_app(directory)
+        with tempfile.TemporaryDirectory() as directory, self.make_app(directory) as (app, updater):
             before = app.round.snapshot()
             app.open_menu()
             app.handle('1')
@@ -153,8 +151,7 @@ class UpdateTuiTests(unittest.TestCase):
             self.assertEqual(app.round.snapshot(), before)
 
     def test_download_and_activation_require_separate_choices_and_save_first(self):
-        with tempfile.TemporaryDirectory() as directory:
-            app, updater = self.make_app(directory)
+        with tempfile.TemporaryDirectory() as directory, self.make_app(directory) as (app, updater):
             updater.status = {'state': 'available', 'version': '3.4.0', 'message': '发现新版'}
             app.open_update_picker()
             self.choose(app, 'install_update')
@@ -178,8 +175,7 @@ class UpdateTuiTests(unittest.TestCase):
             self.assertEqual(app.update_restart_args, ['--learn'])
 
     def test_activation_failure_keeps_old_session_running(self):
-        with tempfile.TemporaryDirectory() as directory:
-            app, updater = self.make_app(directory)
+        with tempfile.TemporaryDirectory() as directory, self.make_app(directory) as (app, updater):
             updater.status = {'state': 'ready', 'version': '3.4.0', 'message': '准备启用'}
             updater.activation_fails = True
             app.open_update_picker()

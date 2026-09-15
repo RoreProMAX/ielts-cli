@@ -102,6 +102,12 @@
       "current Python for Linux timer",
       "portable notification message",
       "separate portable timer name"
+    ],
+    "apps/v3.3.0/test_updater.py": [
+      "canonical temporary paths for macOS and Windows verification"
+    ],
+    "apps/v3.3.0/test_update_tui.py": [
+      "close study test resources before deleting temporary directories on Windows"
     ]
   }
 }

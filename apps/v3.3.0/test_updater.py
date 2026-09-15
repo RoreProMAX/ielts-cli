@@ -163,7 +163,7 @@ class UpdateManagerTests(unittest.TestCase):
 
     def test_auto_check_setting_is_atomic_and_constructor_stays_read_only(self):
         with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
+            root = Path(directory).resolve()
             manager = UpdateManager(root / "missing", "3.2.0")
             self.assertTrue(manager.auto_check)
             self.assertFalse((root / "missing").exists())
@@ -177,7 +177,7 @@ class UpdateManagerTests(unittest.TestCase):
         bundle = make_bundle()
         metadata = release_payload(bundle)
         with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
+            root = Path(directory).resolve()
             (root / "progress.json").write_text('{"attempts": 8}', encoding="utf-8")
             (root / "learn_round-ielts.json").write_text('{"word": "safe"}', encoding="utf-8")
             database = sqlite3.connect(root / "learning.sqlite3")
@@ -226,7 +226,7 @@ class UpdateManagerTests(unittest.TestCase):
         bundle = make_bundle()
         metadata = release_payload(bundle)
         with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
+            root = Path(directory).resolve()
             manager = UpdateManager(root, "3.2.0", transport=FakeTransport(metadata, bundle))
             manager.check_async()
             wait_for(manager)
@@ -274,7 +274,7 @@ class UpdateManagerTests(unittest.TestCase):
     def test_path_traversal_is_rejected_without_writing_outside_stage(self):
         bundle = make_bundle(extra_entries=[("../escaped.txt", b"no")])
         with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
+            root = Path(directory).resolve()
             manager = UpdateManager(root, "3.2.0", transport=FakeTransport(release_payload(bundle), bundle))
             manager.check_async()
             wait_for(manager)
@@ -338,7 +338,7 @@ class UpdateManagerTests(unittest.TestCase):
     def test_backup_failure_preserves_old_active_pointer(self):
         bundle = make_bundle()
         with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
+            root = Path(directory).resolve()
             manager = UpdateManager(root, "3.2.0", transport=FakeTransport(release_payload(bundle), bundle))
             manager.check_async()
             wait_for(manager)
@@ -354,7 +354,7 @@ class UpdateManagerTests(unittest.TestCase):
 
     def test_active_pointer_cannot_supply_a_path_or_downgrade(self):
         with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory)
+            root = Path(directory).resolve()
             manager = UpdateManager(root, "3.2.0")
             manager.active_path.parent.mkdir(parents=True)
             manager.active_path.write_text(json.dumps({
