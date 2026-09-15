@@ -1,5 +1,7 @@
 # IELTS CLI
 
+English | [简体中文](README.md)
+
 An independent terminal vocabulary practice tool inspired by the idea of Qwerty typing vocabulary practice. It is useful for IELTS, CET, and general English review. The default application is `apps/v3.2.0`; `apps/v1.0.0` and `apps/v2.0.0` are retained.
 
 ## Features
@@ -72,6 +74,6 @@ Linux has passed 120 tests, relocation checks, and offline container validation.
 
 This is an independent Python implementation, not an official fork and not endorsed by the upstream projects. The five dictionaries were taken from a fixed `qwerty-learner-vscode` commit. Each version keeps the original URLs, SHA-256 values, and provenance metadata in `data/source.json`, together with the MIT notice in `data/QWERTY-VSCODE-LICENSE.txt`. The main `qwerty-learner` project is currently GPL-3.0; that is distinct from the dictionary source notice. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-The project license is specified by [LICENSE](LICENSE). If that file has not yet been published, follow the license file included in the formal release.
+The project license is [GPL-3.0-only](LICENSE).
 
 The application code is licensed under [GPL-3.0-only](LICENSE). Third-party content retains its own license notices. Repository: [RoreProMAX/ielts-cli](https://github.com/RoreProMAX/ielts-cli).

@@ -1,6 +1,8 @@
 # IELTS CLI
 
-一个独立实现的终端英语词汇练习工具，受 Qwerty 打字学词思路启发，适合 IELTS、CET 和通用词汇复习。本仓库默认运行 `apps/v3.2.0`，同时保留 `apps/v1.0.0` 与 `apps/v2.0.0` 供对照和使用。
+[English](README.en.md) | 简体中文
+
+一个独立实现的终端英语词汇练习工具，受 [Qwerty Learner](https://github.com/RealKai42/qwerty-learner) 的打字学词思路启发，适合 IELTS、CET 和通用词汇复习。本仓库默认运行 `apps/v3.2.0`，同时保留 `apps/v1.0.0` 与 `apps/v2.0.0` 供对照和使用。
 
 ## 功能
 
