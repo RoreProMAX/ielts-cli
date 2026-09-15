@@ -13,8 +13,9 @@ import sqlite3
 import sys
 
 ROOT = Path(__file__).resolve().parent
-BUNDLE_VERSION = '3.2.0-portable.1'
-APP_VERSIONS = {'1': '1.0.0', '2': '2.0.0', '3': '3.2.0'}
+CURRENT_VERSION = (ROOT / 'VERSION').read_text(encoding='utf-8').strip()
+BUNDLE_VERSION = CURRENT_VERSION + '-public.1'
+APP_VERSIONS = {'1': '1.0.0', '2': '2.0.0', '3': CURRENT_VERSION}
 
 
 def default_data_root():
@@ -38,6 +39,8 @@ def locations(options):
     data_root = ROOT / 'user-data' if options.portable else default_data_root()
     data_dir = options.data_dir or data_root / 'versions' / version
     cache_home = ROOT / 'user-data/cache' if options.portable else default_cache_home()
+    if os.environ.get('IELTS_UPDATE_CACHE_HOME'):
+        cache_home = Path(os.environ['IELTS_UPDATE_CACHE_HOME'])
     return version, Path(data_dir).expanduser().resolve(), cache_home.expanduser().resolve()
 
 

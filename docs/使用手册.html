@@ -58,9 +58,9 @@
   }
 </style></head>
 <body><div class="wrap"><div class="card">
-<nav class="toc"><b>目录 <span class="reset" onclick="resetCk()">［清空勾选］</span></b><a href="#sec0">启动与版本</a><a href="#sec1">按键</a><a href="#sec2">词库</a><a href="#sec3">学习与复习</a><a href="#sec4">题型</a><a href="#sec5">每日任务</a><a href="#sec6">发音与保存</a><a href="#sec7">增量练习与学习中例句</a></nav>
+<nav class="toc"><b>目录 <span class="reset" onclick="resetCk()">［清空勾选］</span></b><a href="#sec0">启动与版本</a><a href="#sec1">按键</a><a href="#sec2">词库</a><a href="#sec3">学习与复习</a><a href="#sec4">题型</a><a href="#sec5">每日任务</a><a href="#sec6">发音与保存</a><a href="#sec7">增量练习与学习中例句</a><a href="#sec8">版本与更新</a></nav>
 <h1>IELTS CLI 使用手册</h1>
-<p>这是跟打、默写和间隔复习的终端工具。通用入口的 V3 为 3.2.0；各版独立保存记录。</p>
+<p>这是跟打、默写和间隔复习的终端工具。通用入口的 V3 为 3.3.0；各版独立保存记录。</p>
 <h2 id="sec0">启动与版本</h2>
 <table><thead><tr><th>平台</th><th>默认启动</th><th>带着进度移动</th></tr></thead><tbody>
 <tr><td>Windows</td><td>双击 <code>start.bat</code></td><td>在终端运行 <code>start.bat --portable</code></td></tr>
@@ -76,7 +76,7 @@ python3 launcher.py --verify</code></pre>
 <table><thead><tr><th>版本</th><th>能力</th></tr></thead><tbody>
 <tr><td>V1</td><td>五本词库、跟打/默写、错词补练、到期复习、暂停续接</td></tr>
 <tr><td>V2</td><td>V1 加英选中、中选英、听写、混合题型、例句与搭配</td></tr>
-<tr><td>V3 3.2.0</td><td>V2 加每日目标、每组 5 词、自动混合新词题型、程序内提醒、Linux 可选后台提醒</td></tr>
+<tr><td>V3 3.3.0</td><td>V2 加每日目标、每组 5 词、自动混合新词题型、增量例句返回单词学习、程序内提醒、后台版本检查与用户确认更新</td></tr>
 </tbody></table>
 <h2 id="sec1">按键</h2>
 <table><thead><tr><th>按键</th><th>功能</th></tr></thead><tbody>
@@ -90,7 +90,7 @@ python3 launcher.py --verify</code></pre>
 <tr><td>F7 / Ctrl+D</td><td>选择词库</td></tr>
 <tr><td>F8 / Ctrl+K</td><td>选择章节</td></tr>
 <tr><td>F9 / Ctrl+B</td><td>到期复习 / 暂停返回学习</td></tr>
-<tr><td>Esc</td><td>打开菜单；菜单按 3 再 Enter 选择题型（V3）</td></tr>
+<tr><td>Esc</td><td>打开菜单；菜单按 3 再 Enter 选择题型，按 10 进入版本与更新（V3；内部选项编号随状态动态显示）</td></tr>
 <tr><td>F11 / Ctrl+Y</td><td>今日任务（V3）</td></tr>
 <tr><td>F12 / Ctrl+L</td><td>目标与提醒设置（V3）</td></tr>
 <tr><td>Ctrl+S</td><td>复习提醒稍后 15 分钟（V3）</td></tr>
@@ -133,7 +133,7 @@ python3 launcher.py --stats</code></pre>
 <pre class="code" data-lang="bash"><code>python3 launcher.py --learn --question-mode mixed
 python3 launcher.py --review --question-mode mixed</code></pre>
 <p>选择题直接按 1–4 作答。中选英和默写显示词库中全部已有释义，保留词性及义项标点；长释义自动换行，窗口较小时可用上下键或 PageUp/PageDown 翻阅，选项保持可见。V3 新词默认 mixed，每组 5 词按跟打、英选中、中选英、默写四阶段推进，阶段之间自动穿插；组末自动接下一组。每日任务完成后回到每日面板。复习默认 recall，完成一组到期复习后自动接学习。各题型成绩分别记录。</p>
-<p>例句和搭配目前覆盖 124 个词。直接选择这两种模式时使用已有内容的词；复习遇到没有配套内容的词时提示并回退到默写。</p>
+<p>例句和搭配目前覆盖 124 个词。直接选择这两种模式时使用已有内容的词；复习遇到没有配套内容的词时提示并回退到默写。菜单 9 进入增量例句后，菜单 2 可返回单词学习并保留当前题目、输入和评分上下文。</p>
 <h2 id="sec5">每日任务</h2>
 <p>默认每日新词 20、复习 30，每组 5 词。F11 打开面板，按 1 开始下一组，先处理到期复习再从当前词库选新词。每日目标按不同词条计数，表示练习量，不代表掌握率。</p>
 <p>每日下一组跳过今天已复习过的词，避免选择题重复占满小组。错词同轮重测保留，需要继续重测当天到期词可用 F9。已有未完成轮次优先续接。</p>
@@ -153,6 +153,10 @@ python3 launcher.py --configure --reminder-minutes 30</code></pre>
 python3 launcher.py --configure --extra-after-daily on
 python3 launcher.py --configure --examples-during-learning on</code></pre>
 <p>把 on 换成 off 即可关闭。例句显示英文填空、中文句意和目标词义；答题后可查看完整句子，长文本用上下键翻阅。当前有 124 个词的配套例句及搭配，覆盖雅思通用前 40 词和其它词库的部分初始词汇，尚未覆盖所有词条。</p>
+<h2 id="sec8">版本与更新</h2>
+<p>自动更新功能从 V3.3.0 开始提供。使用 V3.2.0 或更早版本的用户需要先手动安装/切换到 V3.3.0 一次；之后 V3.3.0 才能在启动时后台检查 <code>RoreProMAX/ielts-cli</code> 的公开 stable Release。旧版不会自行更新。检查不下载、不安装、不重启，也不占用当前题目；无网络或 GitHub 限流时继续正常学习。Esc 菜单 10“版本与更新”可立即检查、关闭启动检查或查看状态；其内部选项编号随当前状态动态显示。学习计划中明确提供“启动时检查稳定版本”开关，默认开启。</p>
+<p>更新页先显示“下载并校验 vX”；下载完成后由用户选择“保存进度并重启到 vX”或“下次启动使用 vX”。选择“暂不更新，继续当前练习”只收起本次会话的版本提示。程序仅接受 stable Release，并校验官方 asset 的 SHA-256 与 ZIP 清单；下载放在当前进度目录 <code>updates/releases/&lt;version&gt;</code>。自动更新沿用当前同一进度目录，和手工复制到新版本目录的跨版本迁移不同。安装前备份 JSON 与 SQLite 到 <code>updates/backups</code>。更新不会升级 Python、windows-curses、ffplay 或词库，也不会上传个人词库和学习进度。</p>
+<p>命令行可用 <code>--configure --auto-update-check on|off</code> 配置、<code>--update-status</code> 只读查看状态；<code>--no-update</code> 仅本次使用原入口版本并跳过更新检查，不修改永久开关。测试或需要完全隔离网络时设置 <code>IELTS_DISABLE_UPDATE_CHECK=1</code>。</p>
 </div></div>
 <script>
   var KEY = "md_ck_" + location.pathname;

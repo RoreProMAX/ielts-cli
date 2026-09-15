@@ -18,8 +18,8 @@ def build(output):
         raise ValueError('Refusing to overwrite an existing release file')
     tracked = subprocess.check_output(['git', 'ls-files', '-z'], cwd=ROOT).decode('utf-8').split('\0')
     payloads = {}
-    prohibited = {'user-data', '__pycache__', '.git', '.codex', '.venv'}
-    private_names = {'learning.sqlite3', 'progress.json', 'library.json', 'settings.json', 'routine.json', 'practice_settings.json', 'active_round.json', 'extra_round.json'}
+    prohibited = {'user-data', '__pycache__', '.git', '.codex', '.venv', 'updates'}
+    private_names = {'learning.sqlite3', 'progress.json', 'library.json', 'settings.json', 'routine.json', 'practice_settings.json', 'active_round.json', 'extra_round.json', 'update_settings.json'}
     for name in filter(None, tracked):
         relative = Path(name)
         item = ROOT / relative
@@ -30,7 +30,9 @@ def build(output):
         payloads[name] = item.read_bytes()
     if not payloads:
         raise ValueError('There are no tracked files to package')
-    version = (ROOT / 'apps/v3.2.0/VERSION').read_text().strip()
+    version = (ROOT / 'VERSION').read_text(encoding='utf-8').strip()
+    if (ROOT / 'apps' / ('v' + version) / 'VERSION').read_text(encoding='utf-8').strip() != version:
+        raise ValueError('Root VERSION and default application VERSION differ')
     manifest = {
         'bundle_version': version + '-public.1',
         'created_at': datetime.datetime.now(datetime.timezone.utc).isoformat(),

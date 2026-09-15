@@ -1,5 +1,5 @@
 {
-  "bundle_version": "3.2.0-portable.1",
+  "bundle_version": "3.3.0-public.1",
   "sources": {
     "v1.0.0": {
       "source_version": "1.0.0",
@@ -15,6 +15,11 @@
       "source_version": "3.2.0",
       "original_test_summary": "Ran 117 tests in 35.809s\nOK",
       "original_release_manifest_sha256": "a71f05f34b285b456faa2a028426d854d0ad7033a2f4bf2894b7c343b5599df8"
+    },
+    "v3.3.0": {
+      "source_version": "3.3.0",
+      "original_test_summary": "Ran 147 tests in 41.785s\nOK",
+      "original_release_manifest_sha256": "ca2ad95ce5420a2b5e6e8b11cd699ec66f33284e430f848d3a5c51fb5e2e7655"
     }
   },
   "portable_patches": {
@@ -67,6 +72,32 @@
       "verify portable timer name"
     ],
     "apps/v3.2.0/reminders.py": [
+      "platform file locks",
+      "current Python for Linux timer",
+      "portable notification message",
+      "separate portable timer name"
+    ],
+    "apps/v3.3.0/ielts.py": [
+      "supported shutdown signals",
+      "explicit UTF-8 state reading"
+    ],
+    "apps/v3.3.0/audio_settings.py": [
+      "private file permissions"
+    ],
+    "apps/v3.3.0/routine.py": [
+      "private file permissions"
+    ],
+    "apps/v3.3.0/pronunciation.py": [
+      "hide Windows audio subprocess console"
+    ],
+    "apps/v3.3.0/study.py": [
+      "platform file locks",
+      "private file permissions"
+    ],
+    "apps/v3.3.0/test_reminders.py": [
+      "verify portable timer name"
+    ],
+    "apps/v3.3.0/reminders.py": [
       "platform file locks",
       "current Python for Linux timer",
       "portable notification message",

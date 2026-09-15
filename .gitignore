@@ -5,6 +5,8 @@ user-data/
 **/library.json*
 **/settings.json
 **/practice_settings.json
+**/update_settings.json
+**/updates/
 **/routine.json
 **/active_round.json
 **/extra_round.json

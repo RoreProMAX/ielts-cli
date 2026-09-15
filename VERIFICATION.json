@@ -1,9 +1,9 @@
 {
-  "bundle_version": "3.2.0-portable.1",
-  "verified_at": "2026-09-15T09:33:45.916762+00:00",
+  "bundle_version": "3.3.0-public.1",
+  "verified_at": "2026-09-15T12:30:13.227893+00:00",
   "local_release": {
-    "version": "3.2.0",
-    "tests": 117,
+    "version": "3.3.0",
+    "tests": 147,
     "result": "passed"
   },
   "portable_release": {
@@ -17,6 +17,10 @@
     },
     "v3.2.0": {
       "tests": 120,
+      "result": "previously verified, unchanged source"
+    },
+    "v3.3.0": {
+      "tests": 150,
       "result": "passed"
     }
   },
@@ -30,7 +34,16 @@
     "extra_correct_does_not_lengthen_review_schedule": "passed",
     "daily_extra_pool_and_skipping_terminate": "passed",
     "example_words": 124,
-    "dictionary_payloads": "unchanged"
+    "dictionary_payloads": "unchanged",
+    "incremental_exit_keeps_learning_and_extra_drafts": "passed",
+    "explicit_learning_does_not_reenter_extra_in_same_session": "passed",
+    "legacy_extra_mode_repair": "passed",
+    "background_stable_check_without_automatic_download": "passed",
+    "explicit_download_activation_and_lock_release": "passed",
+    "update_settings_and_dismissal_preserve_question": "passed",
+    "sha256_zip_manifest_and_extracted_files_bound": "passed",
+    "stable_version_and_certificate_validation": "passed",
+    "profile_backup_and_failed_activation_preserve_old_version": "passed"
   },
   "relocation": {
     "relocated_chinese_space_paths": "passed",
@@ -47,10 +60,16 @@
     "network": "disabled",
     "program_directory": "read-only",
     "ffplay_installed": false,
-    "v3_2_startup": "passed"
+    "v3_3_startup": "passed"
   },
-  "windows_native_test": "not_run",
-  "macos_native_test": "not_run",
+  "windows_native_test": "interactive manual testing not run; automated tests tracked in GitHub Actions",
+  "macos_native_test": "interactive manual testing not run; automated tests tracked in GitHub Actions",
   "personal_learning_data_included": false,
-  "background_reminders_enabled": false
+  "background_reminders_enabled": false,
+  "update_menu_pty": {
+    "six_row_update_menu": "passed",
+    "two_digit_main_menu_entry": "passed",
+    "toggle_and_dismiss_keep_input": "passed",
+    "real_network_or_audio_used": false
+  }
 }

@@ -8,11 +8,11 @@
 
 ```sh
 python3 -m pip install -r requirements-test.txt
-cd apps/v3.2.0
+cd apps/v3.3.0
 python3 -m unittest discover -p 'test_*.py'
 ```
 
-当前主要验证范围是 Linux：已完成 V3 的 120 项测试、重定位检查和离线容器验证。Windows 与 macOS 交互测试尚未在真机完成；跨平台 smoke CI 已配置，运行记录见 Actions。
+当前主要验证范围是 Linux；V3.3.0 的测试数量和结果以本次验收记录及 Actions 为准。Windows 与 macOS 交互测试尚未在真机完成；跨平台 smoke CI 的运行记录见 Actions。
 
 ## 提交改动
 
@@ -27,4 +27,4 @@ python3 -m unittest discover -p 'test_*.py'
 
 提交前请检查 `git diff`、运行相关测试，并确认没有把发布包专用的 `BUNDLE_MANIFEST.json` 或个人数据混入源码提交。提交信息只描述变更内容。
 
-例句材料的来源和已知排除项见 [CONTENT_SOURCES.md](apps/v3.2.0/CONTENT_SOURCES.md)。
+例句材料的来源和已知排除项见 [CONTENT_SOURCES.md](apps/v3.3.0/CONTENT_SOURCES.md)。

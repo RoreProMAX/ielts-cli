@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>IELTS CLI 通用分享包</title><style>
+<title>IELTS CLI</title><style>
   :root { --blue:#1f6feb; --navy:#0b3d91; --ink:#1a2330; --mut:#5b6573;
           --code-bg:#1e2430; --code-fg:#e6edf3; --line:#e2e6ec; }
   * { box-sizing:border-box; }
@@ -58,25 +58,50 @@
   }
 </style></head>
 <body><div class="wrap"><div class="card">
-
-<h1>IELTS CLI 通用分享包</h1>
-<p>默认运行 V3.2；包内也保留 V1、V2。五本英语/雅思词库随包提供。</p>
-<p>学习会自动穿插跟打、英选中、中选英和默写，完成一组后继续下一组。Esc 打开菜单（输入为空时也可按 <code>?</code>），选 3 可手动指定题型。</p>
-<ol>
-<li>解压整个 ZIP 到一个可写的文件夹。</li>
-<li>安装 Python 3.10+。Windows 还需在本文件夹执行 <code>py -3 -m pip install -r requirements-windows.txt</code>。</li>
-<li>Windows 双击 <code>start.bat</code>；macOS 双击 <code>start.command</code>；Linux 在终端运行 <code>sh start.sh</code>。</li>
-</ol>
-<p>首次安装和发音配置请打开 [部署指南](docs/部署指南.html)；学习操作见 [使用手册](docs/使用手册.html)。</p>
-<p>在终端执行以下命令可检查环境和文件：</p>
-<pre class="code" data-lang="text"><code>Windows:     start.bat --doctor --verify
-Linux/macOS: sh start.sh --doctor --verify</code></pre>
-<p>默认进度保存在当前电脑的用户目录。加 <code>--portable</code> 后，进度与音频缓存保存在本文件夹的 <code>user-data/</code>，退出程序后可连同文件夹一起带走。切换版本使用 <code>--app-version 1</code>、<code>2</code> 或 <code>3</code>。</p>
-<p>发给朋友时直接发送原始 ZIP。它不含发布者的学习记录、账号、音频缓存或系统配置。</p>
-<p>文字练习可离线使用。读音需要 <code>ffplay</code>；首次获取某个词的音频需要联网，缓存后可离线重播。Python、Windows curses 组件和 FFmpeg 需要另外安装。</p>
-<p>本包按 Windows、macOS、Linux 适配；已完成的平台验证结果见 <code>VERIFICATION.json</code>。Windows 和 macOS 尚未进行真机验收。Linux 可选后台提醒，其它平台使用程序内提醒。</p>
-<p>中选英和默写展示词库已有的完整释义。小窗口中可用上下键或 PageUp/PageDown 翻阅长释义。</p>
-<p>每日基础任务完成后默认进入增量例句与搭配练习；Esc 菜单的学习计划可开启“学习过程中加入例句”。已有 124 词的配套材料。</p>
+<nav class="toc"><b>目录 <span class="reset" onclick="resetCk()">［清空勾选］</span></b><a href="#sec0">项目声明</a><a href="#sec1">快速开始</a><a href="#sec2">主要功能</a><a href="#sec3">检查与数据</a><a href="#sec4">文档</a><a href="#sec5">当前状态与许可证</a></nav>
+<h1>IELTS CLI</h1>
+<p>一个通用、轻量的终端英语练习工具：在普通终端、Agent Desktop 的 CLI 窗口，或开发与学习的空隙里随手练几分钟，不需要打开网页或接入另一套服务。它是独立的 Python 实现，受 Qwerty 打字学词思路启发，不是上游项目的官方 fork。</p>
+<p>默认运行 <code>apps/v3.3.0</code>，仓库同时保留 <code>apps/v1.0.0</code>、<code>apps/v2.0.0</code>、<code>apps/v3.2.0</code>。五本词库合计 19,086 个有效词条，按每章 20 词组织。</p>
+<h2 id="sec0">项目声明</h2>
+<p>本项目是我在 vibe coding 过程中，利用等待 Agent 输出的闲暇时间做的小作品，目前仍处于半成品阶段，功能、体验和兼容性都还有待完善。欢迎各位使用者提出问题、建议和指正。</p>
+<p>感谢 Qwerty 以及所有上游项目的开源，也感谢相关作者和维护者分享代码、词库与工具。上游来源和许可证说明见 [第三方声明](THIRD_PARTY_NOTICES.md)。</p>
+<h2 id="sec1">快速开始</h2>
+<p>下载 [Release ZIP](https://github.com/RoreProMAX/ielts-cli/releases/latest)，或克隆仓库：</p>
+<pre class="code" data-lang="sh"><code>git clone https://github.com/RoreProMAX/ielts-cli.git
+cd ielts-cli</code></pre>
+<p>需要 Python 3.10+。Windows 安装 <code>windows-curses==2.4.2</code>：</p>
+<pre class="code" data-lang="powershell"><code>py -3 -m pip install -r requirements-windows.txt</code></pre>
+<p>启动：Windows 双击 <code>start.bat</code>，macOS 双击 <code>start.command</code>，Linux 运行 <code>sh start.sh</code>。默认选择 V3.3，也可直接执行：</p>
+<pre class="code" data-lang="sh"><code>python3 launcher.py --app-version 3</code></pre>
+<p>在 Agent Desktop 底部终端中运行即可；终端至少需要 40 列、6 行。宿主可能拦截 F10，此时用 Esc 或空输入时的 <code>?</code> 打开菜单。</p>
+<h2 id="sec2">主要功能</h2>
+<ul>
+<li>跟打 <code>copy</code>、英选中 <code>en_to_zh</code>、中选英 <code>zh_to_en</code>、默写 <code>recall</code>，V3 默认混合学习并分别记录题型成绩。</li>
+<li>中选英和默写显示词库已有的完整中文释义；长释义可以翻页。</li>
+<li>F7/Ctrl+D 选词库，F8/Ctrl+K 选章节，F9/Ctrl+B 进入或暂停到期复习，F11/Ctrl+Y 查看今日任务。</li>
+<li>每日任务完成后默认进入增量例句与搭配练习；当前材料覆盖 124 个词。学习过程中加入例句默认关闭，可在 Esc 菜单的学习计划中开启；从增量例句返回菜单后可继续单词学习。</li>
+<li>V3.3 启动时可在后台检查 GitHub 公开 stable Release；默认开启，可从 Esc 菜单“版本与更新”或学习计划中关闭。只在用户确认后下载并安装，更新不抢题、不自动重启。</li>
+<li>自动更新从 V3.3.0 开始；V3.2.0 及更早版本需先手动切换到 V3.3.0 一次。<code>--no-update</code> 仅本次使用原入口版本并跳过检查，不修改开关。</li>
+<li>增量练习不抬高正常新词/复习目标；到期量不足时按实际数量处理。</li>
+<li>文字练习可离线。发音依赖 PATH 中的 <code>ffplay</code>，首次取某词音频需联网，之后使用本地缓存。</li>
+</ul>
+<h2 id="sec3">检查与数据</h2>
+<p><code>--doctor</code> 适用于源码目录，会检查 Python、curses、SQLite、应用文件并显示解析后的数据路径：</p>
+<pre class="code" data-lang="sh"><code>python3 launcher.py --doctor</code></pre>
+<p><code>--verify</code> 只适用于带发布清单的 Release 包。源码仓库不含 <code>BUNDLE_MANIFEST.json</code>，不要把源码目录的 <code>--verify</code> 结果当成发布包校验：</p>
+<pre class="code" data-lang="sh"><code>python3 launcher.py --verify</code></pre>
+<p><code>--portable</code> 把进度和音频缓存写入当前目录的 <code>user-data/</code>，便于和代码目录一起移动。提交前不要包含个人进度、缓存、日志、账号或 API key。</p>
+<h2 id="sec4">文档</h2>
+<ul>
+<li>[功能说明](docs/FEATURES.md) · [接口参考](docs/INTERFACES.md)</li>
+<li>[词库维护](docs/DICTIONARIES.md) · [开发状态](docs/STATUS.md)</li>
+<li>[部署指南](docs/部署指南.md) · [使用手册](docs/使用手册.md)</li>
+<li>[贡献指南](CONTRIBUTING.md) · [第三方声明](THIRD_PARTY_NOTICES.md)</li>
+</ul>
+<h2 id="sec5">当前状态与许可证</h2>
+<p>V3.3 通用版已在 Linux 通过 150 项测试，含更新器与学习会话回归；远端结果见仓库 Actions。Windows/macOS 真实 Desktop 交互仍未验收。已知限制和缺陷见 [STATUS.md](docs/STATUS.md)。</p>
+<p>自有代码使用 GPL-3.0，见 [LICENSE](LICENSE)。词库来源的独立 MIT notice、固定 commit、原始 URL 和 SHA-256 见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 及各版本 <code>data/source.json</code>。</p>
+<p>给编程 Agent 的操作文档：[forAgent 部署与优化指南](docs/FOR_AGENTS.md)。它用于部署和维护，不限定产品的使用人群。</p>
 </div></div>
 <script>
   var KEY = "md_ck_" + location.pathname;

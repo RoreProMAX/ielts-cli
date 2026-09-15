@@ -2,7 +2,7 @@
 
 一个通用、轻量的终端英语练习工具：在普通终端、Agent Desktop 的 CLI 窗口，或开发与学习的空隙里随手练几分钟，不需要打开网页或接入另一套服务。它是独立的 Python 实现，受 Qwerty 打字学词思路启发，不是上游项目的官方 fork。
 
-默认运行 `apps/v3.2.0`，仓库同时保留 `apps/v1.0.0`、`apps/v2.0.0`。五本词库合计 19,086 个有效词条，按每章 20 词组织。
+默认运行 `apps/v3.3.0`，仓库同时保留 `apps/v1.0.0`、`apps/v2.0.0`、`apps/v3.2.0`。五本词库合计 19,086 个有效词条，按每章 20 词组织。
 
 ## 项目声明
 
@@ -25,7 +25,7 @@ cd ielts-cli
 py -3 -m pip install -r requirements-windows.txt
 ```
 
-启动：Windows 双击 `start.bat`，macOS 双击 `start.command`，Linux 运行 `sh start.sh`。默认选择 V3.2，也可直接执行：
+启动：Windows 双击 `start.bat`，macOS 双击 `start.command`，Linux 运行 `sh start.sh`。默认选择 V3.3，也可直接执行：
 
 ```sh
 python3 launcher.py --app-version 3
@@ -38,7 +38,9 @@ python3 launcher.py --app-version 3
 - 跟打 `copy`、英选中 `en_to_zh`、中选英 `zh_to_en`、默写 `recall`，V3 默认混合学习并分别记录题型成绩。
 - 中选英和默写显示词库已有的完整中文释义；长释义可以翻页。
 - F7/Ctrl+D 选词库，F8/Ctrl+K 选章节，F9/Ctrl+B 进入或暂停到期复习，F11/Ctrl+Y 查看今日任务。
-- 每日任务完成后默认进入增量例句与搭配练习；当前材料覆盖 124 个词。学习过程中加入例句默认关闭，可在 Esc 菜单的学习计划中开启。
+- 每日任务完成后默认进入增量例句与搭配练习；当前材料覆盖 124 个词。学习过程中加入例句默认关闭，可在 Esc 菜单的学习计划中开启；从增量例句返回菜单后可继续单词学习。
+- V3.3 启动时可在后台检查 GitHub 公开 stable Release；默认开启，可从 Esc 菜单“版本与更新”或学习计划中关闭。只在用户确认后下载并安装，更新不抢题、不自动重启。
+- 自动更新从 V3.3.0 开始；V3.2.0 及更早版本需先手动切换到 V3.3.0 一次。`--no-update` 仅本次使用原入口版本并跳过检查，不修改开关。
 - 增量练习不抬高正常新词/复习目标；到期量不足时按实际数量处理。
 - 文字练习可离线。发音依赖 PATH 中的 `ffplay`，首次取某词音频需联网，之后使用本地缓存。
 
@@ -67,7 +69,7 @@ python3 launcher.py --verify
 
 ## 当前状态与许可证
 
-Linux 本机已完成 V3 的 120 项测试、6 行终端/重定位检查和离线容器验证。Windows/macOS 已有适配代码，但真实 Desktop 交互尚未验收，自动化检查结果以仓库 Actions 为准。已知限制和缺陷见 [STATUS.md](docs/STATUS.md)。
+V3.3 通用版已在 Linux 通过 150 项测试，含更新器与学习会话回归；远端结果见仓库 Actions。Windows/macOS 真实 Desktop 交互仍未验收。已知限制和缺陷见 [STATUS.md](docs/STATUS.md)。
 
 自有代码使用 GPL-3.0，见 [LICENSE](LICENSE)。词库来源的独立 MIT notice、固定 commit、原始 URL 和 SHA-256 见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 及各版本 `data/source.json`。
 
