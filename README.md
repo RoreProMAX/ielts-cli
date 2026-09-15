@@ -4,13 +4,19 @@
 
 默认运行 `apps/v3.2.0`，仓库同时保留 `apps/v1.0.0`、`apps/v2.0.0`。五本词库合计 19,086 个有效词条，按每章 20 词组织。
 
+## 项目声明
+
+本项目是我在 vibe coding 过程中，利用等待 Agent 输出的闲暇时间做的小作品，目前仍处于半成品阶段，功能、体验和兼容性都还有待完善。欢迎各位使用者提出问题、建议和指正。
+
+感谢 Qwerty 以及所有上游项目的开源，也感谢相关作者和维护者分享代码、词库与工具。上游来源和许可证说明见 [第三方声明](THIRD_PARTY_NOTICES.md)。
+
 ## 快速开始
 
-下载 ZIP，或在仓库页面复制实际地址：
+下载 [Release ZIP](https://github.com/RoreProMAX/ielts-cli/releases/latest)，或克隆仓库：
 
 ```sh
-git clone <repository-url>
-cd ielts-cli-public
+git clone https://github.com/RoreProMAX/ielts-cli.git
+cd ielts-cli
 ```
 
 需要 Python 3.10+。Windows 安装 `windows-curses==2.4.2`：

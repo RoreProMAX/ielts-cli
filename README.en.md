@@ -4,13 +4,19 @@ A lightweight, general-purpose terminal vocabulary practice tool: use it in a re
 
 The default application is `apps/v3.2.0`; `apps/v1.0.0` and `apps/v2.0.0` remain available. Five dictionaries contain 19,086 valid entries, organized in 20-word chapters.
 
+## Project note
+
+I made this small project in spare moments while waiting for an Agent to respond during vibe coding. It is still a work in progress, with unfinished features and room to improve the experience and compatibility. Feedback, suggestions, and corrections from all users are welcome.
+
+Thank you to Qwerty and all upstream open-source projects, and to the authors and maintainers who share their code, dictionaries, and tools. See [Third-party notices](THIRD_PARTY_NOTICES.md) for sources and license details.
+
 ## Quick start
 
-Download a ZIP, or copy the repository's actual URL:
+Download a [Release ZIP](https://github.com/RoreProMAX/ielts-cli/releases/latest), or clone the repository:
 
 ```sh
-git clone <repository-url>
-cd ielts-cli-public
+git clone https://github.com/RoreProMAX/ielts-cli.git
+cd ielts-cli
 ```
 
 Python 3.10+ is required. On Windows install `windows-curses==2.4.2`:
@@ -25,7 +31,7 @@ Start `start.bat` on Windows, double-click `start.command` on macOS, or run `sh 
 python3 launcher.py --app-version 3
 ```
 
-It is designed to run in an Agent Desktop bottom terminal. The terminal needs at least 40 columns and 6 rows. If the host captures F10, use Esc or `?` with an empty input to open the menu.
+Use a regular terminal or an Agent Desktop terminal pane with at least 40 columns and 6 rows. If the host captures F10, use Esc or `?` with an empty input to open the menu.
 
 ## Features
 
@@ -56,7 +62,7 @@ python3 launcher.py --verify
 
 See [FEATURES](docs/FEATURES.md), [INTERFACES](docs/INTERFACES.md), [DICTIONARIES](docs/DICTIONARIES.md), [STATUS](docs/STATUS.md), the [deployment guide](docs/部署指南.md), and the [user manual](docs/使用手册.md).
 
-Linux has passed 120 V3 tests, 6-row terminal and relocation checks, and offline container validation. The GitHub remote has not completed its push yet. Windows and macOS adaptations exist, but real Desktop interaction has not been accepted and cross-platform smoke CI is pending. Known limitations are documented in [STATUS](docs/STATUS.md).
+Linux has passed 120 V3 tests, 6-row terminal and relocation checks, and offline container validation. Windows and macOS adaptations exist, but manual testing of real Desktop interaction remains outstanding. Check the repository's [Actions](https://github.com/RoreProMAX/ielts-cli/actions) for automated test results. Known limitations are documented in [STATUS](docs/STATUS.md).
 
 The project code is GPL-3.0 under [LICENSE](LICENSE). The dictionaries have separate MIT notices, fixed-commit provenance, source URLs, and SHA-256 values documented in [THIRD_PARTY_NOTICES](THIRD_PARTY_NOTICES.md) and each version's `data/source.json`.
 
