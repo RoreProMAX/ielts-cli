@@ -26,3 +26,5 @@ python3 -m unittest discover -p 'test_*.py'
 - 保持 `--doctor`、发布包 `--verify` 和 `--app-version 1/2/3` 接口可用，除非变更说明明确记录兼容性影响。
 
 提交前请检查 `git diff`、运行相关测试，并确认没有把发布包专用的 `BUNDLE_MANIFEST.json` 或个人数据混入源码提交。提交信息只描述变更内容。
+
+例句材料的来源和已知排除项见 [CONTENT_SOURCES.md](apps/v3.2.0/CONTENT_SOURCES.md)。
