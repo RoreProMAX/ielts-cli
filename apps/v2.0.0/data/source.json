@@ -1,0 +1,15 @@
+{
+  "dictionary": "IELTS_3_T",
+  "upstream_repository": "https://github.com/RealKai42/qwerty-learner-vscode",
+  "commit": "e0dc7a09a5e0946d77b2c279f72a89daf3659b97",
+  "source_url": "https://raw.githubusercontent.com/RealKai42/qwerty-learner-vscode/e0dc7a09a5e0946d77b2c279f72a89daf3659b97/assets/dicts/IELTS_3_T.json",
+  "sha256": "63f64c79c96270f2a74f7bfebe952efe1d4c1f09b887bc3e4560a989b8873ad1",
+  "entry_count": 3575,
+  "unique_names": 3575,
+  "downloaded_at": "2026-09-14T07:31:23.736254+00:00",
+  "upstream_repository_license": "MIT (repository-level declaration; dictionary file has no separate license field)",
+  "license_source": "https://raw.githubusercontent.com/RealKai42/qwerty-learner-vscode/e0dc7a09a5e0946d77b2c279f72a89daf3659b97/LICENSE",
+  "dictionary_provenance_note": "The main Qwerty Learner README credits kajweb as a source of dictionary data. This note does not independently establish per-dictionary rights.",
+  "main_project_source_note": "https://github.com/RealKai42/qwerty-learner#数据来源",
+  "copied_source_code": false
+}

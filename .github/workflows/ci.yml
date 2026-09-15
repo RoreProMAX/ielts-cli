@@ -1,0 +1,66 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  linux-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.10', '3.12']
+        app: ['v1.0.0', 'v2.0.0', 'v3.2.0']
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -r requirements-test.txt
+      - name: Unit and isolated terminal tests
+        working-directory: apps/${{ matrix.app }}
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: python -B -m unittest discover -q
+
+  platform-smoke:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements-windows.txt
+      - name: Check dependencies and isolated profile startup
+        run: |
+          python -X utf8 -B launcher.py --doctor
+          python -X utf8 -B - <<'PY'
+          import json
+          import subprocess
+          import sys
+          import tempfile
+          for version in ('1', '2', '3'):
+              with tempfile.TemporaryDirectory() as directory:
+                  result = subprocess.run(
+                      [sys.executable, '-X', 'utf8', '-B', 'launcher.py',
+                       '--app-version', version, '--data-dir', directory, '--stats'],
+                      capture_output=True, text=True, encoding='utf-8', check=True)
+                  assert json.loads(result.stdout)['attempts'] == 0
+          PY

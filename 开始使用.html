@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IELTS CLI 通用分享包</title><style>
+  :root { --blue:#1f6feb; --navy:#0b3d91; --ink:#1a2330; --mut:#5b6573;
+          --code-bg:#1e2430; --code-fg:#e6edf3; --line:#e2e6ec; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:#eef1f5; color:var(--ink); line-height:1.65;
+         font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; }
+  .wrap { max-width:940px; margin:0 auto; padding:24px 18px 90px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:12px;
+          padding:22px 28px; box-shadow:0 1px 3px rgba(0,0,0,.05); }
+  h1 { font-size:1.7rem; margin:.1em 0 .3em; color:var(--navy); }
+  h2 { font-size:1.3rem; margin:1.9em 0 .6em; padding-left:12px;
+       border-left:5px solid var(--blue); color:var(--navy); scroll-margin-top:14px; }
+  h3 { font-size:1.08rem; margin:1.3em 0 .4em; color:#173a6b; }
+  p { margin:.6em 0; }
+  code { font-family:"SF Mono",Consolas,"Cascadia Code",monospace;
+         background:#eef0f4; color:#b5295a; padding:.1em .4em; border-radius:5px; font-size:.88em; }
+  pre.code { position:relative; background:var(--code-bg); color:var(--code-fg);
+             padding:30px 16px 14px; border-radius:9px; overflow-x:auto; font-size:.85rem;
+             line-height:1.5; margin:.8em 0; }
+  pre.code code { background:none; color:inherit; padding:0; font-size:1em; white-space:pre; }
+  pre.code::before { content:attr(data-lang); position:absolute; top:7px; left:14px;
+             font-size:.7rem; letter-spacing:.08em; color:#8a93a3; text-transform:uppercase; }
+  table { border-collapse:collapse; width:100%; margin:1em 0; font-size:.92rem; }
+  th,td { border:1px solid var(--line); padding:8px 11px; text-align:left; vertical-align:top; }
+  th { background:var(--navy); color:#fff; font-weight:600; }
+  tbody tr:nth-child(even) { background:#f4f7fb; }
+  blockquote { margin:1.1em 0; padding:12px 16px; border-radius:9px; border-left:5px solid var(--blue);
+               background:#eef4ff; }
+  blockquote.danger { border-color:#d93025; background:#fdecea; }
+  blockquote p { margin:.3em 0; }
+  ul,ol { padding-left:1.5em; margin:.6em 0; }
+  li { margin:.3em 0; }
+  ul.checklist { list-style:none; padding-left:0; }
+  ul.checklist li { margin:.5em 0; }
+  ul.checklist label { display:flex; align-items:flex-start; gap:10px; cursor:pointer;
+                       padding:8px 11px; border:1px solid var(--line); border-radius:8px; background:#fafbfd; }
+  ul.checklist input { width:19px; height:19px; margin-top:2px; flex:0 0 auto; accent-color:var(--blue); }
+  ul.checklist input:checked + span { color:var(--mut); text-decoration:line-through; }
+  hr { border:none; border-top:1px solid var(--line); margin:2em 0; }
+  nav.toc { background:#fff; border:1px solid var(--line); border-radius:10px;
+            padding:12px 18px; margin-bottom:18px; font-size:.92rem; }
+  nav.toc b { color:var(--navy); display:block; margin-bottom:6px; }
+  nav.toc a { color:var(--blue); text-decoration:none; margin:2px 14px 2px 0; display:inline-block; }
+  nav.toc a:hover { text-decoration:underline; }
+  .reset { font-size:.8rem; color:var(--blue); cursor:pointer; user-select:none; font-weight:400; }
+  @media print {
+    body { background:#fff; }
+    .card { box-shadow:none; border:none; padding:0; }
+    nav.toc, .reset { display:none; }
+    pre.code { background:#f3f4f7; color:#1a2330; border:1px solid var(--line); }
+    pre.code::before { color:#999; }
+    h2 { page-break-after:avoid; }
+    table,blockquote,pre.code { page-break-inside:avoid; }
+  }
+</style></head>
+<body><div class="wrap"><div class="card">
+
+<h1>IELTS CLI 通用分享包</h1>
+<p>默认运行 V3.2；包内也保留 V1、V2。五本英语/雅思词库随包提供。</p>
+<p>学习会自动穿插跟打、英选中、中选英和默写，完成一组后继续下一组。Esc 打开菜单（输入为空时也可按 <code>?</code>），选 3 可手动指定题型。</p>
+<ol>
+<li>解压整个 ZIP 到一个可写的文件夹。</li>
+<li>安装 Python 3.10+。Windows 还需在本文件夹执行 <code>py -3 -m pip install -r requirements-windows.txt</code>。</li>
+<li>Windows 双击 <code>start.bat</code>；macOS 双击 <code>start.command</code>；Linux 在终端运行 <code>sh start.sh</code>。</li>
+</ol>
+<p>首次安装和发音配置请打开 [部署指南](docs/部署指南.html)；学习操作见 [使用手册](docs/使用手册.html)。</p>
+<p>在终端执行以下命令可检查环境和文件：</p>
+<pre class="code" data-lang="text"><code>Windows:     start.bat --doctor --verify
+Linux/macOS: sh start.sh --doctor --verify</code></pre>
+<p>默认进度保存在当前电脑的用户目录。加 <code>--portable</code> 后，进度与音频缓存保存在本文件夹的 <code>user-data/</code>，退出程序后可连同文件夹一起带走。切换版本使用 <code>--app-version 1</code>、<code>2</code> 或 <code>3</code>。</p>
+<p>发给朋友时直接发送原始 ZIP。它不含发布者的学习记录、账号、音频缓存或系统配置。</p>
+<p>文字练习可离线使用。读音需要 <code>ffplay</code>；首次获取某个词的音频需要联网，缓存后可离线重播。Python、Windows curses 组件和 FFmpeg 需要另外安装。</p>
+<p>本包按 Windows、macOS、Linux 适配；已完成的平台验证结果见 <code>VERIFICATION.json</code>。Windows 和 macOS 尚未进行真机验收。Linux 可选后台提醒，其它平台使用程序内提醒。</p>
+<p>中选英和默写展示词库已有的完整释义。小窗口中可用上下键或 PageUp/PageDown 翻阅长释义。</p>
+<p>每日基础任务完成后默认进入增量例句与搭配练习；Esc 菜单的学习计划可开启“学习过程中加入例句”。已有 124 词的配套材料。</p>
+</div></div>
+<script>
+  var KEY = "md_ck_" + location.pathname;
+  function load(){var s=JSON.parse(localStorage.getItem(KEY)||"{}");
+    document.querySelectorAll('.checklist input').forEach(function(c){
+      if(s[c.id])c.checked=true; c.addEventListener('change',save);});}
+  function save(){var s={};document.querySelectorAll('.checklist input').forEach(
+    function(c){s[c.id]=c.checked;});localStorage.setItem(KEY,JSON.stringify(s));}
+  function resetCk(){localStorage.removeItem(KEY);
+    document.querySelectorAll('.checklist input').forEach(function(c){c.checked=false;});}
+  load();
+</script>
+</body></html>

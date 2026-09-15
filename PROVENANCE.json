@@ -1,0 +1,76 @@
+{
+  "bundle_version": "3.2.0-portable.1",
+  "sources": {
+    "v1.0.0": {
+      "source_version": "1.0.0",
+      "original_test_summary": "Ran 51 tests in 13.302s\nOK",
+      "original_release_manifest_sha256": "27f2e03d25b837b807505375157c6721aef3a1b9a239523cb4e42a5943979c11"
+    },
+    "v2.0.0": {
+      "source_version": "2.0.0",
+      "original_test_summary": "Ran 69 tests in 16.019s\nOK",
+      "original_release_manifest_sha256": "752b11018668db8d65f0c446d9fed0ac83c70b2c8cdf2b4fd105116585c5dfc8"
+    },
+    "v3.2.0": {
+      "source_version": "3.2.0",
+      "original_test_summary": "Ran 117 tests in 35.809s\nOK",
+      "original_release_manifest_sha256": "a71f05f34b285b456faa2a028426d854d0ad7033a2f4bf2894b7c343b5599df8"
+    }
+  },
+  "portable_patches": {
+    "apps/v1.0.0/ielts.py": [
+      "supported shutdown signals",
+      "explicit UTF-8 state reading"
+    ],
+    "apps/v1.0.0/audio_settings.py": [
+      "private file permissions"
+    ],
+    "apps/v1.0.0/pronunciation.py": [
+      "hide Windows audio subprocess console"
+    ],
+    "apps/v1.0.0/study.py": [
+      "platform file locks",
+      "private file permissions"
+    ],
+    "apps/v2.0.0/ielts.py": [
+      "supported shutdown signals",
+      "explicit UTF-8 state reading"
+    ],
+    "apps/v2.0.0/audio_settings.py": [
+      "private file permissions"
+    ],
+    "apps/v2.0.0/pronunciation.py": [
+      "hide Windows audio subprocess console"
+    ],
+    "apps/v2.0.0/study.py": [
+      "platform file locks",
+      "private file permissions"
+    ],
+    "apps/v3.2.0/ielts.py": [
+      "supported shutdown signals",
+      "explicit UTF-8 state reading"
+    ],
+    "apps/v3.2.0/audio_settings.py": [
+      "private file permissions"
+    ],
+    "apps/v3.2.0/routine.py": [
+      "private file permissions"
+    ],
+    "apps/v3.2.0/pronunciation.py": [
+      "hide Windows audio subprocess console"
+    ],
+    "apps/v3.2.0/study.py": [
+      "platform file locks",
+      "private file permissions"
+    ],
+    "apps/v3.2.0/test_reminders.py": [
+      "verify portable timer name"
+    ],
+    "apps/v3.2.0/reminders.py": [
+      "platform file locks",
+      "current Python for Linux timer",
+      "portable notification message",
+      "separate portable timer name"
+    ]
+  }
+}

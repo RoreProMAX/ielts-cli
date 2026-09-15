@@ -1,0 +1,2 @@
+# Development / terminal integration tests on Linux and macOS only.
+pexpect==4.9.0; sys_platform != "win32"

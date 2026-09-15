@@ -1,0 +1,62 @@
+{
+  "upstream_repository": "https://github.com/RealKai42/qwerty-learner-vscode",
+  "commit": "e0dc7a09a5e0946d77b2c279f72a89daf3659b97",
+  "repository_license": "MIT (repository-level declaration; dictionary files have no separate license field)",
+  "license_source": "https://raw.githubusercontent.com/RealKai42/qwerty-learner-vscode/e0dc7a09a5e0946d77b2c279f72a89daf3659b97/LICENSE",
+  "dictionary_provenance_note": "The main Qwerty Learner README credits kajweb as a source of dictionary data. This note does not independently establish per-dictionary rights.",
+  "main_project_source_note": "https://github.com/RealKai42/qwerty-learner#数据来源",
+  "dictionaries": {
+    "ielts": {
+      "upstream_file": "IELTS_3_T.json",
+      "source_url": "https://raw.githubusercontent.com/RealKai42/qwerty-learner-vscode/e0dc7a09a5e0946d77b2c279f72a89daf3659b97/assets/dicts/IELTS_3_T.json",
+      "upstream_length": 3575,
+      "raw_entry_count": 3575,
+      "valid_unique_count": 3575,
+      "excluded_count": 0,
+      "sha256": "63f64c79c96270f2a74f7bfebe952efe1d4c1f09b887bc3e4560a989b8873ad1"
+    },
+    "cet4": {
+      "upstream_file": "CET4_T.json",
+      "source_url": "https://raw.githubusercontent.com/RealKai42/qwerty-learner-vscode/e0dc7a09a5e0946d77b2c279f72a89daf3659b97/assets/dicts/CET4_T.json",
+      "upstream_length": 2607,
+      "raw_entry_count": 2607,
+      "valid_unique_count": 2607,
+      "excluded_count": 0,
+      "sha256": "733dd9f9c05ed9e3c35fbd65608e4e061e2d34c461723e057513e346562992de"
+    },
+    "cet6": {
+      "upstream_file": "CET6_T.json",
+      "source_url": "https://raw.githubusercontent.com/RealKai42/qwerty-learner-vscode/e0dc7a09a5e0946d77b2c279f72a89daf3659b97/assets/dicts/CET6_T.json",
+      "upstream_length": 2345,
+      "raw_entry_count": 2345,
+      "valid_unique_count": 2345,
+      "excluded_count": 0,
+      "sha256": "ed5e76b945b7c7bc567a75d44a6eaeda137c767960121057deab52593e245d6e"
+    },
+    "ielts-listening": {
+      "upstream_file": "IELTS_tinglichangjing.json",
+      "source_url": "https://raw.githubusercontent.com/RealKai42/qwerty-learner-vscode/e0dc7a09a5e0946d77b2c279f72a89daf3659b97/assets/dicts/IELTS_tinglichangjing.json",
+      "upstream_length": 1204,
+      "raw_entry_count": 1204,
+      "valid_unique_count": 1171,
+      "excluded_count": 33,
+      "excluded_reasons": {
+        "duplicate_name": 32,
+        "invalid_trans": 1
+      },
+      "sha256": "83c5190e56352d42d488b670e9f90b422e4c1f958f87a40a28bf15c75e7c78f4"
+    },
+    "ielts-expanded": {
+      "upstream_file": "IELTS_order.json",
+      "source_url": "https://raw.githubusercontent.com/RealKai42/qwerty-learner-vscode/e0dc7a09a5e0946d77b2c279f72a89daf3659b97/assets/dicts/IELTS_order.json",
+      "upstream_length": 9389,
+      "raw_entry_count": 9389,
+      "valid_unique_count": 9388,
+      "excluded_count": 1,
+      "excluded_reasons": {
+        "invalid_name": 1
+      },
+      "sha256": "e7409c5be83a8fe0f0111592ca92956c63ad35173e90573f064fd3c091a864d8"
+    }
+  }
+}

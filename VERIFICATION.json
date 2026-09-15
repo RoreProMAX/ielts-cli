@@ -1,0 +1,56 @@
+{
+  "bundle_version": "3.2.0-portable.1",
+  "verified_at": "2026-09-15T09:33:45.916762+00:00",
+  "local_release": {
+    "version": "3.2.0",
+    "tests": 117,
+    "result": "passed"
+  },
+  "portable_release": {
+    "v1.0.0": {
+      "tests": 54,
+      "result": "previously verified, unchanged source"
+    },
+    "v2.0.0": {
+      "tests": 72,
+      "result": "previously verified, unchanged source"
+    },
+    "v3.2.0": {
+      "tests": 120,
+      "result": "passed"
+    }
+  },
+  "features": {
+    "full_existing_meanings_and_6_row_scroll": "passed",
+    "old_question_options_answer_draft_preserved": "passed",
+    "auto_incremental_after_actual_due_work": "passed",
+    "manual_incremental_entry_and_config_switches": "passed",
+    "inline_examples_and_collocations": "passed",
+    "extra_does_not_inflate_new_or_review_goals": "passed",
+    "extra_correct_does_not_lengthen_review_schedule": "passed",
+    "daily_extra_pool_and_skipping_terminate": "passed",
+    "example_words": 124,
+    "dictionary_payloads": "unchanged"
+  },
+  "relocation": {
+    "relocated_chinese_space_paths": "passed",
+    "six_row_terminal_resume": "passed",
+    "typed_answer_and_draft_survive_move": "passed",
+    "versions_keep_separate_data": "passed",
+    "legacy_profile_untouched_and_not_imported": "passed",
+    "doctor_writes_no_profile": "passed",
+    "dictionary_count": 5,
+    "network_and_audio_requested": false
+  },
+  "offline_container": {
+    "python": "3.12.3",
+    "network": "disabled",
+    "program_directory": "read-only",
+    "ffplay_installed": false,
+    "v3_2_startup": "passed"
+  },
+  "windows_native_test": "not_run",
+  "macos_native_test": "not_run",
+  "personal_learning_data_included": false,
+  "background_reminders_enabled": false
+}

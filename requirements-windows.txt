@@ -1,0 +1,2 @@
+# Windows CPython compatibility layer. Linux and macOS do not need this package.
+windows-curses==2.4.2; sys_platform == "win32"

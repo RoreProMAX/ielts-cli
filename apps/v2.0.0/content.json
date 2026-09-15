@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "items": [
+    {"word": "adapt", "sentence": "Schools must ____ their lessons for mixed-ability classes.", "translation": "学校必须调整课程，以适应不同能力的班级。", "collocation": "adapt to change", "collocation_prompt": "____ to change"},
+    {"word": "adequate", "sentence": "The shelter has ____ water for three days.", "translation": "这个避难所有足够三天用的水。", "collocation": "adequate funding", "collocation_prompt": "____ funding"},
+    {"word": "annual", "sentence": "The museum publishes an ____ report each spring.", "translation": "博物馆每年春天发布年度报告。", "collocation": "annual report", "collocation_prompt": "____ report"},
+    {"word": "assess", "sentence": "Researchers will ____ the damage after the storm.", "translation": "研究人员将在暴风雨后评估损失。", "collocation": "assess the impact", "collocation_prompt": "____ the impact"},
+    {"word": "benefit", "sentence": "Regular exercise can ____ older adults.", "translation": "经常锻炼能让老年人受益。", "collocation": "benefit from exercise", "collocation_prompt": "____ from exercise"},
+    {"word": "challenge", "sentence": "Rising rents are a major ____ for students.", "translation": "不断上涨的房租是学生面临的重大挑战。", "collocation": "face a challenge", "collocation_prompt": "face a ____"},
+    {"word": "clarify", "sentence": "Please ____ the final step before we begin.", "translation": "开始前请澄清最后一步。", "collocation": "clarify a point", "collocation_prompt": "____ a point"},
+    {"word": "consequence", "sentence": "A long delay was the main ____ of the storm.", "translation": "长时间延误是暴风雨的主要后果。", "collocation": "serious consequence", "collocation_prompt": "serious ____"},
+    {"word": "contribute", "sentence": "Many small donations can ____ to the project.", "translation": "许多小额捐款都能为这个项目作出贡献。", "collocation": "contribute to research", "collocation_prompt": "____ to research"},
+    {"word": "decline", "sentence": "The number of visitors began to ____ after winter.", "translation": "冬季过后，游客数量开始下降。", "collocation": "decline steadily", "collocation_prompt": "____ steadily"},
+    {"word": "demonstrate", "sentence": "The experiment will ____ how plants use light.", "translation": "这个实验将展示植物如何利用光。", "collocation": "demonstrate ability", "collocation_prompt": "____ ability"},
+    {"word": "diverse", "sentence": "The city has a ____ population with many languages.", "translation": "这座城市人口多样，使用许多种语言。", "collocation": "diverse community", "collocation_prompt": "____ community"},
+    {"word": "emerge", "sentence": "New evidence began to ____ during the review.", "translation": "审查期间开始出现新的证据。", "collocation": "emerge from", "collocation_prompt": "____ from"},
+    {"word": "establish", "sentence": "The team hopes to ____ a local clinic.", "translation": "团队希望建立一家当地诊所。", "collocation": "establish a link", "collocation_prompt": "____ a link"},
+    {"word": "finance", "sentence": "A grant will ____ the training program.", "translation": "一笔拨款将为培训项目提供资金。", "collocation": "public finance", "collocation_prompt": "public ____"},
+    {"word": "fluctuate", "sentence": "Food prices often ____ with the season.", "translation": "食品价格常随季节波动。", "collocation": "fluctuate widely", "collocation_prompt": "____ widely"},
+    {"word": "global", "sentence": "Climate change is a ____ concern.", "translation": "气候变化是一个全球性问题。", "collocation": "global market", "collocation_prompt": "____ market"},
+    {"word": "inevitable", "sentence": "Some disruption is ____ during construction.", "translation": "施工期间出现一些干扰是不可避免的。", "collocation": "inevitable change", "collocation_prompt": "____ change"},
+    {"word": "significant", "sentence": "The survey found a ____ change in travel habits.", "translation": "调查发现旅行习惯发生了重大变化。", "collocation": "significant difference", "collocation_prompt": "____ difference"},
+    {"word": "sustainable", "sentence": "The village is testing ____ farming methods.", "translation": "这个村庄正在测试可持续的耕作方法。", "collocation": "sustainable development", "collocation_prompt": "____ development"}
+  ]
+}

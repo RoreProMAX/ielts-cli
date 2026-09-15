@@ -1,0 +1,35 @@
+# Local study state and audio never belong in source control.
+user-data/
+**/learning.sqlite3*
+**/progress.json*
+**/library.json*
+**/settings.json
+**/practice_settings.json
+**/routine.json
+**/active_round.json
+**/extra_round.json
+**/learn_round-*.json
+**/version_origin.json
+**/migration.json
+*.audio
+
+# Python / build output.
+**/__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+BUNDLE_MANIFEST.json
+SHA256SUMS
+
+# Machine-specific credentials and editor files.
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

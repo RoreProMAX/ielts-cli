@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IELTS CLI 使用手册</title><style>
+  :root { --blue:#1f6feb; --navy:#0b3d91; --ink:#1a2330; --mut:#5b6573;
+          --code-bg:#1e2430; --code-fg:#e6edf3; --line:#e2e6ec; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:#eef1f5; color:var(--ink); line-height:1.65;
+         font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; }
+  .wrap { max-width:940px; margin:0 auto; padding:24px 18px 90px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:12px;
+          padding:22px 28px; box-shadow:0 1px 3px rgba(0,0,0,.05); }
+  h1 { font-size:1.7rem; margin:.1em 0 .3em; color:var(--navy); }
+  h2 { font-size:1.3rem; margin:1.9em 0 .6em; padding-left:12px;
+       border-left:5px solid var(--blue); color:var(--navy); scroll-margin-top:14px; }
+  h3 { font-size:1.08rem; margin:1.3em 0 .4em; color:#173a6b; }
+  p { margin:.6em 0; }
+  code { font-family:"SF Mono",Consolas,"Cascadia Code",monospace;
+         background:#eef0f4; color:#b5295a; padding:.1em .4em; border-radius:5px; font-size:.88em; }
+  pre.code { position:relative; background:var(--code-bg); color:var(--code-fg);
+             padding:30px 16px 14px; border-radius:9px; overflow-x:auto; font-size:.85rem;
+             line-height:1.5; margin:.8em 0; }
+  pre.code code { background:none; color:inherit; padding:0; font-size:1em; white-space:pre; }
+  pre.code::before { content:attr(data-lang); position:absolute; top:7px; left:14px;
+             font-size:.7rem; letter-spacing:.08em; color:#8a93a3; text-transform:uppercase; }
+  table { border-collapse:collapse; width:100%; margin:1em 0; font-size:.92rem; }
+  th,td { border:1px solid var(--line); padding:8px 11px; text-align:left; vertical-align:top; }
+  th { background:var(--navy); color:#fff; font-weight:600; }
+  tbody tr:nth-child(even) { background:#f4f7fb; }
+  blockquote { margin:1.1em 0; padding:12px 16px; border-radius:9px; border-left:5px solid var(--blue);
+               background:#eef4ff; }
+  blockquote.danger { border-color:#d93025; background:#fdecea; }
+  blockquote p { margin:.3em 0; }
+  ul,ol { padding-left:1.5em; margin:.6em 0; }
+  li { margin:.3em 0; }
+  ul.checklist { list-style:none; padding-left:0; }
+  ul.checklist li { margin:.5em 0; }
+  ul.checklist label { display:flex; align-items:flex-start; gap:10px; cursor:pointer;
+                       padding:8px 11px; border:1px solid var(--line); border-radius:8px; background:#fafbfd; }
+  ul.checklist input { width:19px; height:19px; margin-top:2px; flex:0 0 auto; accent-color:var(--blue); }
+  ul.checklist input:checked + span { color:var(--mut); text-decoration:line-through; }
+  hr { border:none; border-top:1px solid var(--line); margin:2em 0; }
+  nav.toc { background:#fff; border:1px solid var(--line); border-radius:10px;
+            padding:12px 18px; margin-bottom:18px; font-size:.92rem; }
+  nav.toc b { color:var(--navy); display:block; margin-bottom:6px; }
+  nav.toc a { color:var(--blue); text-decoration:none; margin:2px 14px 2px 0; display:inline-block; }
+  nav.toc a:hover { text-decoration:underline; }
+  .reset { font-size:.8rem; color:var(--blue); cursor:pointer; user-select:none; font-weight:400; }
+  @media print {
+    body { background:#fff; }
+    .card { box-shadow:none; border:none; padding:0; }
+    nav.toc, .reset { display:none; }
+    pre.code { background:#f3f4f7; color:#1a2330; border:1px solid var(--line); }
+    pre.code::before { color:#999; }
+    h2 { page-break-after:avoid; }
+    table,blockquote,pre.code { page-break-inside:avoid; }
+  }
+</style></head>
+<body><div class="wrap"><div class="card">
+<nav class="toc"><b>目录 <span class="reset" onclick="resetCk()">［清空勾选］</span></b><a href="#sec0">启动与版本</a><a href="#sec1">按键</a><a href="#sec2">词库</a><a href="#sec3">学习与复习</a><a href="#sec4">题型</a><a href="#sec5">每日任务</a><a href="#sec6">发音与保存</a><a href="#sec7">增量练习与学习中例句</a></nav>
+<h1>IELTS CLI 使用手册</h1>
+<p>这是跟打、默写和间隔复习的终端工具。通用入口的 V3 为 3.2.0；各版独立保存记录。</p>
+<h2 id="sec0">启动与版本</h2>
+<table><thead><tr><th>平台</th><th>默认启动</th><th>带着进度移动</th></tr></thead><tbody>
+<tr><td>Windows</td><td>双击 <code>start.bat</code></td><td>在终端运行 <code>start.bat --portable</code></td></tr>
+<tr><td>macOS</td><td>双击 <code>start.command</code></td><td>在终端运行 <code>sh start.command --portable</code></td></tr>
+<tr><td>Linux</td><td>在终端运行 <code>sh start.sh</code></td><td><code>sh start.sh --portable</code></td></tr>
+</tbody></table>
+<p>脚本支持相同参数。下文使用 <code>python3 launcher.py</code>，Windows 可替换为 <code>py -3 launcher.py</code>。</p>
+<pre class="code" data-lang="bash"><code>python3 launcher.py --app-version 1
+python3 launcher.py --app-version 2
+python3 launcher.py --app-version 3
+python3 launcher.py --doctor
+python3 launcher.py --verify</code></pre>
+<table><thead><tr><th>版本</th><th>能力</th></tr></thead><tbody>
+<tr><td>V1</td><td>五本词库、跟打/默写、错词补练、到期复习、暂停续接</td></tr>
+<tr><td>V2</td><td>V1 加英选中、中选英、听写、混合题型、例句与搭配</td></tr>
+<tr><td>V3 3.2.0</td><td>V2 加每日目标、每组 5 词、自动混合新词题型、程序内提醒、Linux 可选后台提醒</td></tr>
+</tbody></table>
+<h2 id="sec1">按键</h2>
+<table><thead><tr><th>按键</th><th>功能</th></tr></thead><tbody>
+<tr><td>Enter</td><td>检查答案；答对后再次按下进入下一题</td></tr>
+<tr><td>Tab</td><td>跟打 / 默写</td></tr>
+<tr><td>F2 / Ctrl+R</td><td>当前词库的全部词 / 错词</td></tr>
+<tr><td>F3 / Ctrl+G</td><td>显示答案并进入补练</td></tr>
+<tr><td>F4 / Ctrl+N</td><td>跳过当前题</td></tr>
+<tr><td>F5 / Ctrl+P</td><td>手动播放当前词读音</td></tr>
+<tr><td>F6 / Ctrl+T</td><td>开关自动发音</td></tr>
+<tr><td>F7 / Ctrl+D</td><td>选择词库</td></tr>
+<tr><td>F8 / Ctrl+K</td><td>选择章节</td></tr>
+<tr><td>F9 / Ctrl+B</td><td>到期复习 / 暂停返回学习</td></tr>
+<tr><td>Esc</td><td>打开菜单；菜单按 3 再 Enter 选择题型（V3）</td></tr>
+<tr><td>F11 / Ctrl+Y</td><td>今日任务（V3）</td></tr>
+<tr><td>F12 / Ctrl+L</td><td>目标与提醒设置（V3）</td></tr>
+<tr><td>Ctrl+S</td><td>复习提醒稍后 15 分钟（V3）</td></tr>
+<tr><td>F1</td><td>帮助</td></tr>
+<tr><td>Ctrl+Q / Ctrl+C</td><td>保存退出</td></tr>
+</tbody></table>
+<p>功能键被系统占用时使用对应 Ctrl 快捷键。V2 历史版保留 F10/Ctrl+O；V3 使用 Esc 菜单，输入为空时按 <code>?</code> 也可打开菜单。普通字母 <code>q</code> 用于拼写。界面至少需要 40 列、6 行；阅读长选项时建议增大窗口。</p>
+<p>选择器支持上下键、翻页、直接输入编号、Enter 确认及 Esc 返回。输入支持左右、Home/End、Backspace/Delete 和 Ctrl+U 清空。</p>
+<h2 id="sec2">词库</h2>
+<table><thead><tr><th>词库</th><th>有效词条</th><th>章节</th><th>ID</th></tr></thead><tbody>
+<tr><td>雅思通用</td><td>3575</td><td>179</td><td><code>ielts</code></td></tr>
+<tr><td>四级</td><td>2607</td><td>131</td><td><code>cet4</code></td></tr>
+<tr><td>六级</td><td>2345</td><td>118</td><td><code>cet6</code></td></tr>
+<tr><td>雅思听力场景</td><td>1171</td><td>59</td><td><code>ielts-listening</code></td></tr>
+<tr><td>雅思扩展</td><td>9388</td><td>470</td><td><code>ielts-expanded</code></td></tr>
+</tbody></table>
+<p>每章 20 词，末章按实际数量显示。不同词库各自保留章节、输入、错词与次数，相同拼写在不同词库中分别统计。</p>
+<pre class="code" data-lang="bash"><code>python3 launcher.py --list-dictionaries
+python3 launcher.py --dictionary ielts-listening --chapter 3</code></pre>
+<h2 id="sec3">学习与复习</h2>
+<p>启动时有到期词会优先复习，复习默认默写。想继续新词可加 <code>--learn</code>；手动进入到期复习使用 F9 或 <code>--review</code>。</p>
+<p>首次跟打后 10 分钟进入复习；无提示的拼写答对按 1、3、7、14、30 天推进。错误和提示后 10 分钟重测，跟打或选择题答对不会延长拼写复习间隔。</p>
+<p>错答后对照答案完整跟打一遍；后面至少还有三题时插入延后重测，同轮最多重试两次。未完成题和输入可保存续接。复习覆盖各词库，顶部显示当前题所属词库。</p>
+<pre class="code" data-lang="bash"><code>python3 launcher.py --learn
+python3 launcher.py --review
+python3 launcher.py --review-intervals 1,3,7,14,30
+python3 launcher.py --stats</code></pre>
+<h2 id="sec4">题型</h2>
+<p>V3 学习中按 Esc 打开菜单，按 3 再 Enter 选择题型；V2 历史版使用 F10/Ctrl+O。学习和复习分别保存设置。</p>
+<table><thead><tr><th>模式</th><th>参数</th></tr></thead><tbody>
+<tr><td>跟打</td><td><code>copy</code></td></tr>
+<tr><td>中文提示默写</td><td><code>recall</code></td></tr>
+<tr><td>英选中</td><td><code>en_to_zh</code></td></tr>
+<tr><td>中选英</td><td><code>zh_to_en</code></td></tr>
+<tr><td>听音拼写</td><td><code>listening</code></td></tr>
+<tr><td>例句填空</td><td><code>cloze</code></td></tr>
+<tr><td>常用搭配</td><td><code>collocation</code></td></tr>
+<tr><td>按成绩选择题型</td><td><code>mixed</code></td></tr>
+</tbody></table>
+<pre class="code" data-lang="bash"><code>python3 launcher.py --learn --question-mode mixed
+python3 launcher.py --review --question-mode mixed</code></pre>
+<p>选择题直接按 1–4 作答。中选英和默写显示词库中全部已有释义，保留词性及义项标点；长释义自动换行，窗口较小时可用上下键或 PageUp/PageDown 翻阅，选项保持可见。V3 新词默认 mixed，每组 5 词按跟打、英选中、中选英、默写四阶段推进，阶段之间自动穿插；组末自动接下一组。每日任务完成后回到每日面板。复习默认 recall，完成一组到期复习后自动接学习。各题型成绩分别记录。</p>
+<p>例句和搭配目前覆盖 124 个词。直接选择这两种模式时使用已有内容的词；复习遇到没有配套内容的词时提示并回退到默写。</p>
+<h2 id="sec5">每日任务</h2>
+<p>默认每日新词 20、复习 30，每组 5 词。F11 打开面板，按 1 开始下一组，先处理到期复习再从当前词库选新词。每日目标按不同词条计数，表示练习量，不代表掌握率。</p>
+<p>每日下一组跳过今天已复习过的词，避免选择题重复占满小组。错词同轮重测保留，需要继续重测当天到期词可用 F9。已有未完成轮次优先续接。</p>
+<pre class="code" data-lang="bash"><code>python3 launcher.py --daily
+python3 launcher.py --configure --new-goal 20 --review-goal 30 --batch-size 5
+python3 launcher.py --configure --reminder-minutes 30</code></pre>
+<p>程序内提醒只显示提示，不替换当前题或输入；Ctrl+S 延后 15 分钟。设置间隔为 0 可关闭程序内提醒。Linux 退出后的后台提醒安装和迁移见部署指南；默认不启用。</p>
+<h2 id="sec6">发音与保存</h2>
+<p>自动发音默认关闭，F5 可手动播放，按 F6 开启自动发音后可自动播放跟打和英选中当前词。例句和搭配支持增量与学习中穿插；默写、中选英和填空答题阶段不会自动读答案，这些题手动播放会记为使用提示。</p>
+<p>发音需要 <code>ffplay</code>。首次获取某词读音需要联网，成功下载后保存在本地缓存。没有发音依赖或网络时仍可继续文字练习。</p>
+<p>输入停顿后自动保存，提交和退出时立即保存；同一数据目录只允许一个学习终端。分享入口不自动导入其它程序或旧版本记录。数据位置和迁移步骤见部署指南。</p>
+<h2 id="sec7">增量练习与学习中例句</h2>
+<p>新词目标完成后，程序接上剩余的到期复习；达到复习目标，或当天实际到期词已处理完，就默认进入增量练习。到期词少于配额时按实际到期量计算。每组按设置的词数安排例句或搭配，自动交替，使用已学且有配套内容的词。增量分开统计，不充当新词/复习目标，答对不会把原复习间隔连续推远。</p>
+<p>已回答的词/题型当天不会重新加入下一增量组；错题仍可补练和延后重测。当天可用内容练完或跳过后回到任务面板，随时可以保存退出。</p>
+<p>Esc 菜单第 9 项可手动进入增量练习。Esc 菜单进入“学习计划”后，第 7 项是“每日任务完成后增量练习”（默认开）；第 8 项是“学习过程中加入例句”（默认关）。开关对下一组生效，当前题和输入保留。开启穿插后，有材料的词会在跟打、英选中、中选英、默写之后再练例句和搭配。</p>
+<pre class="code" data-lang="bash"><code>python3 launcher.py --incremental
+python3 launcher.py --configure --extra-after-daily on
+python3 launcher.py --configure --examples-during-learning on</code></pre>
+<p>把 on 换成 off 即可关闭。例句显示英文填空、中文句意和目标词义；答题后可查看完整句子，长文本用上下键翻阅。当前有 124 个词的配套例句及搭配，覆盖雅思通用前 40 词和其它词库的部分初始词汇，尚未覆盖所有词条。</p>
+</div></div>
+<script>
+  var KEY = "md_ck_" + location.pathname;
+  function load(){var s=JSON.parse(localStorage.getItem(KEY)||"{}");
+    document.querySelectorAll('.checklist input').forEach(function(c){
+      if(s[c.id])c.checked=true; c.addEventListener('change',save);});}
+  function save(){var s={};document.querySelectorAll('.checklist input').forEach(
+    function(c){s[c.id]=c.checked;});localStorage.setItem(KEY,JSON.stringify(s));}
+  function resetCk(){localStorage.removeItem(KEY);
+    document.querySelectorAll('.checklist input').forEach(function(c){c.checked=false;});}
+  load();
+</script>
+</body></html>

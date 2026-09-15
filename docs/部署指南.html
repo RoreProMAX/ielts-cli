@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IELTS CLI Portable 3.2.0 部署指南</title><style>
+  :root { --blue:#1f6feb; --navy:#0b3d91; --ink:#1a2330; --mut:#5b6573;
+          --code-bg:#1e2430; --code-fg:#e6edf3; --line:#e2e6ec; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:#eef1f5; color:var(--ink); line-height:1.65;
+         font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif; }
+  .wrap { max-width:940px; margin:0 auto; padding:24px 18px 90px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:12px;
+          padding:22px 28px; box-shadow:0 1px 3px rgba(0,0,0,.05); }
+  h1 { font-size:1.7rem; margin:.1em 0 .3em; color:var(--navy); }
+  h2 { font-size:1.3rem; margin:1.9em 0 .6em; padding-left:12px;
+       border-left:5px solid var(--blue); color:var(--navy); scroll-margin-top:14px; }
+  h3 { font-size:1.08rem; margin:1.3em 0 .4em; color:#173a6b; }
+  p { margin:.6em 0; }
+  code { font-family:"SF Mono",Consolas,"Cascadia Code",monospace;
+         background:#eef0f4; color:#b5295a; padding:.1em .4em; border-radius:5px; font-size:.88em; }
+  pre.code { position:relative; background:var(--code-bg); color:var(--code-fg);
+             padding:30px 16px 14px; border-radius:9px; overflow-x:auto; font-size:.85rem;
+             line-height:1.5; margin:.8em 0; }
+  pre.code code { background:none; color:inherit; padding:0; font-size:1em; white-space:pre; }
+  pre.code::before { content:attr(data-lang); position:absolute; top:7px; left:14px;
+             font-size:.7rem; letter-spacing:.08em; color:#8a93a3; text-transform:uppercase; }
+  table { border-collapse:collapse; width:100%; margin:1em 0; font-size:.92rem; }
+  th,td { border:1px solid var(--line); padding:8px 11px; text-align:left; vertical-align:top; }
+  th { background:var(--navy); color:#fff; font-weight:600; }
+  tbody tr:nth-child(even) { background:#f4f7fb; }
+  blockquote { margin:1.1em 0; padding:12px 16px; border-radius:9px; border-left:5px solid var(--blue);
+               background:#eef4ff; }
+  blockquote.danger { border-color:#d93025; background:#fdecea; }
+  blockquote p { margin:.3em 0; }
+  ul,ol { padding-left:1.5em; margin:.6em 0; }
+  li { margin:.3em 0; }
+  ul.checklist { list-style:none; padding-left:0; }
+  ul.checklist li { margin:.5em 0; }
+  ul.checklist label { display:flex; align-items:flex-start; gap:10px; cursor:pointer;
+                       padding:8px 11px; border:1px solid var(--line); border-radius:8px; background:#fafbfd; }
+  ul.checklist input { width:19px; height:19px; margin-top:2px; flex:0 0 auto; accent-color:var(--blue); }
+  ul.checklist input:checked + span { color:var(--mut); text-decoration:line-through; }
+  hr { border:none; border-top:1px solid var(--line); margin:2em 0; }
+  nav.toc { background:#fff; border:1px solid var(--line); border-radius:10px;
+            padding:12px 18px; margin-bottom:18px; font-size:.92rem; }
+  nav.toc b { color:var(--navy); display:block; margin-bottom:6px; }
+  nav.toc a { color:var(--blue); text-decoration:none; margin:2px 14px 2px 0; display:inline-block; }
+  nav.toc a:hover { text-decoration:underline; }
+  .reset { font-size:.8rem; color:var(--blue); cursor:pointer; user-select:none; font-weight:400; }
+  @media print {
+    body { background:#fff; }
+    .card { box-shadow:none; border:none; padding:0; }
+    nav.toc, .reset { display:none; }
+    pre.code { background:#f3f4f7; color:#1a2330; border:1px solid var(--line); }
+    pre.code::before { color:#999; }
+    h2 { page-break-after:avoid; }
+    table,blockquote,pre.code { page-break-inside:avoid; }
+  }
+</style></head>
+<body><div class="wrap"><div class="card">
+<nav class="toc"><b>目录 <span class="reset" onclick="resetCk()">［清空勾选］</span></b><a href="#sec0">先看结论</a><a href="#sec1">系统要求和外部依赖</a><a href="#sec2">下载、解压和第一次启动</a><a href="#sec3">入口和版本选择</a><a href="#sec4">数据位置、迁移和分享</a><a href="#sec5">网络、音频和离线边界</a><a href="#sec6">Linux 后台提醒</a><a href="#sec7">故障排查</a><a href="#sec8">已测边界</a><a href="#sec9">词库来源与许可证 notice</a></nav>
+<h1>IELTS CLI Portable 3.2.0 部署指南</h1>
+<p>这是一份给新电脑使用者和朋友的单文件 ZIP 部署说明。交付包名：<code>IELTS-CLI-Portable-3.2.0.zip</code>。</p>
+<h2 id="sec0">先看结论</h2>
+<ul>
+<li>解压后，ZIP 根目录应直接包含 <code>launcher.py</code>、<code>start.sh</code>、<code>start.command</code>、<code>start.bat</code>；不要再进入第二层同名目录。</li>
+<li>包内含程序和 5 本词库，不含 Python、<code>ffplay</code>、网络音频缓存或学习记录。</li>
+<li>V3 默认只使用本机系统用户目录；首次运行默认不导入旧进度。</li>
+<li><code>--portable</code> 把程序数据写入 ZIP 解压目录内的 <code>user-data/versions/3.2.0/</code>，发音缓存写入 <code>user-data/cache/ielts-cli/audio/</code>。</li>
+<li>发音需要联网下载音频，并且本机 PATH 中有 <code>ffplay</code>。没有它仍可使用文字练习，只有播放失败。</li>
+<li>Python 和播放组件需要用户自行准备。</li>
+</ul>
+<h2 id="sec1">系统要求和外部依赖</h2>
+<table><thead><tr><th>平台</th><th>必需</th><th>发音播放</th><th>后台提醒</th></tr></thead><tbody>
+<tr><td>Linux</td><td>Python 3.10+（含标准库 <code>curses</code>）</td><td>FFmpeg 包中的 <code>ffplay</code></td><td>可选 <code>systemd --user</code> + <code>notify-send</code></td></tr>
+<tr><td>macOS</td><td>Python 3.10+（含标准库 <code>curses</code>）</td><td>FFmpeg 的 <code>ffplay</code></td><td>使用程序内提醒</td></tr>
+<tr><td>Windows</td><td>Python 3.10+ 与 <code>windows-curses</code></td><td>Windows FFmpeg 构建中的 <code>ffplay.exe</code></td><td>使用程序内提醒</td></tr>
+</tbody></table>
+<p>建议使用 64 位 Python。Windows 原生终端还需要安装与当前 Python 相匹配的 <code>windows-curses</code> wheel。</p>
+<h3>Windows：Python 和 windows-curses</h3>
+<ol>
+<li>从 [Python 官方 Windows 下载页](https://www.python.org/downloads/windows/) 安装 Python 3.10 或更高版本。安装器中勾选 “Add Python to PATH”（若界面提供）。也可使用 Python 官方安装管理器；官方文档给出的 WinGet 命令是：</li>
+</ol>
+<pre class="code" data-lang="powershell"><code>winget install 9NQ7512CXL7T</code></pre>
+<ol>
+<li>打开新的 PowerShell，确认解释器：</li>
+</ol>
+<pre class="code" data-lang="powershell"><code>py -3 --version</code></pre>
+<p>启动脚本优先使用 <code>py -3</code>。若电脑只提供 <code>python</code>，把安装命令改为 <code>python -m pip</code>，脚本会自动使用它。</p>
+<ol>
+<li>在 ZIP 根目录执行 Windows 依赖安装：</li>
+</ol>
+<pre class="code" data-lang="powershell"><code>py -3 -m pip install -r requirements-windows.txt</code></pre>
+<p><code>requirements-windows.txt</code> 固定 <code>windows-curses==2.4.2</code>。当前 PyPI 发布页列出 CPython 3.10–3.14 的 Windows x86 与 x86-64 wheels；本包的 Python 要求是 3.10+，使用 CPython 并选择与解释器架构匹配的 wheel。来源：[PyPI windows-curses](https://pypi.org/project/windows-curses/)。</p>
+<h3>FFmpeg / ffplay</h3>
+<p>程序只调用 <code>ffplay</code>，不需要单独的 Python 音频包。请安装含 <code>ffplay</code> 的 FFmpeg 构建，并确保命令能在新终端中找到。</p>
+<ul>
+<li>Windows：从 [FFmpeg 官方下载页](https://ffmpeg.org/download.html)进入 Windows builds（官方页列出 gyan.dev 和 BtbN），下载适合系统的构建，解压后将包含 <code>ffplay.exe</code> 的 <code>bin</code> 目录加入 PATH。然后在 PowerShell 检查：</li>
+</ul>
+<pre class="code" data-lang="powershell"><code>ffplay -version</code></pre>
+<ul>
+<li>Ubuntu/Debian：使用系统包管理器（Ubuntu 包页面列出 <code>ffmpeg</code> 包）：</li>
+</ul>
+<pre class="code" data-lang="bash"><code>sudo apt update
+sudo apt install ffmpeg
+ffplay -version</code></pre>
+<p>[Ubuntu ffmpeg 包信息](https://packages.ubuntu.com/ffmpeg)；其他发行版请按发行版的软件源安装。FFmpeg 官方下载页也列出了 Debian、Ubuntu、Fedora 等包入口。</p>
+<ul>
+<li>macOS（已安装 Homebrew 时）：</li>
+</ul>
+<pre class="code" data-lang="bash"><code>brew install ffmpeg
+ffplay -version</code></pre>
+<p>[Homebrew 官方 ffmpeg 公式](https://formulae.brew.sh/formula/ffmpeg)明确列出 <code>brew install ffmpeg</code>，并将 <code>ffplay</code> 列为安装的二进制工具之一。尚未安装 Homebrew 时，请先按 [Homebrew 官方安装说明](https://brew.sh/)操作。</p>
+<p>若 <code>ffplay -version</code> 成功但程序仍提示找不到它，请重开终端；图形启动器不会自动继承安装前已经打开的终端环境。</p>
+<h2 id="sec2">下载、解压和第一次启动</h2>
+<h3>Linux</h3>
+<p>先安装 Python 和解压工具：</p>
+<pre class="code" data-lang="bash"><code>sudo apt update
+sudo apt install python3 python3-venv unzip</code></pre>
+<p>将 ZIP 放在任意目录。路径可以包含空格和中文，但命令中的路径必须用引号包住：</p>
+<pre class="code" data-lang="bash"><code>mkdir -p &quot;$HOME/Apps/IELTS CLI&quot;
+unzip &quot;IELTS-CLI-Portable-3.2.0.zip&quot; -d &quot;$HOME/Apps/IELTS CLI&quot;
+cd &quot;$HOME/Apps/IELTS CLI&quot;
+chmod +x start.sh
+./start.sh</code></pre>
+<p>若启动脚本不可执行，也可以直接运行：</p>
+<pre class="code" data-lang="bash"><code>python3 launcher.py --app-version 3</code></pre>
+<h3>macOS</h3>
+<p>已安装 Homebrew 时先安装 Python：</p>
+<pre class="code" data-lang="bash"><code>brew install python</code></pre>
+<p>在 Finder 中双击 <code>start.command</code>。首次运行若 macOS 阻止脚本，可右键选择“打开”，或在终端执行：</p>
+<pre class="code" data-lang="bash"><code>cd &quot;/Users/你的用户名/Applications/IELTS CLI&quot;
+chmod +x start.command
+./start.command</code></pre>
+<p>路径中的中文、空格和括号均可保留；不要删掉引号。也可以直接执行 <code>python3 launcher.py --app-version 3</code>。</p>
+<h3>Windows</h3>
+<p>在资源管理器中解压 ZIP，双击 <code>start.bat</code>。若需要查看错误信息，打开 PowerShell 后：</p>
+<pre class="code" data-lang="powershell"><code>Set-Location &quot;C:\Users\你的用户名\Desktop\IELTS CLI&quot;
+python launcher.py --app-version 3</code></pre>
+<p>路径中的空格和中文不需要改名；PowerShell 的路径参数请保留双引号。不要直接双击 <code>launcher.py</code>，因为窗口可能在错误出现后立即关闭。</p>
+<h2 id="sec3">入口和版本选择</h2>
+<p>默认启动 V3：</p>
+<pre class="code" data-lang="text"><code>Linux/macOS: ./start.sh              （或 ./start.command）
+Windows:     start.bat
+通用:        python launcher.py --app-version 3</code></pre>
+<p>统一入口支持三个应用版本。版本数据彼此隔离：</p>
+<pre class="code" data-lang="bash"><code>python3 launcher.py --app-version 1
+python3 launcher.py --app-version 2
+python3 launcher.py --app-version 3</code></pre>
+<p>启动前检查环境和包内容：</p>
+<pre class="code" data-lang="bash"><code>python3 launcher.py --doctor
+python3 launcher.py --verify</code></pre>
+<p>需要明确使用包内数据目录时：</p>
+<pre class="code" data-lang="bash"><code>python3 launcher.py --app-version 3 --portable</code></pre>
+<p>单独执行 <code>--verify</code> 可检查包内容。V3 的详细学习选项以包内程序显示的 <code>--help</code> 为准；入口透传 <code>--stats</code>、<code>--list-dictionaries</code>、<code>--review</code> 等参数。</p>
+<h2 id="sec4">数据位置、迁移和分享</h2>
+<h3>默认模式</h3>
+<p>默认模式把当前版本数据放在当前系统用户目录的以下位置：</p>
+<pre class="code" data-lang="text"><code>Linux:  ${XDG_DATA_HOME:-~/.local/share}/ielts-cli-portable/versions/3.2.0/
+macOS:  ~/Library/Application Support/IELTS-CLI-Portable/versions/3.2.0/
+Windows: %LOCALAPPDATA%\IELTS-CLI-Portable\versions\3.2.0\</code></pre>
+<p>其中包含学习进度、设置、复习数据库等运行数据。不同版本目录分开，升级或切换版本不会自动双向同步。<code>--doctor</code> 会显示当前平台解析出的实际路径，且不创建或修改数据文件。</p>
+<p>默认首次运行不导入旧进度。升级自己的旧便携包时，先退出旧程序，在新版解压目录中执行：</p>
+<pre class="code" data-lang="bash"><code>mkdir -p &quot;新包/user-data/versions&quot;
+cp -a &quot;旧包/user-data/versions/3.1.0&quot; &quot;新包/user-data/versions/3.2.0&quot;</code></pre>
+<p>Windows 可在资源管理器中将旧包的 <code>user-data\versions\3.1.0</code> 复制为新版的 <code>user-data\versions\3.2.0</code>。保留旧包和源目录。正常模式也请复制到 3.2.0 新目录后运行，以保留旧版原数据。</p>
+<h3>自己携带进度的便携模式</h3>
+<p>在解压目录执行（Linux/macOS）：</p>
+<pre class="code" data-lang="bash"><code>python3 launcher.py --app-version 3 --portable</code></pre>
+<p>Windows 使用：</p>
+<pre class="code" data-lang="powershell"><code>python launcher.py --app-version 3 --portable</code></pre>
+<p>数据写入包内 <code>user-data/versions/3.2.0/</code>，发音缓存写入 <code>user-data/cache/ielts-cli/audio/</code>。整个解压目录可以复制到 U 盘或另一台电脑；目标电脑仍须有匹配的 Python、Windows 的 <code>windows-curses</code>（若适用）和 <code>ffplay</code>。复制前退出程序，复制后先运行 <code>--doctor</code> 和 <code>--verify</code>。</p>
+<h3>发给朋友的清洁副本</h3>
+<p>请从原始、未启动过的 <code>IELTS-CLI-Portable-3.2.0.zip</code> 发送。压缩内容只保留程序、词库、启动脚本、来源和校验文件；自己的 <code>user-data/</code>、<code>cache/</code> 和日志不放入分享包。可解压到临时目录检查根目录和 <code>user-data/</code>，再运行 <code>--verify</code>。</p>
+<h2 id="sec5">网络、音频和离线边界</h2>
+<p>词库和终端界面可在无网络时运行。发音第一次播放某个词时需要联网下载音频，成功缓存后可离线重播；ZIP 本身不含音频缓存。</p>
+<p>没有网络时，程序给出播放失败提示，文字练习仍可继续。没有 <code>ffplay</code> 时，<code>--doctor</code> 报告缺失；安装后重新打开终端再检查。</p>
+<h2 id="sec6">Linux 后台提醒</h2>
+<p>后台提醒适用于 Linux 的 <code>systemd --user</code> 会话，并依赖 <code>notify-send</code>。Ubuntu/Debian 可运行 <code>sudo apt install libnotify-bin</code> 安装通知工具。本包使用独立的 <code>ielts-cli-portable-review.timer</code>，默认不启用；Linux 上执行：</p>
+<pre class="code" data-lang="bash"><code>python3 launcher.py --app-version 3 --reminders enable --reminder-minutes 30
+python3 launcher.py --app-version 3 --reminders status
+python3 launcher.py --app-version 3 --reminders disable</code></pre>
+<p>提醒在用户登录会话中运行；程序正在运行、没有到期词或提醒被暂缓时不会弹出通知。macOS 和 Windows 使用程序内提醒设置。移动文件夹前在旧位置执行 <code>--reminders disable</code>，移动完成后在新位置重新执行 <code>--reminders enable</code>。使用便携进度时，开启命令也须加 <code>--portable</code>。</p>
+<h2 id="sec7">故障排查</h2>
+<ol>
+<li><strong>窗口一闪而过</strong>：在终端中进入解压目录后运行 <code>python launcher.py --doctor</code>；Windows 使用 PowerShell，Linux/macOS 使用终端。</li>
+<li><strong>找不到 Python</strong>：运行 <code>python --version</code>、<code>python3 --version</code> 或 <code>py --version</code>；安装 Python 3.10+ 后重开终端。</li>
+<li><strong>Windows 报 <code>No module named _curses</code></strong>：运行 <code>py -3 -m pip install -r requirements-windows.txt</code>，与启动脚本保持相同解释器。</li>
+<li><strong>找不到 <code>ffplay</code></strong>：运行 <code>ffplay -version</code>；检查 PATH、重开终端，或把 FFmpeg 的 <code>bin</code> 目录加入 PATH。若构建不含 <code>ffplay.exe</code>，从 FFmpeg 官方下载页选择完整构建。</li>
+<li><strong>中文或空格路径启动失败</strong>：使用上文带引号的 <code>cd</code>/<code>Set-Location</code> 示例。确认 ZIP 解压后 <code>launcher.py</code> 位于当前目录。</li>
+<li><strong>终端显示异常或无法交互</strong>：在真正的交互式终端运行，不要通过管道启动；把终端窗口扩大后重试。</li>
+<li><strong>学习记录看起来不是自己的</strong>：退出程序，确认当前启动是否带了 <code>--portable</code>，并检查对应的 <code>user-data/</code> 或系统用户目录。发给朋友应重新使用清洁 ZIP。</li>
+<li><strong>提醒没有出现</strong>：Linux 检查 <code>systemctl --user status ielts-cli-portable-review.timer</code> 和 <code>notify-send</code> 是否存在；确认用户处于登录会话、已有到期词且没有暂缓提醒。Windows/macOS 后台命令不适用。</li>
+</ol>
+<h2 id="sec8">已测边界</h2>
+<p>发布测试结果、文件清单和打包验证以随包 <code>VERIFICATION.json</code> 为准。Linux 便携目录重定位结果见该记录；Windows/macOS 当前按适配接口使用，待真机验收。</p>
+<h2 id="sec9">词库来源与许可证 notice</h2>
+<p>各版的 <code>apps/v*/data/QWERTY-VSCODE-LICENSE.txt</code> 和来源元数据随包保留。上游仓库为 [RealKai42/qwerty-learner-vscode](https://github.com/RealKai42/qwerty-learner-vscode)，固定提交为 <code>e0dc7a09a5e0946d77b2c279f72a89daf3659b97</code>，许可证来源为该提交的 [LICENSE](https://raw.githubusercontent.com/RealKai42/qwerty-learner-vscode/e0dc7a09a5e0946d77b2c279f72a89daf3659b97/LICENSE)。</p>
+<p>词库释义未逐词校订。再分发时保留上游 notice 和来源文件。</p>
+<hr>
+<p>文档面向：<code>IELTS-CLI-Portable-3.2.0.zip</code></p>
+</div></div>
+<script>
+  var KEY = "md_ck_" + location.pathname;
+  function load(){var s=JSON.parse(localStorage.getItem(KEY)||"{}");
+    document.querySelectorAll('.checklist input').forEach(function(c){
+      if(s[c.id])c.checked=true; c.addEventListener('change',save);});}
+  function save(){var s={};document.querySelectorAll('.checklist input').forEach(
+    function(c){s[c.id]=c.checked;});localStorage.setItem(KEY,JSON.stringify(s));}
+  function resetCk(){localStorage.removeItem(KEY);
+    document.querySelectorAll('.checklist input').forEach(function(c){c.checked=false;});}
+  load();
+</script>
+</body></html>

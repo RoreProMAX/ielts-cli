@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "default_dictionary": "ielts",
+  "chapter_size": 20,
+  "dictionaries": [
+    {
+      "id": "ielts",
+      "name": "雅思通用",
+      "description": "雅思词库",
+      "path": "ielts.json",
+      "word_count": 3575,
+      "language": "en",
+      "source_url": "https://raw.githubusercontent.com/RealKai42/qwerty-learner-vscode/e0dc7a09a5e0946d77b2c279f72a89daf3659b97/assets/dicts/IELTS_3_T.json",
+      "sha256": "63f64c79c96270f2a74f7bfebe952efe1d4c1f09b887bc3e4560a989b8873ad1"
+    },
+    {
+      "id": "cet4",
+      "name": "英语四级",
+      "description": "大学英语四级词库",
+      "path": "dicts/cet4.json",
+      "word_count": 2607,
+      "language": "en",
+      "source_url": "https://raw.githubusercontent.com/RealKai42/qwerty-learner-vscode/e0dc7a09a5e0946d77b2c279f72a89daf3659b97/assets/dicts/CET4_T.json",
+      "sha256": "733dd9f9c05ed9e3c35fbd65608e4e061e2d34c461723e057513e346562992de"
+    },
+    {
+      "id": "cet6",
+      "name": "英语六级",
+      "description": "大学英语六级词库",
+      "path": "dicts/cet6.json",
+      "word_count": 2345,
+      "language": "en",
+      "source_url": "https://raw.githubusercontent.com/RealKai42/qwerty-learner-vscode/e0dc7a09a5e0946d77b2c279f72a89daf3659b97/assets/dicts/CET6_T.json",
+      "sha256": "ed5e76b945b7c7bc567a75d44a6eaeda137c767960121057deab52593e245d6e"
+    },
+    {
+      "id": "ielts-listening",
+      "name": "雅思听力场景",
+      "description": "雅思听力场景词汇",
+      "path": "dicts/ielts-listening.json",
+      "word_count": 1171,
+      "language": "en",
+      "source_url": "https://raw.githubusercontent.com/RealKai42/qwerty-learner-vscode/e0dc7a09a5e0946d77b2c279f72a89daf3659b97/assets/dicts/IELTS_tinglichangjing.json",
+      "sha256": "83c5190e56352d42d488b670e9f90b422e4c1f958f87a40a28bf15c75e7c78f4"
+    },
+    {
+      "id": "ielts-expanded",
+      "name": "雅思扩展（顺序）",
+      "description": "IELTS顺序完整版",
+      "path": "dicts/ielts-expanded.json",
+      "word_count": 9388,
+      "language": "en",
+      "source_url": "https://raw.githubusercontent.com/RealKai42/qwerty-learner-vscode/e0dc7a09a5e0946d77b2c279f72a89daf3659b97/assets/dicts/IELTS_order.json",
+      "sha256": "e7409c5be83a8fe0f0111592ca92956c63ad35173e90573f064fd3c091a864d8"
+    }
+  ]
+}
