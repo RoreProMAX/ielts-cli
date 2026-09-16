@@ -1,6 +1,6 @@
 {
-  "bundle_version": "3.3.1-beta.1-public.1",
-  "verified_at": "2026-09-16T05:21:01.985963+00:00",
+  "bundle_version": "3.3.1-public.1",
+  "verified_at": "2026-09-16T06:33:31.606221+00:00",
   "local_release": {
     "version": "3.3.0",
     "tests": 147,
@@ -22,6 +22,11 @@
     "v3.3.0": {
       "tests": 150,
       "result": "passed"
+    },
+    "v3.3.1": {
+      "tests": 174,
+      "result": "passed",
+      "runtime_changes_from_beta": "VERSION only"
     }
   },
   "features": {
@@ -79,7 +84,7 @@
     "windows_native_vt_and_terminal_tests": "passed",
     "channel_default": "stable",
     "stable_release_unchanged": "3.3.0",
-    "prerelease_publication": "planned; stable latest remains 3.3.0",
+    "prerelease_publication": true,
     "ci_url": "https://github.com/RoreProMAX/ielts-cli/actions/runs/35058831180",
     "ci_code_commit": "162a9039702ecbf6b48a263388aaf55c8c6094cd",
     "ci_jobs_passed": 13,
@@ -106,6 +111,21 @@
       "stable_to_beta_profile_copy_preserves_source_hashes": "passed",
       "cli_channel_configuration": "passed",
       "offline_readonly_container_cold_start": "passed"
-    }
+    },
+    "scope": "historical verification of v3.3.1-beta.1; stable latest was v3.3.0 at that publication"
+  },
+  "stable_release": {
+    "version": "3.3.1",
+    "requested_promotion_from": "3.3.1-beta.1",
+    "base_commit": "75c4f91b1386ce6b0223411be8ad4111330f5e62",
+    "linux_application_tests": 174,
+    "linux_test_result": "passed",
+    "runtime_and_dictionary_identical_except_VERSION": true,
+    "beta_baseline_terminal_ci": "https://github.com/RoreProMAX/ielts-cli/actions/runs/35059466717",
+    "beta_baseline_platform_count": 4,
+    "beta_baseline_terminal_steps_each": 10,
+    "release_ci_reference": "See v3.3.1 release notes for the exact stable commit CI",
+    "update_channel_default": "stable",
+    "command_registration": "documentation only; no installer or PATH changes"
   }
 }

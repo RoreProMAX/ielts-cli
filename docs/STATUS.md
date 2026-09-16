@@ -4,7 +4,7 @@
 
 - 已修复菜单 9 增量例句返回后菜单 2 无法回到单词学习的问题；恢复时保留当前题目、输入和评分上下文。
 - 已加入启动时后台 stable Release 检查、用户可关闭设置、确认后下载/安装和保存并重启或下次启动使用的流程。更新器不自动安装、重启或打断学习。
-- V3.3.1-beta.1：本地 174 项测试完成；4 个 CI 平台各完成 10 步真实终端场景，见 [Actions 35058831180](https://github.com/RoreProMAX/ielts-cli/actions/runs/35058831180)。
+- V3.3.1 稳定版：本地 174 项测试通过；发布提交的四平台真实终端结果与安装包检查见[V3.3.1 发布页](https://github.com/RoreProMAX/ielts-cli/releases/tag/v3.3.1)。Beta 的 174 项本地测试及 4 平台 10 步结果是历史依据，见 [Actions 35059466717](https://github.com/RoreProMAX/ielts-cli/actions/runs/35059466717)。
 
 ## 已验证
 
@@ -12,7 +12,7 @@
 - 终端最小尺寸 40 列、6 行的拒绝路径和 6 行交互布局已验证。
 - 从不同工作目录启动的重定位行为已验证。
 - 离线容器验证已完成；文字练习不依赖发音网络。
-- Windows 旧版本适配代码与 `windows-curses==2.4.2` 依赖保留；V3.3.1-beta.1 主版本改用标准库 VT/native console 后端，真实终端 10 步 CI 已通过。
+- Windows 旧版本适配代码与 `windows-curses==2.4.2` 依赖保留；V3.3.1 稳定版 继承标准库 VT/native console 后端，Beta 历史真实终端 10 步 CI 已通过，稳定版发布提交的验证记录见[V3.3.1 发布页](https://github.com/RoreProMAX/ielts-cli/releases/tag/v3.3.1)。
 
 ## 待验证
 
@@ -26,7 +26,7 @@
 
 - Linux、macOS 15 ARM64 与 Intel：固定的 10 步交互场景通过，含例句往返、更新设置、F9/F11、缩放、保存和重启恢复。
 - V3.3.0 Windows Server 2025 / ConPTY 的 PDCurses 中文局部重绘失败是历史基线：将“中文”计为 2 列，双列 CJK 模型应为 4 列。旧证据见 [Actions 35055258617](https://github.com/RoreProMAX/ielts-cli/actions/runs/35055258617)。
-- V3.3.1-beta.1 使用 `windows_terminal.py` 后，Windows “中文”在 VT 预期、内部网格和原生控制台均为 4 列；两种 codepage 对照及 10 步真实终端场景通过，见 [Actions 35058831180](https://github.com/RoreProMAX/ielts-cli/actions/runs/35058831180)。
+- V3.3.1 稳定版 继续使用 `windows_terminal.py`；Beta 历史证据中 Windows “中文”在 VT 预期、内部网格和原生控制台均为 4 列，两种 codepage 对照及 10 步场景通过，见 [Actions 35059466717](https://github.com/RoreProMAX/ielts-cli/actions/runs/35059466717)。稳定版发布记录见[V3.3.1 发布页](https://github.com/RoreProMAX/ielts-cli/releases/tag/v3.3.1)。
 
 ## 已知限制与缺陷
 
@@ -37,9 +37,9 @@
 - 版本进度迁移是一次性复制；运行后不同版本的新增记录不会双向合并。
 - 退出后的后台提醒依赖 Linux `systemd --user`；其他平台只有程序内提醒。
 - 更新按 channel 接受 `RoreProMAX/ielts-cli` 的公开 Release，并校验官方 asset 的 SHA-256 与 ZIP 清单；stable 不接受 Beta，beta 接受高于当前版本的 stable/beta，均不接受 draft 或降级。程序与内置词库随完整发布包更新，不自动升级 Python、curses 或 ffplay。压缩包保存在当前进度目录的 `updates/downloads/`，解压程序保存在 `updates/releases/`，启用前保留 JSON/SQLite 备份。
-- 更新 channel 默认是 `stable`，可选 `beta`；beta 接受高于当前版本的 stable/beta，不降级。stable 用户不会收到 Beta。V3.3.0 及更早版本没有 Beta 入口，需先手动安装 Beta；Beta 与 stable 数据按版本隔离，不双向同步。
-- 原 PDCurses 中文重绘失败是历史基线，保留其失败证据；V3.3.1-beta.1 的 VT/native console 修复已通过上述 CI 场景，人工宿主体验仍单独记录。
-- 需要 Python 3.10+；Linux/macOS 使用 curses，Windows Beta 使用标准库 VT/native console，旧版才需要 `windows-curses`。可选发音另需 `ffplay`。
+- 更新 channel 默认是 `stable`，可选 `beta`；beta 接受高于当前版本的 stable/beta，不降级。stable 用户不会收到 Beta。V3.3.0 可通过 stable channel 更新到 V3.3.1；V3.2.0 及更早版本没有 updater，需手动安装 V3.3.1 一次；Beta 与 stable 数据按版本隔离，不双向同步。
+- 原 PDCurses 中文重绘失败是历史基线，保留其失败证据；V3.3.1 稳定版 继承 Beta 已验证的 VT/native console 修复，稳定版发布记录见[V3.3.1 发布页](https://github.com/RoreProMAX/ielts-cli/releases/tag/v3.3.1)，人工宿主体验单独记录。
+- 需要 Python 3.10+；Linux/macOS 使用 curses，Windows V3.3.1 使用标准库 VT/native console，旧版才需要 `windows-curses`。可选发音另需 `ffplay`。
 - 终端宿主若吞掉功能键、改变 TERM 或不能提供 40×6 的最小尺寸，交互体验会受影响。
 
 ## 按模块查看

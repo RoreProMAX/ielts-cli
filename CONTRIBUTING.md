@@ -8,11 +8,11 @@
 
 ```sh
 python3 -m pip install -r requirements-test.txt
-cd apps/v3.3.1-beta.1
+cd apps/v3.3.1
 python3 -m unittest discover -p 'test_*.py'
 ```
 
-当前主要验证范围是 Linux；V3.3.1-beta.1 的测试数量和结果以本次验收记录及 Actions 为准，不在文档中预先宣称通过。Windows 与 macOS 交互测试尚未在真机完成；跨平台 smoke CI 的运行记录见 Actions。
+V3.3.1 本地 174 项测试通过；CI 覆盖 Linux、macOS ARM/Intel 与 Windows 的真实终端场景。发布提交的结果和产物见[V3.3.1 发布页](https://github.com/RoreProMAX/ielts-cli/releases/tag/v3.3.1)。字体、DPI、IME 与具体桌面宿主仍需人工验收。
 
 ## 提交改动
 
@@ -28,4 +28,4 @@ python3 -m unittest discover -p 'test_*.py'
 
 提交前请检查 `git diff`、运行相关测试，并确认没有把发布包专用的 `BUNDLE_MANIFEST.json` 或个人数据混入源码提交。提交信息只描述变更内容。
 
-例句材料的来源和已知排除项见 [CONTENT_SOURCES.md](apps/v3.3.1-beta.1/CONTENT_SOURCES.md)。
+例句材料的来源和已知排除项见 [CONTENT_SOURCES.md](apps/v3.3.1/CONTENT_SOURCES.md)。

@@ -2,7 +2,7 @@
 
 A lightweight, general-purpose terminal vocabulary practice tool: use it in a regular terminal, an Agent Desktop CLI window, or a spare moment during development or study. It is an independent Python implementation inspired by Qwerty typing vocabulary practice, not an official upstream fork.
 
-The default source/Beta package runs `apps/v3.3.1-beta.1`; `apps/v1.0.0`, `apps/v2.0.0`, `apps/v3.2.0`, and `apps/v3.3.0` remain available. Stable downloads remain at the [stable Release](https://github.com/RoreProMAX/ielts-cli/releases/latest); the Beta uses the separate [v3.3.1-beta.1 Release](https://github.com/RoreProMAX/ielts-cli/releases/tag/v3.3.1-beta.1). Five dictionaries contain 19,086 valid entries, organized in 20-word chapters.
+The default source/stable package runs `apps/v3.3.1`; `apps/v1.0.0`, `apps/v2.0.0`, `apps/v3.2.0`, `apps/v3.3.0`, and the historical Beta `apps/v3.3.1-beta.1` remain available. Stable downloads remain at the [stable Release](https://github.com/RoreProMAX/ielts-cli/releases/latest); the Beta remains at its separate [v3.3.1-beta.1 Release](https://github.com/RoreProMAX/ielts-cli/releases/tag/v3.3.1-beta.1). Five dictionaries contain 19,086 valid entries, organized in 20-word chapters.
 
 ## Project note
 
@@ -19,13 +19,13 @@ git clone https://github.com/RoreProMAX/ielts-cli.git
 cd ielts-cli
 ```
 
-Python 3.10+ is required. V3.3.1-beta.1 uses a standard-library VT output and native console input backend on Windows; `windows-curses==2.4.2` remains for older versions and comparison diagnostics:
+Python 3.10+ is required. V3.3.1 uses a standard-library VT output and native console input backend on Windows; `windows-curses==2.4.2` is only needed when running older versions or comparison diagnostics:
 
 ```powershell
 py -3 -m pip install -r requirements-windows.txt
 ```
 
-Start `start.bat` on Windows, double-click `start.command` on macOS, or run `sh start.sh` on Linux. The default is V3.3.1-beta.1:
+Start `start.bat` on Windows, double-click `start.command` on macOS, or run `sh start.sh` on Linux. The default is V3.3.1 stable:
 
 ```sh
 python3 launcher.py --app-version 3
@@ -33,14 +33,32 @@ python3 launcher.py --app-version 3
 
 Use a regular terminal or an Agent Desktop terminal pane with at least 40 columns and 6 rows. If the host captures F10, use Esc or `?` with an empty input to open the menu.
 
+### Launch with `ielts` after installation
+
+To launch from any directory, give your installation agent this request:
+
+> Install IELTS CLI using this repository's `docs/FOR_AGENTS.md` and configure an `ielts` command. Detect my operating system, actual shell, Python interpreter, and installation directory; create a suitable launcher and add its directory to my user PATH so it works in a newly opened terminal. Target the version I installed and preserve arguments and data settings. If the command already exists, explain its target and the proposed handling before replacing it. Verify `ielts --no-update --version` and `ielts --doctor` outside the installation directory, then tell me how to launch with `ielts`.
+
+For manual setup, keep the complete application in a fixed directory. Create an `ielts` wrapper in a user command directory such as `~/.local/bin` on Linux/macOS, or an `ielts.cmd` wrapper in a user command directory on Windows. Have it invoke the installed `launcher.py`, then add the **wrapper directory** to your user PATH. See the [agent setup instructions](docs/FOR_AGENTS.md#安装后配置-ielts-命令) for platform details and verification.
+
+Open a new terminal afterward; if an embedded terminal still cannot find the command, reopen its host application. Then run:
+
+```sh
+ielts --no-update --version
+ielts --doctor
+ielts
+```
+
+The current ZIP and startup scripts do not register this command automatically; these are setup steps for you or your installation agent. The command targets your installed version; stable and Beta selection still follows the download guidance above. Update the wrapper if you move or remove the application directory.
+
 ## Features
 
 - Typing (`copy`), English-to-Chinese (`en_to_zh`), Chinese-to-English (`zh_to_en`), and recall (`recall`); V3 uses mixed learning by default and records each mode separately.
 - Complete stored Chinese meanings in Chinese-to-English and recall, with paging for long meanings.
 - F7/Ctrl+D selects a dictionary, F8/Ctrl+K selects a chapter, F9/Ctrl+B starts or pauses due review, and F11/Ctrl+Y opens today's task.
 - Incremental examples and collocations start by default after the daily task. Current material covers 124 words; examples during learning are off by default and configurable from the Esc learning-plan menu. V3.3 can return from incremental examples to word learning.
-- V3.3.1-beta.1 checks public stable Releases in the background at startup (on by default). The update channel is stable by default; Esc “Version and updates” can opt into beta. Beta accepts only newer stable or beta releases and never downgrades; confirmation is required and study sessions are not interrupted or restarted automatically. Stable users do not receive Beta releases.
-- V3.3.0 and earlier have no Beta channel. Download the Beta package manually once, then explicitly enable its Beta channel to receive later Beta fixes; no intermediate version is required. `--no-update` uses the original entry version and skips checking for this run only; it does not change the setting.
+- V3.3.1 checks public stable Releases in the background at startup (on by default). The update channel is stable by default; Esc “Version and updates” can opt into beta. Beta accepts only newer stable or beta releases and never downgrades; confirmation is required and study sessions are not interrupted or restarted automatically. Stable users do not receive Beta releases.
+- V3.3.0 can update to V3.3.1 through the original stable channel, and the historical Beta can also upgrade to the same stable release. V3.2.0 and earlier have no updater and require one manual installation of V3.3.1; no Beta or intermediate version is required. `--no-update` uses the original entry version and skips checking for this run only; it does not change the setting.
 - Incremental practice does not inflate normal new-word or review goals; when fewer items are due, the actual due count is used.
 - Text practice works offline. Pronunciation requires `ffplay`; the first audio request for a word needs network access and later uses the local cache.
 
@@ -64,7 +82,7 @@ python3 launcher.py --verify
 
 See [FEATURES](docs/FEATURES.md), [INTERFACES](docs/INTERFACES.md), [DICTIONARIES](docs/DICTIONARIES.md), [STATUS](docs/STATUS.md), the [deployment guide](docs/部署指南.md), and the [user manual](docs/使用手册.md).
 
-V3.3.1-beta.1 has 174 local tests and a completed 10-step real-terminal scenario on each of four CI platforms; see [Actions run 35058831180](https://github.com/RoreProMAX/ielts-cli/actions/runs/35058831180). The Beta Windows path uses VT/native console. The V3.3.0 Windows PDCurses CJK redraw failure remains documented as a historical baseline in [STATUS](docs/STATUS.md). Fonts, DPI, IME, and real Desktop hosts still require manual acceptance.
+V3.3.1 stable inherits the verified Windows VT/native console fix; 174 local tests pass. See the [V3.3.1 release](https://github.com/RoreProMAX/ielts-cli/releases/tag/v3.3.1) for the release commit CI and terminal replay artifacts. The V3.3.0 Windows PDCurses CJK redraw failure remains documented as a historical baseline in [STATUS](docs/STATUS.md). Fonts, DPI, IME, and real Desktop hosts still require manual acceptance.
 
 The project code is GPL-3.0 under [LICENSE](LICENSE). The dictionaries have separate MIT notices, fixed-commit provenance, source URLs, and SHA-256 values documented in [THIRD_PARTY_NOTICES](THIRD_PARTY_NOTICES.md) and each version's `data/source.json`.
 

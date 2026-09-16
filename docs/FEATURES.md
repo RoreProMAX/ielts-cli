@@ -16,9 +16,9 @@ F7/Ctrl+D 选择词库，F8/Ctrl+K 选择章节，F9/Ctrl+B 进入或暂停复�
 
 ## 发音与提醒
 
-发音调用 PATH 中的 `ffplay`。第一次请求某个词会从有道发音服务取音频并缓存，文字题可离线继续。程序内提醒可配置；退出后的 systemd user timer 仅在 Linux 可用。V3.3.1-beta.1 的“版本与更新”在程序运行时后台检查公开 Release；默认 channel 为 stable，可选 beta，不会自动下载、安装或重启。稳定 channel 不接收 Beta；Beta 只接受高于当前版本的 stable/beta，不降级。V3.2.0 及更早版本需先手动进入 V3.3.0，再手动下载 Beta 一次，旧版没有 Beta 入口。
+发音调用 PATH 中的 `ffplay`。第一次请求某个词会从有道发音服务取音频并缓存，文字题可离线继续。程序内提醒可配置；退出后的 systemd user timer 仅在 Linux 可用。V3.3.1 的“版本与更新”在程序运行时后台检查公开 Release；默认 channel 为 stable，可选 beta，不会自动下载、安装或重启。稳定 channel 不接收 Beta；Beta 只接受高于当前版本的 stable/beta，不降级。V3.3.0 可通过原 stable channel 更新到 V3.3.1；V3.2.0 及更早版本没有 updater，需手动安装 V3.3.1 一次。
 
-V3.3.1-beta.1 在 Windows 使用标准库 VT 输出和原生 console 输入，按显示 cell 处理双列 CJK 与组合字符，并对变化行先清空再写入；Linux/macOS 仍使用 ncurses。`windows-curses` 保留给旧版本和对照诊断。4 个 CI 平台各 10 步真实终端场景已完成，Windows VT 预期/内部/原生控制台均验证“中文”为 4 列；字体、DPI、IME 和实际 Desktop 宿主仍需人工验收。
+V3.3.1 在 Windows 使用标准库 VT 输出和原生 console 输入，按显示 cell 处理双列 CJK 与组合字符，并对变化行先清空再写入；Linux/macOS 仍使用 ncurses。`windows-curses` 保留给旧版本和对照诊断。Beta 历史 CI 已验证 4 个平台各 10 步及 Windows “中文”4 列；stable 本次结果以对应验收和 Actions 为准。字体、DPI、IME 和实际 Desktop 宿主仍需人工验收。
 
 ## 进度隔离
 

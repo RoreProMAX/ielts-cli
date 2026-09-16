@@ -1,5 +1,5 @@
 {
-  "bundle_version": "3.3.1-beta.1-public.1",
+  "bundle_version": "3.3.1-public.1",
   "sources": {
     "v1.0.0": {
       "source_version": "1.0.0",
@@ -26,6 +26,14 @@
       "base_version": "3.3.0",
       "base_commit": "1b973b0360f5f80301f49574f3a7d863f9249b20",
       "implementation": "repository beta patch; Windows VT rendering and optional beta update channel",
+      "linux_test_summary": "Ran 174 tests; OK"
+    },
+    "v3.3.1": {
+      "source_version": "3.3.1",
+      "base_version": "3.3.1-beta.1",
+      "base_commit": "75c4f91b1386ce6b0223411be8ad4111330f5e62",
+      "implementation": "stable promotion requested by user; application and dictionary files identical to beta except VERSION",
+      "beta_verification_ci": "https://github.com/RoreProMAX/ielts-cli/actions/runs/35059466717",
       "linux_test_summary": "Ran 174 tests; OK"
     }
   },

@@ -19,7 +19,7 @@ Windows 使用 `py -3` 替换 `python3`。不要将用户未提交的改动覆�
 
 ## 2. 部署路径
 
-1. 准备 Python 3.10+。Windows Beta 使用标准库后端；运行旧版本才安装 `requirements-windows.txt`；Linux/macOS 使用 Python 的 curses。
+1. 准备 Python 3.10+。Windows V3.3.1 稳定版 使用标准库后端；运行旧版本才安装 `requirements-windows.txt`；Linux/macOS 使用 Python 的 curses。
 2. 先运行 `--doctor`。发音是可选能力，需要 PATH 中存在 `ffplay`；文字练习可离线运行。
 3. 用隔离目录验证启动与存储，再让用户启动真实学习界面：
 
@@ -37,10 +37,42 @@ with tempfile.TemporaryDirectory() as directory:
 PY
 ```
 
-4. 用户正常运行 `sh start.sh`、`start.command` 或 `start.bat`。需要携带进度时加 `--portable`；移动前退出程序。
+4. 用户委托安装时，把配置 `ielts` 命令作为安装收尾，按下节匹配平台、shell、解释器和安装路径；用户明确只需便携解压或说明时，按其限定范围处理。原有 `sh start.sh`、`start.command` 和 `start.bat` 也可启动。需要携带进度时加 `--portable`；移动前退出程序。
 5. 手工换包时先复制旧版本进度到新版本目录，保留源目录；V3.3 起使用程序内更新时，新代码沿用当前进度目录，切换前会备份。不要让旧版和新版同时写同一份数据。
 
-后台提醒默认关闭。只有用户明确要求时才执行 `--reminders enable`；这会创建本程序的 Linux 用户定时器。它不是普通启动检查的一部分。V3.3.1-beta.1 的更新检查是程序运行时后台线程，默认 channel 为 stable，可选 beta，默认开启但可关闭；V3.3.0 及更早版本没有 Beta 入口，需直接手动安装 V3.3.1-beta.1 一次，无需先安装中间版本。更新线程只读取高于当前版本的公开 stable/beta Release，不自动下载、安装或重启，也不得抢占题目；`--no-update` 仅本次使用原入口版本并跳过检查。测试用 `IELTS_DISABLE_UPDATE_CHECK=1` 隔离网络。
+后台提醒默认关闭。只有用户明确要求时才执行 `--reminders enable`；这会创建本程序的 Linux 用户定时器。它不是普通启动检查的一部分。V3.3.1 的更新检查是程序运行时后台线程，默认 channel 为 stable，可选 beta，默认开启但可关闭；V3.3.0 可通过原 stable channel 更新到 V3.3.1，旧 Beta 也可升级到同一 stable；V3.2.0 及更早版本没有 updater，需手动安装 V3.3.1 一次。更新线程只读取高于当前版本的公开 stable/beta Release，不自动下载、安装或重启，也不得抢占题目；`--no-update` 仅本次使用原入口版本并跳过检查。测试用 `IELTS_DISABLE_UPDATE_CHECK=1` 隔离网络。
+
+### 安装后配置 `ielts` 命令
+
+本节是供安装 Agent 或用户手工配置的操作说明，仓库目前没有自动注册命令的安装器。用户仅要求文档、方案或评审时，只提供说明，不据此修改本机入口、PATH 或 shell 配置。
+
+先核对四项：用户选择的版本、完整程序的固定安装目录、通过 `--doctor` 的 Python 解释器，以及实际使用的终端和 shell。解释器路径可从 doctor 的 `python_executable` 读取；不要写入发布者机器的路径，也不要把安装位置固定成当前临时解压目录。`ielts` 应对应本次安装的版本；安装稳定版不隐式切到仓库 main/Beta。
+
+| 平台 | 用户级命令入口 | PATH 配置要点 |
+|---|---|---|
+| Linux / macOS | 如 `~/.local/bin/ielts`，使用可执行包装脚本调用已验证的 Python 和安装目录中的 `launcher.py` | 先检查目录是否已在 PATH；需要添加时，按用户实际使用的 bash、zsh、fish 等 shell 配置用户路径，并检查新终端是否读取该配置 |
+| Windows PowerShell / cmd | 如 `%LOCALAPPDATA%\IELTS-CLI\bin\ielts.cmd`，调用已验证的 Python 和安装目录中的 `launcher.py` | 把入口目录加入用户级 Path，保留原条目并去重；不要只修改当前 PowerShell 进程的 `$env:Path` 就报告永久配置完成 |
+
+Windows 可通过“环境变量”界面的用户 Path 配置，也可由安装 Agent 合并已有用户 Path 后使用 `System.Environment` 的 User 作用域写入；当前进程、用户和系统作用域的区别见 [Microsoft 环境变量说明](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables#create-persistent-environment-variables-in-windows)。优先使用用户级位置，不要求管理员权限，也不替换整份 PATH。
+
+配置时保留以下行为：
+
+- **先识别同名命令**：POSIX shell 可用 `command -v ielts`，bash/zsh 再用 `type -a ielts`；Windows PowerShell 用 `Get-Command ielts -All`，cmd 用 `where ielts`。同时检查拟写入的文件，即使该目录尚未加入 PATH。发现旧版、别名、函数或其他程序时，先说明其指向和冲突处理方案，按用户已有选择处理；未获替换授权时不覆盖。
+- 包装入口保存经过正确引用的绝对程序路径和解释器路径，原样转发参数并保留退出码。POSIX 参数转发使用 `"$@"`，Windows `.cmd` 使用 `%*`；含中文或空格的路径必须正确引用，不依赖调用时的工作目录。
+- 调用发布包根目录的 `launcher.py`，保留 `--app-version`、`--portable`、`--data-dir` 和更新入口行为。直接调用 `apps/.../ielts.py` 会绕过包入口的数据目录与版本选择，不作为分享包的通用命令配置。也不要直接把 `start.sh` 软链接成 `ielts`：它按 `$0` 定位目录，可能错误地去命令目录寻找 `launcher.py`。
+- 普通模式继续使用包入口原有的系统用户数据目录；便携模式仍由 `--portable` 明确选择。若用户原来固定了数据路径，延续其选择；命令注册本身不复制、合并或改写学习进度，不切换更新通道，不把 `--no-update` 永久写入入口。
+- 只补充缺失的用户 PATH 条目，避免重复追加。保存原配置或记录新增条目，说明如何撤销这次注册；移动安装目录后应重新指向新位置。新增入口目录不会自动把完整程序复制到那里，原程序目录需要保留。
+
+完成后，从安装目录之外、使用用户实际使用的 shell 检查命令解析位置，并运行：
+
+```sh
+ielts --no-update --version
+ielts --doctor
+```
+
+前者应返回本次安装的入口版本，后者应显示正确解释器、应用与数据路径且 `core_ready` 为 `true`。Release ZIP 再检查 `ielts --verify`；源码 checkout 不使用这项发布包检查。沿用本节前面的临时数据目录检查，不为验收启动用户真实学习会话。
+
+还需确认新打开的终端能解析命令；不要把当前会话临时设置 PATH 的成功当成持久生效。嵌入式终端继承宿主进程环境，必要时让用户重新打开终端宿主；若未能验证新会话，应明确标注这一步待用户验证。交付时告知入口文件、实际版本、PATH 是否已生效，以及“以后在终端输入 `ielts` 即可启动”。
 
 ## 3. Agent Desktop 和嵌入式终端
 
@@ -64,7 +96,7 @@ PY
 | 目标/增量/提醒配置 | `routine.Routine` | 严格类型、原子保存、旧字段缺省；当日实际到期量规则 |
 | UI 与快捷键 | `ielts.TerminalStudy` | 40×6、焦点、翻页、题目不被提醒打断；不要依赖 F10 |
 | 发音后端 | `pronunciation.Pronouncer` | `speak/cancel/poll_message/close`；取消旧请求、避免叠音、失败不阻断练习 |
-| 系统兼容 | `portable_compat`、`windows_terminal.py` | POSIX/Windows 文件锁、权限、信号；Windows V3.3.1-beta.1 使用标准库 VT/native console，不能只检查模块能 import |
+| 系统兼容 | `portable_compat`、`windows_terminal.py` | POSIX/Windows 文件锁、权限、信号；Windows V3.3.1 稳定版 使用标准库 VT/native console，不能只检查模块能 import |
 | 外层部署 | `launcher.py` | 相对路径、数据隔离、`--doctor`、`--portable` 与选版本参数 |
 | 稳定版更新 | `updater.UpdateManager` | `check_async/install_async/poll/activate_ready/active_launcher/close`；检查、下载和激活分开，保留证书校验与原包清单绑定，切换前备份并释放学习锁 |
 
@@ -100,7 +132,7 @@ PY
 
 ```sh
 python3 -m pip install -r requirements-test.txt
-cd apps/v3.3.1-beta.1
+cd apps/v3.3.1
 IELTS_DISABLE_UPDATE_CHECK=1 python3 -B -m unittest discover -q
 ```
 
@@ -111,7 +143,7 @@ IELTS_DISABLE_UPDATE_CHECK=1 python3 -B -m unittest discover -q
 发布包由仓库根目录运行：
 
 ```sh
-python3 tools/package_release.py dist/IELTS-CLI-Portable-3.3.1-beta.1.zip
+python3 tools/package_release.py dist/IELTS-CLI-Portable-3.3.1.zip
 ```
 
 该命令只打包 Git 跟踪文件并生成清单，不覆盖已有 ZIP。文件需先纳入 Git，再打包。对输出 ZIP 另做解压、`--verify` 和独立启动检查；不能用工作目录通过代替交付副本通过。

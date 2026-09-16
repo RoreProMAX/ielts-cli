@@ -2,7 +2,7 @@
 
 - This is a general-purpose terminal vocabulary practice tool. Agent Desktop terminals are one supported usage scenario, not the only audience.
 - Read `docs/FOR_AGENTS.md`, `docs/STATUS.md`, and `docs/INTERFACES.md` before changing deployment or behavior.
-- `launcher.py` selects the application version. The current development/default version is `apps/v3.3.1-beta.1`; `apps/v1.0.0`, `apps/v2.0.0`, `apps/v3.2.0`, and `apps/v3.3.0` are retained for version isolation.
+- `launcher.py` selects the application version. The current stable/default version is `apps/v3.3.1`; `apps/v1.0.0`, `apps/v2.0.0`, `apps/v3.2.0`, `apps/v3.3.0`, and `apps/v3.3.1-beta.1` are retained for version isolation.
 - Keep personal study profiles, audio caches, credentials, and machine paths outside Git. Tests must use temporary data directories.
 - Do not answer questions in a user's live study session, enable background reminders, change audio devices, or publish a repository unless the user requested that action.
 - Preserve original dictionary payloads and their source/license records. Add a new dictionary ID for a different dataset.
