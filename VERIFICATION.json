@@ -1,6 +1,6 @@
 {
   "bundle_version": "3.3.1-beta.1-public.1",
-  "verified_at": "2026-09-15T12:30:13.227893+00:00",
+  "verified_at": "2026-09-16T05:21:01.985963+00:00",
   "local_release": {
     "version": "3.3.0",
     "tests": 147,
@@ -76,9 +76,36 @@
     "version": "3.3.1-beta.1",
     "linux_application_tests": 174,
     "linux_test_result": "passed",
-    "windows_native_vt_and_terminal_tests": "10 steps and native 2-column CJK probe passed in run 35057645988; subsequent fixture fixes require final CI",
+    "windows_native_vt_and_terminal_tests": "passed",
     "channel_default": "stable",
     "stable_release_unchanged": "3.3.0",
-    "prerelease_publication": true
+    "prerelease_publication": "planned; stable latest remains 3.3.0",
+    "ci_url": "https://github.com/RoreProMAX/ielts-cli/actions/runs/35058831180",
+    "ci_code_commit": "162a9039702ecbf6b48a263388aaf55c8c6094cd",
+    "ci_jobs_passed": 13,
+    "terminal_steps_per_platform": 10,
+    "terminal_platforms": [
+      "Linux x86_64 PTY",
+      "macOS ARM64 PTY",
+      "macOS Intel PTY",
+      "Windows Server 2025 ConPTY"
+    ],
+    "windows_native_cjk_columns": {
+      "sample": "中文",
+      "expected": 4,
+      "pdcurses_legacy": 2,
+      "windows_vt": 4,
+      "native_console_cursor": 4
+    },
+    "real_update_channel_menu": "stable -> beta -> stable passed",
+    "activation_channel_race": "regression passed",
+    "manual_host_font_dpi_ime": "not tested",
+    "candidate_delivery_checks": {
+      "zip_integrity": "passed",
+      "chinese_space_relocation_and_six_row_pty": "passed",
+      "stable_to_beta_profile_copy_preserves_source_hashes": "passed",
+      "cli_channel_configuration": "passed",
+      "offline_readonly_container_cold_start": "passed"
+    }
   }
 }

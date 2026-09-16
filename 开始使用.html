@@ -71,7 +71,7 @@
 cd ielts-cli</code></pre>
 <p>需要 Python 3.10+。V3.3.1-beta.1 在 Windows 使用标准库 VT 输出与原生 console 输入后端，主版本不再依赖 PDCurses 绘制；<code>windows-curses==2.4.2</code> 仍为旧版本和对照诊断依赖：</p>
 <pre class="code" data-lang="powershell"><code>py -3 -m pip install -r requirements-windows.txt</code></pre>
-<p>启动：Windows 双击 <code>start.bat</code>，macOS 双击 <code>start.command</code>，Linux 运行 <code>sh start.sh</code>。默认选择 V3.3，也可直接执行：</p>
+<p>启动：Windows 双击 <code>start.bat</code>，macOS 双击 <code>start.command</code>，Linux 运行 <code>sh start.sh</code>。默认选择 V3.3.1-beta.1，也可直接执行：</p>
 <pre class="code" data-lang="sh"><code>python3 launcher.py --app-version 3</code></pre>
 <p>在 Agent Desktop 底部终端中运行即可；终端至少需要 40 列、6 行。宿主可能拦截 F10，此时用 Esc 或空输入时的 <code>?</code> 打开菜单。</p>
 <h2 id="sec2">主要功能</h2>
@@ -99,7 +99,7 @@ cd ielts-cli</code></pre>
 <li>[贡献指南](CONTRIBUTING.md) · [第三方声明](THIRD_PARTY_NOTICES.md)</li>
 </ul>
 <h2 id="sec5">当前状态与许可证</h2>
-<p>V3.3.1-beta.1 的测试与真实终端验收以当前验收记录和仓库 Actions 为准，文档不预先宣称 Windows/macOS 通过。V3.3.0 的 Windows PDCurses 中文重绘失败保留在 [STATUS.md](docs/STATUS.md) 作为历史基线。已知限制和缺陷见 [STATUS.md](docs/STATUS.md)。</p>
+<p>V3.3.1-beta.1 已在本地完成 174 项测试；4 个 CI 平台各完成 10 步真实终端场景，结果见 [Actions 运行 35058831180](https://github.com/RoreProMAX/ielts-cli/actions/runs/35058831180)。Windows Beta 使用 VT/native console；V3.3.0 的 Windows PDCurses 中文重绘失败仍保留在 [STATUS.md](docs/STATUS.md) 作为历史基线。字体、DPI、IME 和实际 Desktop 宿主仍需人工验收。</p>
 <p>自有代码使用 GPL-3.0，见 [LICENSE](LICENSE)。词库来源的独立 MIT notice、固定 commit、原始 URL 和 SHA-256 见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 及各版本 <code>data/source.json</code>。</p>
 <p>给编程 Agent 的操作文档：[forAgent 部署与优化指南](docs/FOR_AGENTS.md)。它用于部署和维护，不限定产品的使用人群。</p>
 </div></div>

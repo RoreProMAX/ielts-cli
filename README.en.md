@@ -25,7 +25,7 @@ Python 3.10+ is required. V3.3.1-beta.1 uses a standard-library VT output and na
 py -3 -m pip install -r requirements-windows.txt
 ```
 
-Start `start.bat` on Windows, double-click `start.command` on macOS, or run `sh start.sh` on Linux. The default is V3.3:
+Start `start.bat` on Windows, double-click `start.command` on macOS, or run `sh start.sh` on Linux. The default is V3.3.1-beta.1:
 
 ```sh
 python3 launcher.py --app-version 3
@@ -64,7 +64,7 @@ python3 launcher.py --verify
 
 See [FEATURES](docs/FEATURES.md), [INTERFACES](docs/INTERFACES.md), [DICTIONARIES](docs/DICTIONARIES.md), [STATUS](docs/STATUS.md), the [deployment guide](docs/部署指南.md), and the [user manual](docs/使用手册.md).
 
-V3.3.1-beta.1 test and real-terminal acceptance status is defined by the current acceptance record and repository [Actions](https://github.com/RoreProMAX/ielts-cli/actions); this document does not predeclare Windows or macOS success. The V3.3.0 Windows PDCurses CJK redraw failure remains documented as a historical baseline in [STATUS](docs/STATUS.md).
+V3.3.1-beta.1 has 174 local tests and a completed 10-step real-terminal scenario on each of four CI platforms; see [Actions run 35058831180](https://github.com/RoreProMAX/ielts-cli/actions/runs/35058831180). The Beta Windows path uses VT/native console. The V3.3.0 Windows PDCurses CJK redraw failure remains documented as a historical baseline in [STATUS](docs/STATUS.md). Fonts, DPI, IME, and real Desktop hosts still require manual acceptance.
 
 The project code is GPL-3.0 under [LICENSE](LICENSE). The dictionaries have separate MIT notices, fixed-commit provenance, source URLs, and SHA-256 values documented in [THIRD_PARTY_NOTICES](THIRD_PARTY_NOTICES.md) and each version's `data/source.json`.
 

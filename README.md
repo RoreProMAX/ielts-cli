@@ -25,7 +25,7 @@ cd ielts-cli
 py -3 -m pip install -r requirements-windows.txt
 ```
 
-启动：Windows 双击 `start.bat`，macOS 双击 `start.command`，Linux 运行 `sh start.sh`。默认选择 V3.3，也可直接执行：
+启动：Windows 双击 `start.bat`，macOS 双击 `start.command`，Linux 运行 `sh start.sh`。默认选择 V3.3.1-beta.1，也可直接执行：
 
 ```sh
 python3 launcher.py --app-version 3
@@ -69,7 +69,7 @@ python3 launcher.py --verify
 
 ## 当前状态与许可证
 
-V3.3.1-beta.1 的测试与真实终端验收以当前验收记录和仓库 Actions 为准，文档不预先宣称 Windows/macOS 通过。V3.3.0 的 Windows PDCurses 中文重绘失败保留在 [STATUS.md](docs/STATUS.md) 作为历史基线。已知限制和缺陷见 [STATUS.md](docs/STATUS.md)。
+V3.3.1-beta.1 已在本地完成 174 项测试；4 个 CI 平台各完成 10 步真实终端场景，结果见 [Actions 运行 35058831180](https://github.com/RoreProMAX/ielts-cli/actions/runs/35058831180)。Windows Beta 使用 VT/native console；V3.3.0 的 Windows PDCurses 中文重绘失败仍保留在 [STATUS.md](docs/STATUS.md) 作为历史基线。字体、DPI、IME 和实际 Desktop 宿主仍需人工验收。
 
 自有代码使用 GPL-3.0，见 [LICENSE](LICENSE)。词库来源的独立 MIT notice、固定 commit、原始 URL 和 SHA-256 见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 及各版本 `data/source.json`。
 

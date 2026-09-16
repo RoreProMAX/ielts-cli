@@ -26,7 +26,7 @@
       "base_version": "3.3.0",
       "base_commit": "1b973b0360f5f80301f49574f3a7d863f9249b20",
       "implementation": "repository beta patch; Windows VT rendering and optional beta update channel",
-      "linux_test_summary": "Ran 173 tests; OK"
+      "linux_test_summary": "Ran 174 tests; OK"
     }
   },
   "portable_patches": {

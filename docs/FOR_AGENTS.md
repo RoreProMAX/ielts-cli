@@ -19,7 +19,7 @@ Windows 使用 `py -3` 替换 `python3`。不要将用户未提交的改动覆�
 
 ## 2. 部署路径
 
-1. 准备 Python 3.10+。Windows 安装 `requirements-windows.txt`；Linux/macOS 使用 Python 的 curses。
+1. 准备 Python 3.10+。Windows Beta 使用标准库后端；运行旧版本才安装 `requirements-windows.txt`；Linux/macOS 使用 Python 的 curses。
 2. 先运行 `--doctor`。发音是可选能力，需要 PATH 中存在 `ffplay`；文字练习可离线运行。
 3. 用隔离目录验证启动与存储，再让用户启动真实学习界面：
 
@@ -40,7 +40,7 @@ PY
 4. 用户正常运行 `sh start.sh`、`start.command` 或 `start.bat`。需要携带进度时加 `--portable`；移动前退出程序。
 5. 手工换包时先复制旧版本进度到新版本目录，保留源目录；V3.3 起使用程序内更新时，新代码沿用当前进度目录，切换前会备份。不要让旧版和新版同时写同一份数据。
 
-后台提醒默认关闭。只有用户明确要求时才执行 `--reminders enable`；这会创建本程序的 Linux 用户定时器。它不是普通启动检查的一部分。V3.3.1-beta.1 的更新检查是程序运行时后台线程，默认 channel 为 stable，可选 beta，默认开启但可关闭；V3.2.0 及更早版本没有 Beta 入口，需先手动安装 Beta。更新线程只读取高于当前版本的公开 stable/beta Release，不自动下载、安装或重启，也不得抢占题目；`--no-update` 仅本次使用原入口版本并跳过检查。测试用 `IELTS_DISABLE_UPDATE_CHECK=1` 隔离网络。
+后台提醒默认关闭。只有用户明确要求时才执行 `--reminders enable`；这会创建本程序的 Linux 用户定时器。它不是普通启动检查的一部分。V3.3.1-beta.1 的更新检查是程序运行时后台线程，默认 channel 为 stable，可选 beta，默认开启但可关闭；V3.3.0 及更早版本没有 Beta 入口，需直接手动安装 V3.3.1-beta.1 一次，无需先安装中间版本。更新线程只读取高于当前版本的公开 stable/beta Release，不自动下载、安装或重启，也不得抢占题目；`--no-update` 仅本次使用原入口版本并跳过检查。测试用 `IELTS_DISABLE_UPDATE_CHECK=1` 隔离网络。
 
 ## 3. Agent Desktop 和嵌入式终端
 

@@ -172,13 +172,13 @@ cp -a &quot;旧包/user-data/versions/3.2.0&quot; &quot;新包/user-data/version
 <pre class="code" data-lang="powershell"><code>python launcher.py --app-version 3 --portable</code></pre>
 <p>稳定版数据写入包内 <code>user-data/versions/3.3.0/</code>；Beta 数据写入 <code>user-data/versions/3.3.1-beta.1/</code>。发音缓存写入 <code>user-data/cache/ielts-cli/audio/</code>。整个解压目录可以复制到 U 盘或另一台电脑；目标电脑仍须有匹配的 Python 和 <code>ffplay</code>。旧版本若使用 <code>windows-curses</code>，保留相应依赖；V3.3.1-beta.1 主路径不依赖 PDCurses 绘制。复制前退出程序，复制后先运行 <code>--doctor</code> 和 <code>--verify</code>。</p>
 <h3>发给朋友的清洁副本</h3>
-<p>请从原始、未启动过的 <code>IELTS-CLI-Portable-3.3.0.zip</code> 发送。压缩内容只保留程序、词库、启动脚本、来源和校验文件；自己的 <code>user-data/</code>、<code>cache/</code> 和日志不放入分享包。可解压到临时目录检查根目录和 <code>user-data/</code>，再运行 <code>--verify</code>。</p>
+<p>稳定版清洁副本使用原始、未启动过的 <code>IELTS-CLI-Portable-3.3.0.zip</code>；Beta 清洁副本使用 <code>IELTS-CLI-Portable-3.3.1-beta.1.zip</code>。压缩内容只保留程序、词库、启动脚本、来源和校验文件；自己的 <code>user-data/</code>、<code>cache/</code> 和日志不放入分享包。可解压到临时目录检查根目录和 <code>user-data/</code>，再运行 <code>--verify</code>。</p>
 <h2 id="sec5">网络、音频和离线边界</h2>
 <p>词库和终端界面可在无网络时运行。发音第一次播放某个词时需要联网下载音频，成功缓存后可离线重播；ZIP 本身不含音频缓存。</p>
 <p>没有网络时，程序给出播放失败提示，文字练习仍可继续。没有 <code>ffplay</code> 时，<code>--doctor</code> 报告缺失；安装后重新打开终端再检查。</p>
 <h2 id="sec6">V3.3 版本更新</h2>
 <p>自动更新从 V3.3.0 开始提供。V3.3.0 及更早版本没有 Beta 入口。首次需手动安装 V3.3.1-beta.1，开启 beta channel 后才会检查后续 Beta；无需先安装中间版本。V3.3.1-beta.1 启动时默认后台检查公开 stable Release；Esc 菜单 10“版本与更新”可切换 channel。稳定用户不会收到 Beta。</p>
-<p>更新页先让用户选择“下载并校验 vX”；下载完成后再选择“保存进度并重启到 vX”或“下次启动使用 vX”。选择“暂不更新，继续当前练习”只收起本次会话提示。更新器只接受 stable Release，并校验官方 asset 的 SHA-256 与 ZIP 清单；文件下载到当前进度目录 <code>updates/releases/&lt;version&gt;</code>。自动更新沿用当前同一进度目录，区别于手工复制到新版本目录的跨版本迁移。启用前先把 JSON 与 SQLite 备份到 <code>updates/backups</code>，<code>update_settings.json</code> 保存开关，<code>updates/active.json</code> 保存激活指针。旧程序和旧 ZIP 保留；<code>--no-update</code> 仅本次使用原入口版本并跳过检查，不修改用户设置。更新不上传个人词库或进度，也不升级 Python、<code>windows-curses</code>、<code>ffplay</code> 或词库。</p>
+<p>更新页先让用户选择“下载并校验 vX”；下载完成后再选择“保存进度并重启到 vX”或“下次启动使用 vX”。选择“暂不更新，继续当前练习”只收起本次会话提示。stable channel 只接受 stable Release；beta channel 接受高于当前版本的 stable/beta，均校验官方 asset 的 SHA-256 与 ZIP 清单，不接受 draft 或降级。压缩包下载到当前进度目录 <code>updates/downloads/</code>，解压到 <code>updates/releases/&lt;version&gt;</code>。自动更新沿用当前同一进度目录，区别于手工复制到新版本目录的跨版本迁移。启用前先把 JSON 与 SQLite 备份到 <code>updates/backups</code>，<code>update_settings.json</code> 保存开关，<code>updates/active.json</code> 保存激活指针。旧程序和旧 ZIP 保留；<code>--no-update</code> 仅本次使用原入口版本并跳过检查，不修改用户设置。更新不上传个人词库或进度，程序与内置词库随完整包更新，不升级 Python、<code>windows-curses</code> 或 <code>ffplay</code>。</p>
 <p>命令行配置：<code>--configure --auto-update-check on|off</code>、<code>--configure --update-channel stable|beta</code>；只读查看：<code>--update-status</code>；本次跳过：<code>--no-update</code>。测试隔离网络时设置 <code>IELTS_DISABLE_UPDATE_CHECK=1</code>。</p>
 <h2 id="sec7">Linux 后台提醒</h2>
 <p>后台提醒适用于 Linux 的 <code>systemd --user</code> 会话，并依赖 <code>notify-send</code>。Ubuntu/Debian 可运行 <code>sudo apt install libnotify-bin</code> 安装通知工具。本包使用独立的 <code>ielts-cli-portable-review.timer</code>，默认不启用；Linux 上执行：</p>
@@ -190,7 +190,7 @@ python3 launcher.py --app-version 3 --reminders disable</code></pre>
 <ol>
 <li><strong>窗口一闪而过</strong>：在终端中进入解压目录后运行 <code>python launcher.py --doctor</code>；Windows 使用 PowerShell，Linux/macOS 使用终端。</li>
 <li><strong>找不到 Python</strong>：运行 <code>python --version</code>、<code>python3 --version</code> 或 <code>py --version</code>；安装 Python 3.10+ 后重开终端。</li>
-<li><strong>Windows 报 <code>No module named _curses</code></strong>：运行 <code>py -3 -m pip install -r requirements-windows.txt</code>，与启动脚本保持相同解释器。</li>
+<li><strong>Windows 旧版本报 <code>No module named _curses</code></strong>：运行 <code>py -3 -m pip install -r requirements-windows.txt</code>，与启动脚本保持相同解释器。</li>
 <li><strong>找不到 <code>ffplay</code></strong>：运行 <code>ffplay -version</code>；检查 PATH、重开终端，或把 FFmpeg 的 <code>bin</code> 目录加入 PATH。若构建不含 <code>ffplay.exe</code>，从 FFmpeg 官方下载页选择完整构建。</li>
 <li><strong>中文或空格路径启动失败</strong>：使用上文带引号的 <code>cd</code>/<code>Set-Location</code> 示例。确认 ZIP 解压后 <code>launcher.py</code> 位于当前目录。</li>
 <li><strong>终端显示异常或无法交互</strong>：在真正的交互式终端运行，不要通过管道启动；把终端窗口扩大后重试。</li>
@@ -198,7 +198,7 @@ python3 launcher.py --app-version 3 --reminders disable</code></pre>
 <li><strong>提醒没有出现</strong>：Linux 检查 <code>systemctl --user status ielts-cli-portable-review.timer</code> 和 <code>notify-send</code> 是否存在；确认用户处于登录会话、已有到期词且没有暂缓提醒。Windows/macOS 后台命令不适用。</li>
 </ol>
 <h2 id="sec9">已测边界</h2>
-<p>发布测试结果、文件清单和打包验证以随包 <code>VERIFICATION.json</code> 为准。Linux 便携目录重定位结果见该记录；Windows/macOS 当前按适配接口使用，待真机验收。</p>
+<p>发布测试结果、文件清单和打包验证以随包 <code>VERIFICATION.json</code> 为准。V3.3.1-beta.1 已完成 4 平台各 10 步真实终端回归；字体、DPI、IME 和实际 Desktop 宿主仍需人工验收。</p>
 <h2 id="sec10">词库来源与许可证 notice</h2>
 <p>各版的 <code>apps/v*/data/QWERTY-VSCODE-LICENSE.txt</code> 和来源元数据随包保留。上游仓库为 [RealKai42/qwerty-learner-vscode](https://github.com/RealKai42/qwerty-learner-vscode)，固定提交为 <code>e0dc7a09a5e0946d77b2c279f72a89daf3659b97</code>，许可证来源为该提交的 [LICENSE](https://raw.githubusercontent.com/RealKai42/qwerty-learner-vscode/e0dc7a09a5e0946d77b2c279f72a89daf3659b97/LICENSE)。</p>
 <p>词库释义未逐词校订。再分发时保留上游 notice 和来源文件。</p>
