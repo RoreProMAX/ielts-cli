@@ -148,7 +148,9 @@ class UpdateManagerTests(unittest.TestCase):
             manager = UpdateManager(directory, "3.3.0", transport=transport)
             manager.set_channel("beta")
             manager.check_async()
-            self.assertEqual(wait_for(manager)["state"], "available")
+            status = wait_for(manager)
+            self.assertEqual(status["state"], "available")
+            self.assertIn("Beta 版", status["message"])
             self.assertTrue(manager.install_async())
             self.assertEqual(wait_for(manager)["state"], "ready")
             launcher = manager.activate_ready()
@@ -161,6 +163,7 @@ class UpdateManagerTests(unittest.TestCase):
     def test_beta_channel_selects_highest_consistent_beta_or_stable(self):
         bundles = {version: make_bundle(version) for version in ("3.3.1-beta.2", "3.3.1-beta.10", "3.3.1")}
         releases = [json.loads(release_payload(bundles[version], version, prerelease="-beta." in version)) for version in bundles]
+        releases = [None, "invalid", 42, []] + releases
         with tempfile.TemporaryDirectory() as directory:
             transport = FakeTransport(json.dumps(releases).encode())
             manager = UpdateManager(directory, "3.3.0", transport=transport)

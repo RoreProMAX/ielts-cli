@@ -385,7 +385,9 @@ class UpdateManager:
         releases = [release] if channel == "stable" and isinstance(release, dict) else release if channel == "beta" and isinstance(release, list) else []
         valid = []
         for item in releases:
-            tag = item.get("tag_name") if isinstance(item, dict) else None
+            if not isinstance(item, dict):
+                continue
+            tag = item.get("tag_name")
             version = tag[1:] if isinstance(tag, str) and tag.startswith("v") else None
             parsed = _parse_version(version)
             is_beta = isinstance(version, str) and "-beta." in version
@@ -407,7 +409,7 @@ class UpdateManager:
         assets = release.get("assets")
         matches = [asset for asset in assets if isinstance(asset, dict) and asset.get("name") == expected_name] if isinstance(assets, list) else []
         if len(matches) != 1:
-            raise UpdateError("稳定版缺少唯一的官方更新包")
+            raise UpdateError("发布版本缺少唯一的官方更新包")
         asset = matches[0]
         digest_match = _DIGEST_RE.fullmatch(asset.get("digest", ""))
         size = asset.get("size")
@@ -432,7 +434,8 @@ class UpdateManager:
                                "path": self.releases_dir / version}
             self._set_status("ready", version, "版本 %s 已校验并暂存，等待你确认切换" % version)
             return
-        self._set_status("available", version, "发现稳定版 %s，可由你选择下载" % version)
+        label = "Beta 版" if "-beta." in version else "稳定版"
+        self._set_status("available", version, "发现%s %s，可由你选择下载" % (label, version))
 
     def _candidate_is_staged(self, candidate):
         archive = self.downloads_dir / candidate["name"]
