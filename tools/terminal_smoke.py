@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from contextlib import closing
 import datetime
 import importlib.metadata
 import json
@@ -85,7 +86,7 @@ class Scenario:
         self.backends = []
         self.exit_codes = []
         self.redactions = sorted([
-            (str(self.temporary), '<TEMP>'), (str(ROOT.resolve()), '<REPO>'),
+            (str(temporary), '<TEMP>'), (str(self.temporary), '<TEMP>'), (str(ROOT.resolve()), '<REPO>'),
             (str(Path.home()), '<HOME>'), (str(Path.home().resolve()), '<HOME>'),
         ], key=lambda item: len(item[0]), reverse=True)
 
@@ -234,6 +235,9 @@ class Scenario:
     def setting(self):
         return json.loads((self.profile / 'update_settings.json').read_text(encoding='utf-8'))['auto_check']
 
+    def update_channel(self):
+        return json.loads((self.profile / 'update_settings.json').read_text(encoding='utf-8')).get('channel')
+
     def write(self, text, label=None):
         self.event('input', data=text, label=label or text)
         self.session.write(text)
@@ -285,6 +289,14 @@ class Scenario:
         self.menu(10, '版本与更新')
         self.write('1\r', 'toggle automatic stable check')
         self.wait(lambda: self.setting() is False and '关' in '\n'.join(self.screen.display), 'update check is disabled')
+        if self.update_channel() is not None:
+            assert self.update_channel() == 'stable', 'Beta updates must be opt-in'
+            self.write('2\r', 'explicitly choose beta update channel')
+            self.wait(lambda: self.update_channel() == 'beta' and '更新通道：beta' in '\n'.join(self.screen.display), 'beta channel is explicitly selected')
+            self.write('2\r', 'switch update channel back to stable')
+            self.wait(lambda: self.update_channel() == 'stable' and '更新通道：稳定版' in '\n'.join(self.screen.display), 'stable channel restored without a download')
+            self.event('beta_channel_controls', default='stable', opt_in_verified=True,
+                       returned_to_stable=True, automatic_download=False)
         self.write('\x1b', 'Esc return to current question')
         self.wait(lambda: self.activity('学习') and self.draft_visible(self.learning_draft), 'return from settings preserves draft')
         assert self.snapshot()['event_id'] == self.learning_before['event_id']
@@ -345,7 +357,7 @@ class Scenario:
         self.wait(lambda: self.draft_visible(self.learning_draft), 'restart return to word learning')
 
     def verify_storage(self):
-        with sqlite3.connect(self.profile / 'learning.sqlite3') as database:
+        with closing(sqlite3.connect(self.profile / 'learning.sqlite3')) as database:
             events = database.execute('SELECT COUNT(*) FROM events').fetchone()[0]
         assert events == 2, 'Navigation changed the number of scored attempts'
         assert self.snapshot('extra')['draft'] == self.extra_draft
@@ -410,9 +422,16 @@ def main():
     output = args.output.expanduser().resolve()
     if output.exists() and any(output.iterdir()):
         parser.error('Output directory must be absent or empty; existing evidence is preserved')
-    with tempfile.TemporaryDirectory(prefix='ielts-terminal-session-') as temporary:
-        scenario = Scenario(output, Path(temporary))
-        report = scenario.execute()
+    temporary = tempfile.TemporaryDirectory(prefix='ielts-terminal-session-')
+    scenario = Scenario(output, Path(temporary.name))
+    report = scenario.execute()
+    try:
+        temporary.cleanup()
+    except OSError as error:
+        report['passed'] = False
+        report['failure'] = 'Fixture cleanup failed: ' + scenario.redact(error)
+        report['steps'].append({'name': 'fixture-cleanup', 'status': 'failed', 'details': report['failure']})
+        write_report(output, report, scenario.frames)
     print(json.dumps({'passed': report['passed'], 'platform': report['platform'],
                       'backend': report['backend'], 'steps': len(report['steps']),
                       'failure': report['failure']}, ensure_ascii=False))

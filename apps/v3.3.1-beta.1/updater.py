@@ -682,6 +682,8 @@ class UpdateManager:
     def activate_ready(self):
         with self._lock:
             ready = dict(self._ready) if self._ready else None
+            generation = self._generation
+            channel = self.channel
         if ready is None or _parse_version(ready["version"]) <= self._current_tuple:
             self._set_status("error", self.current_version, "没有可激活的新版本")
             return None
@@ -693,13 +695,17 @@ class UpdateManager:
             self._backup_profile(ready["version"])
             pointer = {"schema": 1, "version": ready["version"], "digest": ready["digest"],
                        "activated_at": datetime.datetime.now(datetime.timezone.utc).isoformat()}
-            self._atomic_json(self.active_path, pointer)
+            with self._lock:
+                if (generation != self._generation or channel != self.channel or
+                        self._ready is None or self._ready.get("version") != ready["version"] or
+                        self._ready.get("digest") != ready["digest"]):
+                    raise UpdateError("更新通道已变化，取消激活旧候选")
+                self._atomic_json(self.active_path, pointer)
+                self._ready = None
         except Exception as error:
             self._set_status("error", ready["version"], self._friendly_error(error))
             return None
         launcher = ready["path"] / "launcher.py"
-        with self._lock:
-            self._ready = None
         self._set_status("ready", ready["version"], "版本 %s 已设为下次启动版本" % ready["version"])
         return launcher
 

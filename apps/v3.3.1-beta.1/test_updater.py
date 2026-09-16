@@ -8,6 +8,7 @@ from pathlib import Path
 import sqlite3
 import ssl
 import tempfile
+import threading
 import time
 import unittest
 from unittest.mock import patch
@@ -112,6 +113,32 @@ def wait_for(manager, terminal_states=("current", "available", "ready", "error")
 
 
 class UpdateManagerTests(unittest.TestCase):
+    def test_channel_switch_during_activation_cannot_write_old_pointer(self):
+        version = "3.3.1-beta.1"
+        bundle = make_bundle(version)
+        metadata = json.dumps([json.loads(release_payload(bundle, version, prerelease=True))]).encode()
+        with tempfile.TemporaryDirectory() as directory:
+            manager = UpdateManager(directory, "3.3.0", transport=FakeTransport(metadata, bundle))
+            manager.set_channel("beta")
+            manager.check_async(); self.assertEqual(wait_for(manager)["state"], "available")
+            manager.install_async(); self.assertEqual(wait_for(manager)["state"], "ready")
+            old_pointer = {"schema": 1, "version": "3.3.0", "digest": "0" * 64,
+                           "activated_at": "old"}
+            manager._atomic_json(manager.active_path, old_pointer)
+            entered = threading.Event()
+            release = threading.Event()
+            def blocked_backup(_version):
+                entered.set()
+                release.wait(2)
+            manager._backup_profile = blocked_backup
+            result = []
+            worker = threading.Thread(target=lambda: result.append(manager.activate_ready()))
+            worker.start(); self.assertTrue(entered.wait(2))
+            manager.set_channel("stable")
+            release.set(); worker.join(2)
+            self.assertEqual(result, [None])
+            self.assertEqual(json.loads(manager.active_path.read_text(encoding="utf-8")), old_pointer)
+
     def test_beta_bundle_stages_activates_and_is_recovered(self):
         version = "3.3.1-beta.1"
         bundle = make_bundle(version)
@@ -125,7 +152,7 @@ class UpdateManagerTests(unittest.TestCase):
             self.assertTrue(manager.install_async())
             self.assertEqual(wait_for(manager)["state"], "ready")
             launcher = manager.activate_ready()
-            self.assertEqual(launcher, Path(directory) / ("updates/releases/%s/launcher.py" % version))
+            self.assertEqual(launcher, Path(directory).resolve() / ("updates/releases/%s/launcher.py" % version))
             self.assertEqual(manager.active_launcher(), launcher)
             restored = UpdateManager(directory, "3.3.0")
             self.assertEqual(restored.channel, "beta")

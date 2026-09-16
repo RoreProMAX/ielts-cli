@@ -9,15 +9,15 @@
   "portable_release": {
     "v1.0.0": {
       "tests": 54,
-      "result": "previously verified, unchanged source"
+      "result": "previously verified, unchanged application/data; deterministic lock test fixture"
     },
     "v2.0.0": {
       "tests": 72,
-      "result": "previously verified, unchanged source"
+      "result": "previously verified, unchanged application/data; deterministic lock test fixture"
     },
     "v3.2.0": {
       "tests": 120,
-      "result": "previously verified, unchanged source"
+      "result": "previously verified, unchanged application/data; deterministic lock test fixture"
     },
     "v3.3.0": {
       "tests": 150,
@@ -74,9 +74,9 @@
   },
   "beta_release": {
     "version": "3.3.1-beta.1",
-    "linux_application_tests": 173,
+    "linux_application_tests": 174,
     "linux_test_result": "passed",
-    "windows_native_vt_and_terminal_tests": "pending CI at time of this commit",
+    "windows_native_vt_and_terminal_tests": "10 steps and native 2-column CJK probe passed in run 35057645988; subsequent fixture fixes require final CI",
     "channel_default": "stable",
     "stable_release_unchanged": "3.3.0",
     "prerelease_publication": true

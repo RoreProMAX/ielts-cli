@@ -109,9 +109,27 @@ class StudyTests(unittest.TestCase):
     def test_parallel_store_lock(self):
         with tempfile.TemporaryDirectory() as directory:
             script = """import sys; sys.path.insert(0, %r); from study import StateStore, fresh_state; s=fresh_state(); s['current']='x'; StateStore(%r).save(s)""" % (str(Path(__file__).parent), directory)
-            processes = [subprocess.Popen([sys.executable, "-c", script]) for _ in range(2)]
-            codes = [process.wait(timeout=3) for process in processes]
-            self.assertEqual(sorted(codes), [0, 1])
+            # 先确认一个独立进程已持锁，再让另一个进程尝试；不依赖调度重叠。
+            holder_script = """import sys; sys.path.insert(0, %r); from study import StateStore, fresh_state
+with StateStore(%r) as store:
+    print('LOCKED', flush=True)
+    sys.stdin.readline()
+    state = fresh_state(); state['current'] = 'x'; store.save(state)
+""" % (str(Path(__file__).parent), directory)
+            holder = subprocess.Popen([sys.executable, "-c", holder_script], stdin=subprocess.PIPE,
+                                      stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            try:
+                self.assertEqual(holder.stdout.readline().strip(), 'LOCKED')
+                contender = subprocess.run([sys.executable, "-c", script], capture_output=True,
+                                           text=True, timeout=5)
+                self.assertEqual(contender.returncode, 1)
+                self.assertIn('RuntimeError', contender.stderr)
+                holder.communicate('\n', timeout=5)
+                self.assertEqual(holder.returncode, 0)
+            finally:
+                if holder.poll() is None:
+                    holder.kill()
+                    holder.communicate(timeout=5)
             self.assertEqual(StateStore(directory).load()["current"], "x")
 
     def test_load_words(self):
