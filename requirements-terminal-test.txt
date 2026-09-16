@@ -1,0 +1,6 @@
+# Real terminal-session tests only; these are not application dependencies.
+-r requirements-test.txt
+-r requirements-windows.txt
+pywinpty==3.0.5; sys_platform == "win32"
+pyte==0.8.2
+wcwidth==0.8.3

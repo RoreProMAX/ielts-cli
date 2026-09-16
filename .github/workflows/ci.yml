@@ -70,3 +70,48 @@ jobs:
                       capture_output=True, text=True, encoding='utf-8', check=True)
                   assert json.loads(result.stdout)['attempts'] == 0
           PY
+
+  terminal-session:
+    name: Terminal session (${{ matrix.target }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            target: linux-x64
+          - os: macos-15
+            target: macos-arm64
+          - os: macos-15-intel
+            target: macos-intel
+          - os: windows-2025
+            target: windows-x64
+    defaults:
+      run:
+        shell: bash
+    env:
+      IELTS_DISABLE_UPDATE_CHECK: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Install isolated terminal-test dependencies
+        run: python -m pip install -r requirements-terminal-test.txt
+      - name: Check offline report rendering
+        run: python -X utf8 -B -m unittest discover -s tools -p 'test_terminal_*.py' -q
+      - name: Exercise actual terminal input, screen output, resize and resume
+        run: python -X utf8 -B tools/terminal_smoke.py --output artifacts/terminal-${{ matrix.target }}
+      - name: Preserve replay and failure evidence
+        if: always()
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: terminal-${{ matrix.target }}
+          path: artifacts/terminal-${{ matrix.target }}/
+          if-no-files-found: warn
+          include-hidden-files: false
+          retention-days: 90

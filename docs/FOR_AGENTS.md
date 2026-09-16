@@ -106,6 +106,8 @@ IELTS_DISABLE_UPDATE_CHECK=1 python3 -B -m unittest discover -q
 
 测试应使用临时目录、固定时钟和假发声器。不能为了展示通过而自动填写用户真实题目、修改真实学习成绩、播放声音或启用系统提醒。
 
+跨平台真实终端回归使用 `tools/terminal_smoke.py`，流程和可下载的离线回放见 [TERMINAL_TESTING.md](TERMINAL_TESTING.md)。该套场景禁止替换应用的输入、绘制和 curses 入口；应保留失败产物，不能用管道子进程代替 PTY/ConPTY 来报告交互通过。
+
 发布包由仓库根目录运行：
 
 ```sh
