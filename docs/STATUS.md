@@ -4,7 +4,7 @@
 
 - 已修复菜单 9 增量例句返回后菜单 2 无法回到单词学习的问题；恢复时保留当前题目、输入和评分上下文。
 - 已加入启动时后台 stable Release 检查、用户可关闭设置、确认后下载/安装和保存并重启或下次启动使用的流程。更新器不自动安装、重启或打断学习。
-- V3.3：Linux 本机版 147 项、通用版 150 项测试通过；具体结果见根目录 `VERIFICATION.json`，远端检查见仓库 Actions。
+- V3.3.1-beta.1：测试数量、Windows VT 后端和真实终端结果待本次验收记录及仓库 Actions，本文不预先宣称通过。
 
 ## 已验证
 
@@ -12,7 +12,7 @@
 - 终端最小尺寸 40 列、6 行的拒绝路径和 6 行交互布局已验证。
 - 从不同工作目录启动的重定位行为已验证。
 - 离线容器验证已完成；文字练习不依赖发音网络。
-- Windows 适配代码已存在，`windows-curses==2.4.2` 依赖已固定。
+- Windows 旧版本适配代码与 `windows-curses==2.4.2` 依赖保留；V3.3.1-beta.1 主版本改用标准库 VT/native console 后端，真实终端仍待验收。
 
 ## 待验证
 
@@ -38,6 +38,8 @@
 - 版本进度迁移是一次性复制；运行后不同版本的新增记录不会双向合并。
 - 退出后的后台提醒依赖 Linux `systemd --user`；其他平台只有程序内提醒。
 - 更新只接受 `RoreProMAX/ielts-cli` 的 stable Release，并校验官方 asset 的 SHA-256 与 ZIP 清单；不接受 draft/prerelease。程序与内置词库随完整发布包更新，不自动升级 Python、curses 或 ffplay。压缩包保存在当前进度目录的 `updates/downloads/`，解压程序保存在 `updates/releases/`，启用前保留 JSON/SQLite 备份。
+- 更新 channel 默认是 `stable`，可选 `beta`；beta 接受高于当前版本的 stable/beta，不降级。stable 用户不会收到 Beta。V3.3.0 及更早版本没有 Beta 入口，需先手动安装 Beta；Beta 与 stable 数据按版本隔离，不双向同步。
+- 原 PDCurses 中文重绘失败是历史基线，保留其失败证据；V3.3.1-beta.1 的 VT/native console 修复不得在验收前写成通过。
 - Python 3.10+、终端 curses、Windows 的 `windows-curses` 和可选发音所需的 `ffplay` 都是外部依赖。
 - 终端宿主若吞掉功能键、改变 TERM 或不能提供 40×6 的最小尺寸，交互体验会受影响。
 

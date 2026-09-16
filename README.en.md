@@ -2,7 +2,7 @@
 
 A lightweight, general-purpose terminal vocabulary practice tool: use it in a regular terminal, an Agent Desktop CLI window, or a spare moment during development or study. It is an independent Python implementation inspired by Qwerty typing vocabulary practice, not an official upstream fork.
 
-The default application is `apps/v3.3.0`; `apps/v1.0.0`, `apps/v2.0.0`, and `apps/v3.2.0` remain available. Five dictionaries contain 19,086 valid entries, organized in 20-word chapters.
+The default source/Beta package runs `apps/v3.3.1-beta.1`; `apps/v1.0.0`, `apps/v2.0.0`, `apps/v3.2.0`, and `apps/v3.3.0` remain available. Stable downloads remain at the [stable Release](https://github.com/RoreProMAX/ielts-cli/releases/latest); the Beta uses the separate [v3.3.1-beta.1 Release](https://github.com/RoreProMAX/ielts-cli/releases/tag/v3.3.1-beta.1). Five dictionaries contain 19,086 valid entries, organized in 20-word chapters.
 
 ## Project note
 
@@ -19,7 +19,7 @@ git clone https://github.com/RoreProMAX/ielts-cli.git
 cd ielts-cli
 ```
 
-Python 3.10+ is required. On Windows install `windows-curses==2.4.2`:
+Python 3.10+ is required. V3.3.1-beta.1 uses a standard-library VT output and native console input backend on Windows; `windows-curses==2.4.2` remains for older versions and comparison diagnostics:
 
 ```powershell
 py -3 -m pip install -r requirements-windows.txt
@@ -39,8 +39,8 @@ Use a regular terminal or an Agent Desktop terminal pane with at least 40 column
 - Complete stored Chinese meanings in Chinese-to-English and recall, with paging for long meanings.
 - F7/Ctrl+D selects a dictionary, F8/Ctrl+K selects a chapter, F9/Ctrl+B starts or pauses due review, and F11/Ctrl+Y opens today's task.
 - Incremental examples and collocations start by default after the daily task. Current material covers 124 words; examples during learning are off by default and configurable from the Esc learning-plan menu. V3.3 can return from incremental examples to word learning.
-- V3.3 can check public stable GitHub Releases in the background at startup (on by default). The Esc “Version and updates” menu can disable it; downloads and installation require confirmation and never interrupt or restart a study session automatically.
-- Automatic updates start with V3.3.0; users on V3.2.0 or earlier must manually switch to V3.3.0 once. `--no-update` uses the original entry version and skips checking for this run only; it does not change the setting.
+- V3.3.1-beta.1 checks public stable Releases in the background at startup (on by default). The update channel is stable by default; Esc “Version and updates” can opt into beta. Beta accepts only newer stable or beta releases and never downgrades; confirmation is required and study sessions are not interrupted or restarted automatically. Stable users do not receive Beta releases.
+- V3.3.0 and earlier have no Beta channel. Download the Beta package manually once, then explicitly enable its Beta channel to receive later Beta fixes; no intermediate version is required. `--no-update` uses the original entry version and skips checking for this run only; it does not change the setting.
 - Incremental practice does not inflate normal new-word or review goals; when fewer items are due, the actual due count is used.
 - Text practice works offline. Pronunciation requires `ffplay`; the first audio request for a word needs network access and later uses the local cache.
 
@@ -64,7 +64,7 @@ python3 launcher.py --verify
 
 See [FEATURES](docs/FEATURES.md), [INTERFACES](docs/INTERFACES.md), [DICTIONARIES](docs/DICTIONARIES.md), [STATUS](docs/STATUS.md), the [deployment guide](docs/部署指南.md), and the [user manual](docs/使用手册.md).
 
-The V3.3 portable application has passed 150 tests locally on Linux, including update and study-session regressions. Remote results are available in repository [Actions](https://github.com/RoreProMAX/ielts-cli/actions). Manual testing of real Windows and macOS Desktop interaction remains outstanding. Known limitations are documented in [STATUS](docs/STATUS.md).
+V3.3.1-beta.1 test and real-terminal acceptance status is defined by the current acceptance record and repository [Actions](https://github.com/RoreProMAX/ielts-cli/actions); this document does not predeclare Windows or macOS success. The V3.3.0 Windows PDCurses CJK redraw failure remains documented as a historical baseline in [STATUS](docs/STATUS.md).
 
 The project code is GPL-3.0 under [LICENSE](LICENSE). The dictionaries have separate MIT notices, fixed-commit provenance, source URLs, and SHA-256 values documented in [THIRD_PARTY_NOTICES](THIRD_PARTY_NOTICES.md) and each version's `data/source.json`.
 

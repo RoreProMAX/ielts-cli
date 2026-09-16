@@ -1,5 +1,5 @@
 {
-  "bundle_version": "3.3.0-public.1",
+  "bundle_version": "3.3.1-beta.1-public.1",
   "verified_at": "2026-09-15T12:30:13.227893+00:00",
   "local_release": {
     "version": "3.3.0",
@@ -71,5 +71,14 @@
     "two_digit_main_menu_entry": "passed",
     "toggle_and_dismiss_keep_input": "passed",
     "real_network_or_audio_used": false
+  },
+  "beta_release": {
+    "version": "3.3.1-beta.1",
+    "linux_application_tests": 173,
+    "linux_test_result": "passed",
+    "windows_native_vt_and_terminal_tests": "pending CI at time of this commit",
+    "channel_default": "stable",
+    "stable_release_unchanged": "3.3.0",
+    "prerelease_publication": true
   }
 }

@@ -16,7 +16,7 @@ jobs:
       fail-fast: false
       matrix:
         python: ['3.10', '3.12']
-        app: ['v1.0.0', 'v2.0.0', 'v3.3.0']
+        app: ['v1.0.0', 'v2.0.0', 'v3.3.1-beta.1']
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -50,10 +50,10 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install -r requirements-windows.txt
       - name: Update engine and study-session transition tests
-        working-directory: apps/v3.3.0
+        working-directory: apps/v3.3.1-beta.1
         env:
           IELTS_DISABLE_UPDATE_CHECK: '1'
-        run: python -X utf8 -B -m unittest -q test_updater test_update_tui
+        run: python -X utf8 -B -m unittest -q test_updater test_update_tui test_windows_terminal
       - name: Check dependencies and isolated profile startup
         run: |
           python -X utf8 -B launcher.py --doctor
@@ -106,7 +106,6 @@ jobs:
         run: python -X utf8 -B -m unittest discover -s tools -p 'test_terminal_*.py' -q
       - name: Measure native Windows Unicode cell positions
         if: matrix.target == 'windows-x64'
-        continue-on-error: true
         run: python -X utf8 -B tools/terminal_width_probe.py --output artifacts/terminal-width-windows-x64
       - name: Exercise actual terminal input, screen output, resize and resume
         run: python -X utf8 -B tools/terminal_smoke.py --output artifacts/terminal-${{ matrix.target }}

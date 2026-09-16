@@ -9,7 +9,7 @@
 | Ubuntu 24.04 x64 | POSIX PTY / pexpect | 同一套真实键盘输入与存档回归 |
 | macOS 15 ARM64 | POSIX PTY / pexpect | Apple Silicon 的 Python/curses 交互 |
 | macOS 15 Intel | POSIX PTY / pexpect | Intel 的 Python/curses 交互 |
-| Windows Server 2025 x64 | ConPTY / pywinpty | Windows 原生 Python 与 windows-curses 交互 |
+| Windows Server 2025 x64 | ConPTY / native console backend | Windows 原生 Python 与 V3.3.1-beta.1 `windows_terminal.py` 交互；旧版 windows-curses 仅作对照 |
 
 具体系统版本、CPU 架构、Python 和测试依赖版本写入每次 `report.json`。`passed: true` 才代表对应环境本次脚本通过；Windows Server 结果不等于所有 Windows 11 终端宿主已经人工验收。
 
@@ -19,7 +19,7 @@
 
 1. 启动实际 CLI，完成一个固定单词，给下一题留下部分输入。
 2. 进入增量例句并输入部分答案，再返回单词学习；核对两边题目、输入和评分事件。
-3. 用菜单第 10 项进入版本与更新，关闭自动检查并返回。
+3. 用菜单第 10 项进入版本与更新，核对 stable 默认 channel、切换 beta 后再恢复 stable，关闭自动检查并返回。
 4. 通过终端输入序列操作 F11 与 F9，核对面板、到期复习和返回学习。
 5. 依次调整到 35×5、40×6、80×24；验证最小尺寸提示、重绘和更新菜单。
 6. Ctrl+Q 保存退出，在 40×6 下重新启动，核对单词和例句输入，再退出。
@@ -52,6 +52,6 @@ python3 -B tools/terminal_smoke.py --output artifacts/terminal-local
 
 回放不是原生窗口截图。使用 pyte 解码 VT 输出；遇到宽字符被单字节字符覆盖留下的孤立延续格时，将该空格渲染为空白，原始字符流仍保留。测试另有回归覆盖这一解析边界。
 
-Windows 另有 `terminal-width-windows-x64` 诊断产物，记录 `curses.getyx()` 与活动 `CONOUT$` 控制台缓冲区，比较默认与 UTF-8 模式下固定字符串的列位置。该采样步骤不替代严格的交互场景；即使诊断可完成，中文画面错位仍使主测试失败。
+Windows 旧版另有 `terminal-width-windows-x64` 诊断产物，记录 `curses.getyx()` 与活动 `CONOUT$` 控制台缓冲区，比较默认与 UTF-8 模式下固定字符串的列位置。V3.3.1-beta.1 的主路径使用 `windows_terminal.py`；该采样步骤不替代严格的交互场景。Windows 新后端结果以本次验收为准，不能预先标记通过。
 
 字体、DPI、输入法、物理键盘与宿主快捷键映射、真实扬声器输出仍需人工体验。该报告证明的是记录中的操作系统、终端后端、尺寸与固定操作路径。

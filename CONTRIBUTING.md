@@ -8,11 +8,11 @@
 
 ```sh
 python3 -m pip install -r requirements-test.txt
-cd apps/v3.3.0
+cd apps/v3.3.1-beta.1
 python3 -m unittest discover -p 'test_*.py'
 ```
 
-当前主要验证范围是 Linux；V3.3.0 的测试数量和结果以本次验收记录及 Actions 为准。Windows 与 macOS 交互测试尚未在真机完成；跨平台 smoke CI 的运行记录见 Actions。
+当前主要验证范围是 Linux；V3.3.1-beta.1 的测试数量和结果以本次验收记录及 Actions 为准，不在文档中预先宣称通过。Windows 与 macOS 交互测试尚未在真机完成；跨平台 smoke CI 的运行记录见 Actions。
 
 ## 提交改动
 
@@ -24,7 +24,8 @@ python3 -m unittest discover -p 'test_*.py'
 - 不要提交个人学习进度、`user-data/`、音频缓存、日志、账号、API key 或其他本机私有配置。
 - 运行脚本不要依赖发布者的个人路径或凭证；保持移动目录后仍可运行。
 - 保持 `--doctor`、发布包 `--verify` 和 `--app-version 1/2/3` 接口可用，除非变更说明明确记录兼容性影响。
+- 更新通道默认为 `stable`；beta 修复默认使用 `X.Y.(Z+1)-beta.N`，同一修复迭代递增 `beta.N`，不自动晋升稳定版。发布 stable 必须有用户明确指定。
 
 提交前请检查 `git diff`、运行相关测试，并确认没有把发布包专用的 `BUNDLE_MANIFEST.json` 或个人数据混入源码提交。提交信息只描述变更内容。
 
-例句材料的来源和已知排除项见 [CONTENT_SOURCES.md](apps/v3.3.0/CONTENT_SOURCES.md)。
+例句材料的来源和已知排除项见 [CONTENT_SOURCES.md](apps/v3.3.1-beta.1/CONTENT_SOURCES.md)。

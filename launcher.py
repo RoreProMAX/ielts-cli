@@ -18,6 +18,10 @@ BUNDLE_VERSION = CURRENT_VERSION + '-public.1'
 APP_VERSIONS = {'1': '1.0.0', '2': '2.0.0', '3': CURRENT_VERSION}
 
 
+def uses_windows_vt(version):
+    return sys.platform == 'win32' and (ROOT / 'apps' / ('v' + version) / 'windows_terminal.py').is_file()
+
+
 def default_data_root():
     if sys.platform == 'win32':
         return Path(os.environ.get('LOCALAPPDATA', Path.home() / 'AppData/Local')) / 'IELTS-CLI-Portable'
@@ -64,18 +68,27 @@ def doctor(options):
     version, data_dir, cache_home = locations(options)
     checks = []
     checks.append({'name': 'Python >= 3.10', 'ok': sys.version_info >= (3, 10), 'detail': sys.version.split()[0]})
-    try:
-        import curses
-        curses_ok = hasattr(curses, 'wrapper') and hasattr(curses, 'getsyx')
-    except ImportError:
-        curses_ok = False
-    checks.append({'name': 'curses', 'ok': curses_ok, 'detail': 'Windows: py -3 -m pip install -r requirements-windows.txt' if not curses_ok else 'available'})
+    if uses_windows_vt(version):
+        windows = sys.getwindowsversion()
+        curses_ok = windows.major >= 10 and windows.build >= 17763
+        backend = 'windows-vt'
+        terminal_detail = 'Windows VT / Win32 console (Windows 10 build 17763 or later)'
+    else:
+        try:
+            import curses
+            curses_ok = hasattr(curses, 'wrapper') and hasattr(curses, 'getsyx')
+        except ImportError:
+            curses_ok = False
+        backend = 'curses'
+        terminal_detail = 'Windows: py -3 -m pip install -r requirements-windows.txt' if not curses_ok else 'available'
+    checks.append({'name': 'terminal backend', 'ok': curses_ok, 'detail': terminal_detail})
     checks.append({'name': 'SQLite >= 3.24', 'ok': sqlite3.sqlite_version_info >= (3, 24, 0), 'detail': sqlite3.sqlite_version})
     checks.append({'name': 'application', 'ok': (ROOT / 'apps' / ('v' + version) / 'ielts.py').is_file(), 'detail': version})
     return {
         'bundle_version': BUNDLE_VERSION,
         'platform': sys.platform,
         'python_executable': sys.executable,
+        'terminal_backend': backend,
         'core_ready': all(item['ok'] for item in checks),
         'checks': checks,
         'data_directory': str(data_dir),
@@ -109,13 +122,13 @@ def main(argv=None):
     if sys.version_info < (3, 10):
         print('请先安装 Python 3.10 或更新版本。', file=sys.stderr)
         return 2
-    if importlib.util.find_spec('curses') is None:
+    version, data_dir, cache_home = locations(options)
+    if not uses_windows_vt(version) and importlib.util.find_spec('curses') is None:
         print('缺少 curses。Windows 请运行：py -3 -m pip install -r requirements-windows.txt', file=sys.stderr)
         return 2
     if any(arg == '--reminders' or arg.startswith('--reminders=') for arg in app_args) and not sys.platform.startswith('linux'):
         print('退出后的后台提醒当前只支持 Linux systemd；程序内提醒仍可使用。', file=sys.stderr)
         return 2
-    version, data_dir, cache_home = locations(options)
     app_root = ROOT / 'apps' / ('v' + version)
     sys.dont_write_bytecode = True
     os.environ['XDG_CACHE_HOME'] = str(cache_home)

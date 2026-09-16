@@ -1,0 +1,873 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "word": "adapt",
+      "sentence": "Schools must ____ their lessons for mixed-ability classes.",
+      "translation": "学校必须调整课程，以适应不同能力的班级。",
+      "collocation": "adapt to change",
+      "collocation_prompt": "____ to change"
+    },
+    {
+      "word": "adequate",
+      "sentence": "The shelter has ____ water for three days.",
+      "translation": "这个避难所有足够三天用的水。",
+      "collocation": "adequate funding",
+      "collocation_prompt": "____ funding"
+    },
+    {
+      "word": "annual",
+      "sentence": "The museum publishes an ____ report each spring.",
+      "translation": "博物馆每年春天发布年度报告。",
+      "collocation": "annual report",
+      "collocation_prompt": "____ report"
+    },
+    {
+      "word": "assess",
+      "sentence": "Researchers will ____ the damage after the storm.",
+      "translation": "研究人员将在暴风雨后评估损失。",
+      "collocation": "assess the impact",
+      "collocation_prompt": "____ the impact"
+    },
+    {
+      "word": "benefit",
+      "sentence": "Regular exercise can ____ older adults.",
+      "translation": "经常锻炼能让老年人受益。",
+      "collocation": "benefit from exercise",
+      "collocation_prompt": "____ from exercise"
+    },
+    {
+      "word": "challenge",
+      "sentence": "Rising rents are a major ____ for students.",
+      "translation": "不断上涨的房租是学生面临的重大挑战。",
+      "collocation": "face a challenge",
+      "collocation_prompt": "face a ____"
+    },
+    {
+      "word": "clarify",
+      "sentence": "Please ____ the final step before we begin.",
+      "translation": "开始前请澄清最后一步。",
+      "collocation": "clarify a point",
+      "collocation_prompt": "____ a point"
+    },
+    {
+      "word": "consequence",
+      "sentence": "A long delay was the main ____ of the storm.",
+      "translation": "长时间延误是暴风雨的主要后果。",
+      "collocation": "serious consequence",
+      "collocation_prompt": "serious ____"
+    },
+    {
+      "word": "contribute",
+      "sentence": "Many small donations can ____ to the project.",
+      "translation": "许多小额捐款都能为这个项目作出贡献。",
+      "collocation": "contribute to research",
+      "collocation_prompt": "____ to research"
+    },
+    {
+      "word": "decline",
+      "sentence": "The number of visitors began to ____ after winter.",
+      "translation": "冬季过后，游客数量开始下降。",
+      "collocation": "decline steadily",
+      "collocation_prompt": "____ steadily"
+    },
+    {
+      "word": "demonstrate",
+      "sentence": "The experiment will ____ how plants use light.",
+      "translation": "这个实验将展示植物如何利用光。",
+      "collocation": "demonstrate ability",
+      "collocation_prompt": "____ ability"
+    },
+    {
+      "word": "diverse",
+      "sentence": "The city has a ____ population with many languages.",
+      "translation": "这座城市人口多样，使用许多种语言。",
+      "collocation": "diverse community",
+      "collocation_prompt": "____ community"
+    },
+    {
+      "word": "emerge",
+      "sentence": "New evidence began to ____ during the review.",
+      "translation": "审查期间开始出现新的证据。",
+      "collocation": "emerge from",
+      "collocation_prompt": "____ from"
+    },
+    {
+      "word": "establish",
+      "sentence": "The team hopes to ____ a local clinic.",
+      "translation": "团队希望建立一家当地诊所。",
+      "collocation": "establish a link",
+      "collocation_prompt": "____ a link"
+    },
+    {
+      "word": "finance",
+      "sentence": "A grant will ____ the training program.",
+      "translation": "一笔拨款将为培训项目提供资金。",
+      "collocation": "public finance",
+      "collocation_prompt": "public ____"
+    },
+    {
+      "word": "fluctuate",
+      "sentence": "Food prices often ____ with the season.",
+      "translation": "食品价格常随季节波动。",
+      "collocation": "fluctuate widely",
+      "collocation_prompt": "____ widely"
+    },
+    {
+      "word": "global",
+      "sentence": "Climate change is a ____ concern.",
+      "translation": "气候变化是一个全球性问题。",
+      "collocation": "global market",
+      "collocation_prompt": "____ market"
+    },
+    {
+      "word": "inevitable",
+      "sentence": "Some disruption is ____ during construction.",
+      "translation": "施工期间出现一些干扰是不可避免的。",
+      "collocation": "inevitable change",
+      "collocation_prompt": "____ change"
+    },
+    {
+      "word": "significant",
+      "sentence": "The survey found a ____ change in travel habits.",
+      "translation": "调查发现旅行习惯发生了重大变化。",
+      "collocation": "significant difference",
+      "collocation_prompt": "____ difference"
+    },
+    {
+      "word": "sustainable",
+      "sentence": "The village is testing ____ farming methods.",
+      "translation": "这个村庄正在测试可持续的耕作方法。",
+      "collocation": "sustainable development",
+      "collocation_prompt": "____ development"
+    },
+    {
+      "word": "cancel",
+      "sentence": "We had to ____ the picnic because of heavy rain.",
+      "translation": "因为大雨，我们不得不取消野餐。",
+      "collocation": "cancel the meeting",
+      "collocation_prompt": "____ the meeting"
+    },
+    {
+      "word": "explosive",
+      "sentence": "The report described the chemical as highly ____.",
+      "translation": "报告称这种化学品具有很强的爆炸性。",
+      "collocation": "explosive growth",
+      "collocation_prompt": "____ growth"
+    },
+    {
+      "word": "prepare",
+      "sentence": "I need to ____ a short presentation for tomorrow.",
+      "translation": "我需要为明天准备一个简短的演讲。",
+      "collocation": "prepare a presentation",
+      "collocation_prompt": "____ a presentation"
+    },
+    {
+      "word": "crusade",
+      "sentence": "The mayor began a ____ against illegal dumping.",
+      "translation": "市长发起了一场反对非法倾倒垃圾的运动。",
+      "collocation": "crusade against corruption",
+      "collocation_prompt": "____ against corruption"
+    },
+    {
+      "word": "hamlet",
+      "sentence": "The tiny ____ has only a few dozen residents.",
+      "translation": "这个小村庄只有几十名居民。",
+      "collocation": "quiet hamlet",
+      "collocation_prompt": "quiet ____"
+    },
+    {
+      "word": "surgeon",
+      "sentence": "The ____ explained the procedure in simple terms.",
+      "translation": "外科医生用简单的语言解释了手术过程。",
+      "collocation": "heart surgeon",
+      "collocation_prompt": "heart ____"
+    },
+    {
+      "word": "hall",
+      "sentence": "The lecture will take place in the main ____.",
+      "translation": "讲座将在主礼堂举行。",
+      "collocation": "concert hall",
+      "collocation_prompt": "concert ____"
+    },
+    {
+      "word": "discourage",
+      "sentence": "High fees may ____ students from applying.",
+      "translation": "高昂的费用可能会使学生打消申请的念头。",
+      "collocation": "discourage bad habits",
+      "collocation_prompt": "____ bad habits"
+    },
+    {
+      "word": "predispose",
+      "sentence": "Past experience may ____ a person to distrust strangers.",
+      "translation": "过去的经历可能使一个人倾向于不信任陌生人。",
+      "collocation": "predispose someone to allergies",
+      "collocation_prompt": "____ someone to allergies"
+    },
+    {
+      "word": "oversee",
+      "sentence": "A senior engineer will ____ the construction work.",
+      "translation": "一名高级工程师将监督施工工作。",
+      "collocation": "oversee a project",
+      "collocation_prompt": "____ a project"
+    },
+    {
+      "word": "pollution",
+      "sentence": "The river became unsafe because of industrial ____.",
+      "translation": "这条河因工业污染而变得不安全。",
+      "collocation": "air pollution",
+      "collocation_prompt": "air ____"
+    },
+    {
+      "word": "pretend",
+      "sentence": "The children like to ____ that the sofa is a spaceship.",
+      "translation": "孩子们喜欢假装沙发是一艘宇宙飞船。",
+      "collocation": "pretend to sleep",
+      "collocation_prompt": "____ to sleep"
+    },
+    {
+      "word": "convection",
+      "sentence": "The lesson used a simple lamp to show heat ____.",
+      "translation": "这节课用一盏简单的灯来演示热对流。",
+      "collocation": "convection currents",
+      "collocation_prompt": "____ currents"
+    },
+    {
+      "word": "warrant",
+      "sentence": "The evidence did not ____ such a strong conclusion.",
+      "translation": "这些证据不足以支持如此强烈的结论。",
+      "collocation": "warrant further investigation",
+      "collocation_prompt": "____ further investigation"
+    },
+    {
+      "word": "ecliptic",
+      "sentence": "The chart shows the Moon's path close to the ____.",
+      "translation": "这张图显示月球的运行路径靠近黄道。",
+      "collocation": "ecliptic plane",
+      "collocation_prompt": "____ plane"
+    },
+    {
+      "word": "conceal",
+      "sentence": "She tried to ____ the gift behind the curtain.",
+      "translation": "她试图把礼物藏在窗帘后面。",
+      "collocation": "conceal the evidence",
+      "collocation_prompt": "____ the evidence"
+    },
+    {
+      "word": "overrate",
+      "sentence": "People often ____ the value of a famous brand.",
+      "translation": "人们常常高估知名品牌的价值。",
+      "collocation": "overrate one's abilities",
+      "collocation_prompt": "____ one's abilities"
+    },
+    {
+      "word": "meanwhile",
+      "sentence": "The soup is cooking; ____, please set the table.",
+      "translation": "汤正在煮；与此同时，把餐桌摆好。",
+      "collocation": "meanwhile, back at home",
+      "collocation_prompt": "____, back at home"
+    },
+    {
+      "word": "opulent",
+      "sentence": "The hotel lobby looked ____ but welcoming.",
+      "translation": "酒店大堂看起来豪华却很宜人。",
+      "collocation": "opulent interior",
+      "collocation_prompt": "____ interior"
+    },
+    {
+      "word": "coincide",
+      "sentence": "Our holidays ____ with the school break this year.",
+      "translation": "今年我们的假期正好与学校假期重合。",
+      "collocation": "coincide with the festival",
+      "collocation_prompt": "____ with the festival"
+    },
+    {
+      "word": "competent",
+      "sentence": "We need a ____ mechanic to check the brakes.",
+      "translation": "我们需要一名能胜任的技师检查刹车。",
+      "collocation": "competent staff",
+      "collocation_prompt": "____ staff"
+    },
+    {
+      "word": "require",
+      "sentence": "This course will ____ students to read every week.",
+      "translation": "这门课程要求学生每周阅读。",
+      "collocation": "require careful planning",
+      "collocation_prompt": "____ careful planning"
+    },
+    {
+      "word": "scratch",
+      "sentence": "Be careful not to ____ the wooden floor.",
+      "translation": "小心别把木地板划伤。",
+      "collocation": "scratch the surface",
+      "collocation_prompt": "____ the surface"
+    },
+    {
+      "word": "compassionate",
+      "sentence": "The nurse was patient and ____ with every visitor.",
+      "translation": "这名护士对每位来访者都耐心且富有同情心。",
+      "collocation": "compassionate care",
+      "collocation_prompt": "____ care"
+    },
+    {
+      "word": "cooperative",
+      "sentence": "The students were ____ during the group exercise.",
+      "translation": "学生们在小组练习中配合得很好。",
+      "collocation": "cooperative approach",
+      "collocation_prompt": "____ approach"
+    },
+    {
+      "word": "strategist",
+      "sentence": "The campaign hired a ____ to plan its next move.",
+      "translation": "竞选团队聘请了一名战略家来规划下一步行动。",
+      "collocation": "military strategist",
+      "collocation_prompt": "military ____"
+    },
+    {
+      "word": "irritable",
+      "sentence": "Lack of sleep made me unusually ____ today.",
+      "translation": "睡眠不足让我今天异常易怒。",
+      "collocation": "irritable mood",
+      "collocation_prompt": "____ mood"
+    },
+    {
+      "word": "triple",
+      "sentence": "The new filter can ____ the amount of clean water produced.",
+      "translation": "新过滤器能使产出的清洁水量增加到三倍。",
+      "collocation": "triple the capacity",
+      "collocation_prompt": "____ the capacity"
+    },
+    {
+      "word": "reserved",
+      "sentence": "My flatmate is quiet and ____ with strangers.",
+      "translation": "我的室友面对陌生人时安静而内向。",
+      "collocation": "reserved personality",
+      "collocation_prompt": "____ personality"
+    },
+    {
+      "word": "temper",
+      "sentence": "She took a walk to ____ her anger.",
+      "translation": "她散步来缓和自己的怒气。",
+      "collocation": "temper criticism with praise",
+      "collocation_prompt": "____ criticism with praise"
+    },
+    {
+      "word": "tickle",
+      "sentence": "The feather began to ____ my nose.",
+      "translation": "羽毛开始让我的鼻子发痒。",
+      "collocation": "tickle someone's fancy",
+      "collocation_prompt": "____ someone's fancy"
+    },
+    {
+      "word": "object",
+      "sentence": "Several residents ____ to the proposed parking fees.",
+      "translation": "几位居民反对拟议的停车费。",
+      "collocation": "object to the decision",
+      "collocation_prompt": "____ to the decision"
+    },
+    {
+      "word": "accessible",
+      "sentence": "The museum is fully ____ to wheelchair users.",
+      "translation": "这座博物馆对轮椅使用者完全无障碍。",
+      "collocation": "accessible by bus",
+      "collocation_prompt": "____ by bus"
+    },
+    {
+      "word": "hang",
+      "sentence": "Please ____ your coat on the hook.",
+      "translation": "请把外套挂在挂钩上。",
+      "collocation": "hang a picture",
+      "collocation_prompt": "____ a picture"
+    },
+    {
+      "word": "authenticate",
+      "sentence": "The app asks users to ____ their identity.",
+      "translation": "这个应用要求用户验证身份。",
+      "collocation": "authenticate an account",
+      "collocation_prompt": "____ an account"
+    },
+    {
+      "word": "suffice",
+      "sentence": "A brief email will ____ for now.",
+      "translation": "目前一封简短的电子邮件就足够了。",
+      "collocation": "suffice for the purpose",
+      "collocation_prompt": "____ for the purpose"
+    },
+    {
+      "word": "concede",
+      "sentence": "He had to ____ that her explanation was clearer.",
+      "translation": "他不得不承认她的解释更清楚。",
+      "collocation": "concede defeat",
+      "collocation_prompt": "____ defeat"
+    },
+    {
+      "word": "notable",
+      "sentence": "The town has a ____ collection of old maps.",
+      "translation": "这个城镇收藏了一批引人注目的旧地图。",
+      "collocation": "notable achievement",
+      "collocation_prompt": "____ achievement"
+    },
+    {
+      "word": "unparalleled",
+      "sentence": "The library offers ____ access to local records.",
+      "translation": "这家图书馆提供无与伦比的当地档案查阅机会。",
+      "collocation": "unparalleled opportunity",
+      "collocation_prompt": "____ opportunity"
+    },
+    {
+      "word": "plush",
+      "sentence": "Guests waited in ____ chairs near the fireplace.",
+      "translation": "客人在壁炉旁的豪华椅子上等候。",
+      "collocation": "plush seating",
+      "collocation_prompt": "____ seating"
+    },
+    {
+      "word": "numerous",
+      "sentence": "The guidebook contains ____ suggestions for day trips.",
+      "translation": "这本指南包含许多一日游建议。",
+      "collocation": "numerous examples",
+      "collocation_prompt": "____ examples"
+    },
+    {
+      "word": "govern",
+      "sentence": "Clear rules ____ how the club makes decisions.",
+      "translation": "明确的规则支配着俱乐部如何作出决定。",
+      "collocation": "govern the process",
+      "collocation_prompt": "____ the process"
+    },
+    {
+      "word": "analyse",
+      "sentence": "We will ____ the survey results next week.",
+      "translation": "我们下周将分析调查结果。",
+      "collocation": "analyse the data",
+      "collocation_prompt": "____ the data"
+    },
+    {
+      "word": "resemble",
+      "sentence": "The puppy seems to ____ its mother.",
+      "translation": "这只小狗似乎很像它的母亲。",
+      "collocation": "resemble a painting",
+      "collocation_prompt": "____ a painting"
+    },
+    {
+      "word": "remote",
+      "sentence": "They live in a ____ mountain village.",
+      "translation": "他们住在一个偏远的山村。",
+      "collocation": "remote control",
+      "collocation_prompt": "____ control"
+    },
+    {
+      "word": "salary",
+      "sentence": "The advertised ____ includes health insurance.",
+      "translation": "广告中的薪水包括医疗保险。",
+      "collocation": "annual salary",
+      "collocation_prompt": "annual ____"
+    },
+    {
+      "word": "kettle",
+      "sentence": "The ____ boiled while I prepared the cups.",
+      "translation": "我准备杯子时，水壶烧开了。",
+      "collocation": "electric kettle",
+      "collocation_prompt": "electric ____"
+    },
+    {
+      "word": "wreck",
+      "sentence": "The old boat became a ____ after the storm.",
+      "translation": "暴风雨过后，那艘旧船成了残骸。",
+      "collocation": "car wreck",
+      "collocation_prompt": "car ____"
+    },
+    {
+      "word": "drunk",
+      "sentence": "He sounded ____ when he called after midnight.",
+      "translation": "他半夜打电话时听起来喝醉了。",
+      "collocation": "drunk driver",
+      "collocation_prompt": "____ driver"
+    },
+    {
+      "word": "calculate",
+      "sentence": "Please ____ the total before you pay.",
+      "translation": "付款前请计算总额。",
+      "collocation": "calculate the cost",
+      "collocation_prompt": "____ the cost"
+    },
+    {
+      "word": "persistent",
+      "sentence": "Her ____ questions helped reveal the error.",
+      "translation": "她持续追问，帮助发现了错误。",
+      "collocation": "persistent problem",
+      "collocation_prompt": "____ problem"
+    },
+    {
+      "word": "sake",
+      "sentence": "For the ____ of safety, keep this door closed.",
+      "translation": "为了安全起见，请关好这扇门。",
+      "collocation": "for the sake of safety",
+      "collocation_prompt": "for the ____ of safety"
+    },
+    {
+      "word": "audience",
+      "sentence": "The young singer thanked the ____ after the show.",
+      "translation": "演出结束后，年轻歌手向观众致谢。",
+      "collocation": "audience applause",
+      "collocation_prompt": "____ applause"
+    },
+    {
+      "word": "abrupt",
+      "sentence": "The bus made an ____ stop outside the station.",
+      "translation": "公交车在车站外突然停下。",
+      "collocation": "abrupt change",
+      "collocation_prompt": "____ change"
+    },
+    {
+      "word": "spacious",
+      "sentence": "The apartment has a bright, ____ kitchen.",
+      "translation": "这套公寓有一间明亮宽敞的厨房。",
+      "collocation": "spacious bedroom",
+      "collocation_prompt": "____ bedroom"
+    },
+    {
+      "word": "disapproval",
+      "sentence": "She noticed her parents' ____ when she mentioned the plan.",
+      "translation": "她提到这个计划时注意到父母的不赞成。",
+      "collocation": "express disapproval",
+      "collocation_prompt": "express ____"
+    },
+    {
+      "word": "spontaneous",
+      "sentence": "We made a ____ decision to visit the beach.",
+      "translation": "我们临时决定去海滩。",
+      "collocation": "spontaneous reaction",
+      "collocation_prompt": "____ reaction"
+    },
+    {
+      "word": "cafeteria",
+      "sentence": "I usually eat lunch in the campus ____.",
+      "translation": "我通常在校园自助食堂吃午饭。",
+      "collocation": "school cafeteria",
+      "collocation_prompt": "school ____"
+    },
+    {
+      "word": "rupture",
+      "sentence": "The pipe may ____ if the pressure rises further.",
+      "translation": "如果压力继续升高，这根管子可能会破裂。",
+      "collocation": "rupture a blood vessel",
+      "collocation_prompt": "____ a blood vessel"
+    },
+    {
+      "word": "virgin",
+      "sentence": "The hikers crossed a valley of ____ forest.",
+      "translation": "徒步者穿过了一片未经开发的森林。",
+      "collocation": "virgin soil",
+      "collocation_prompt": "____ soil"
+    },
+    {
+      "word": "afflict",
+      "sentence": "A recurring cough continued to ____ the child.",
+      "translation": "反复咳嗽一直折磨着这个孩子。",
+      "collocation": "afflict the region",
+      "collocation_prompt": "____ the region"
+    },
+    {
+      "word": "reproach",
+      "sentence": "She spoke without ____ when the mistake was found.",
+      "translation": "发现错误时，她没有责备任何人。",
+      "collocation": "reproach someone for a mistake",
+      "collocation_prompt": "____ someone for a mistake"
+    },
+    {
+      "word": "compartment",
+      "sentence": "I stored my bag in the overhead ____.",
+      "translation": "我把包放在头顶的隔间里。",
+      "collocation": "luggage compartment",
+      "collocation_prompt": "luggage ____"
+    },
+    {
+      "word": "gloomy",
+      "sentence": "The empty room felt ____ on that rainy afternoon.",
+      "translation": "那个下雨的下午，空房间显得阴沉沉的。",
+      "collocation": "gloomy outlook",
+      "collocation_prompt": "____ outlook"
+    },
+    {
+      "word": "kidnap",
+      "sentence": "The criminals planned to ____ the wealthy merchant.",
+      "translation": "这些罪犯计划绑架那位富商。",
+      "collocation": "kidnap a businessman",
+      "collocation_prompt": "____ a businessman"
+    },
+    {
+      "word": "pets not allowed",
+      "sentence": "The sign on the door reads \"____\".",
+      "translation": "门上的告示写着“不允许携带宠物”。",
+      "collocation": "pets not allowed",
+      "collocation_prompt": "____"
+    },
+    {
+      "word": "blackout",
+      "sentence": "A sudden ____ stopped the evening class.",
+      "translation": "突然停电使晚课中断。",
+      "collocation": "power blackout",
+      "collocation_prompt": "power ____"
+    },
+    {
+      "word": "emergency",
+      "sentence": "In an ____, use the stairs instead of the lift.",
+      "translation": "发生紧急情况时，请使用楼梯而不是升降梯。",
+      "collocation": "emergency exit",
+      "collocation_prompt": "____ exit"
+    },
+    {
+      "word": "fire gate",
+      "sentence": "The caretaker unlocked the ____ during the drill.",
+      "translation": "演练期间，管理员打开了消防门。",
+      "collocation": "fire gate key",
+      "collocation_prompt": "____ key"
+    },
+    {
+      "word": "lift",
+      "sentence": "We carried the boxes into the ____.",
+      "translation": "我们把箱子搬进升降梯。",
+      "collocation": "lift door",
+      "collocation_prompt": "____ door"
+    },
+    {
+      "word": "elevator",
+      "sentence": "The hotel ____ stops at every floor.",
+      "translation": "酒店升降梯每层都停。",
+      "collocation": "elevator button",
+      "collocation_prompt": "____ button"
+    },
+    {
+      "word": "attic",
+      "sentence": "We found an old suitcase in the ____.",
+      "translation": "我们在阁楼里发现了一个旧手提箱。",
+      "collocation": "attic window",
+      "collocation_prompt": "____ window"
+    },
+    {
+      "word": "twin room",
+      "sentence": "The hotel reserved a ____ for my sister and me.",
+      "translation": "酒店为我和妹妹预订了一间双人间。",
+      "collocation": "book a twin room",
+      "collocation_prompt": "book a ____"
+    },
+    {
+      "word": "stereo system",
+      "sentence": "The living room has a compact ____ for music.",
+      "translation": "客厅里有一套小型音响用来播放音乐。",
+      "collocation": "stereo system speakers",
+      "collocation_prompt": "____ speakers"
+    },
+    {
+      "word": "water heater",
+      "sentence": "The ____ stopped working before breakfast.",
+      "translation": "热水器在早餐前坏了。",
+      "collocation": "water heater repair",
+      "collocation_prompt": "____ repair"
+    },
+    {
+      "word": "vacuum cleaner",
+      "sentence": "The ____ is stored in the cupboard under the stairs.",
+      "translation": "吸尘器放在楼梯下的橱柜里。",
+      "collocation": "vacuum cleaner bag",
+      "collocation_prompt": "____ bag"
+    },
+    {
+      "word": "coffee maker",
+      "sentence": "The office ____ makes one pot at a time.",
+      "translation": "办公室咖啡机一次煮一壶。",
+      "collocation": "coffee maker filter",
+      "collocation_prompt": "____ filter"
+    },
+    {
+      "word": "refrigerator",
+      "sentence": "Please put the leftovers in the ____.",
+      "translation": "请把剩菜放进冰箱。",
+      "collocation": "refrigerator door",
+      "collocation_prompt": "____ door"
+    },
+    {
+      "word": "fridge",
+      "sentence": "There is fresh fruit in the ____.",
+      "translation": "冰箱里有新鲜水果。",
+      "collocation": "fridge freezer",
+      "collocation_prompt": "____ freezer"
+    },
+    {
+      "word": "bed linen",
+      "sentence": "The hotel changes the ____ every three days.",
+      "translation": "酒店每三天更换一次床上用品。",
+      "collocation": "clean bed linen",
+      "collocation_prompt": "clean ____"
+    },
+    {
+      "word": "real estate agency",
+      "sentence": "We found the flat through a local ____.",
+      "translation": "我们通过当地房屋中介找到了这套公寓。",
+      "collocation": "real estate agency fee",
+      "collocation_prompt": "____ fee"
+    },
+    {
+      "word": "property agency",
+      "sentence": "A nearby ____ helped us compare rental prices.",
+      "translation": "附近的房屋中介帮助我们比较租金。",
+      "collocation": "property agency website",
+      "collocation_prompt": "____ website"
+    },
+    {
+      "word": "landlord",
+      "sentence": "Our ____ repaired the broken window quickly.",
+      "translation": "我们的房东很快修好了坏窗户。",
+      "collocation": "landlord's permission",
+      "collocation_prompt": "____'s permission"
+    },
+    {
+      "word": "landlady",
+      "sentence": "The ____ left fresh towels outside our room.",
+      "translation": "女房东把干净毛巾放在我们房间外。",
+      "collocation": "landlady's house",
+      "collocation_prompt": "____'s house"
+    },
+    {
+      "word": "A.D.",
+      "sentence": "The museum dates the statue to ____ 120.",
+      "translation": "博物馆将这座雕像的年代定为公元120年。",
+      "collocation": "A.D. 120",
+      "collocation_prompt": "____ 120"
+    },
+    {
+      "word": "A.M.",
+      "sentence": "The clinic opens at 8 ____ on weekdays.",
+      "translation": "诊所工作日上午八点开门。",
+      "collocation": "8 A.M. appointment",
+      "collocation_prompt": "8 ____ appointment"
+    },
+    {
+      "word": "ASEAN",
+      "sentence": "The conference discussed trade among ____ members.",
+      "translation": "会议讨论了东盟成员之间的贸易。",
+      "collocation": "ASEAN countries",
+      "collocation_prompt": "____ countries"
+    },
+    {
+      "word": "Africa",
+      "sentence": "She hopes to visit ____ after finishing her studies.",
+      "translation": "她希望完成学业后去非洲旅行。",
+      "collocation": "trip to Africa",
+      "collocation_prompt": "trip to ____"
+    },
+    {
+      "word": "African",
+      "sentence": "The gallery displayed several ____ sculptures.",
+      "translation": "画廊展出了几件非洲雕塑。",
+      "collocation": "African art",
+      "collocation_prompt": "____ art"
+    },
+    {
+      "word": "America",
+      "sentence": "His family moved to ____ when he was young.",
+      "translation": "他小时候全家搬到了美国。",
+      "collocation": "North America",
+      "collocation_prompt": "North ____"
+    },
+    {
+      "word": "American",
+      "sentence": "The exchange student brought an ____ cookbook.",
+      "translation": "交换生带来了一本美国食谱。",
+      "collocation": "American English",
+      "collocation_prompt": "____ English"
+    },
+    {
+      "word": "Antarctic",
+      "sentence": "The museum has a small ____ research exhibit.",
+      "translation": "博物馆有一个小型南极研究展览。",
+      "collocation": "Antarctic expedition",
+      "collocation_prompt": "____ expedition"
+    },
+    {
+      "word": "April",
+      "sentence": "Our spring term ends in ____.",
+      "translation": "我们的春季学期在四月结束。",
+      "collocation": "April showers",
+      "collocation_prompt": "____ showers"
+    },
+    {
+      "word": "Arab",
+      "sentence": "The restaurant serves traditional ____ dishes.",
+      "translation": "这家餐馆供应传统阿拉伯菜肴。",
+      "collocation": "Arab culture",
+      "collocation_prompt": "____ culture"
+    },
+    {
+      "word": "Arabian",
+      "sentence": "The story is set in the ____ desert.",
+      "translation": "故事发生在阿拉伯沙漠。",
+      "collocation": "Arabian horse",
+      "collocation_prompt": "____ horse"
+    },
+    {
+      "word": "Arabic",
+      "sentence": "The sign was written in ____ and English.",
+      "translation": "这块标牌用阿拉伯语和英语书写。",
+      "collocation": "Arabic language",
+      "collocation_prompt": "____ language"
+    },
+    {
+      "word": "Asia",
+      "sentence": "The company now exports its tea across ____.",
+      "translation": "这家公司现在把茶叶出口到亚洲各地。",
+      "collocation": "East Asia",
+      "collocation_prompt": "East ____"
+    },
+    {
+      "word": "Asian",
+      "sentence": "The market sells fresh ____ vegetables.",
+      "translation": "这个市场出售新鲜的亚洲蔬菜。",
+      "collocation": "Asian cuisine",
+      "collocation_prompt": "____ cuisine"
+    },
+    {
+      "word": "Atlantic",
+      "sentence": "The ship sailed across the ____ Ocean.",
+      "translation": "这艘船横渡了大西洋。",
+      "collocation": "Atlantic coast",
+      "collocation_prompt": "____ coast"
+    },
+    {
+      "word": "Australia",
+      "sentence": "My cousin is studying in ____ this year.",
+      "translation": "我表弟今年在澳大利亚学习。",
+      "collocation": "tour of Australia",
+      "collocation_prompt": "tour of ____"
+    },
+    {
+      "word": "Australian",
+      "sentence": "The cafe serves an ____ breakfast on Sundays.",
+      "translation": "这家咖啡馆周日供应澳式早餐。",
+      "collocation": "Australian accent",
+      "collocation_prompt": "____ accent"
+    },
+    {
+      "word": "B.C.",
+      "sentence": "The temple was built around 300 ____",
+      "translation": "这座寺庙大约建于公元前300年。",
+      "collocation": "300 B.C.",
+      "collocation_prompt": "300 ____"
+    },
+    {
+      "word": "Brazilian",
+      "sentence": "He taught us a lively ____ dance.",
+      "translation": "他教我们跳一种活泼的巴西舞蹈。",
+      "collocation": "Brazilian coffee",
+      "collocation_prompt": "____ coffee"
+    },
+    {
+      "word": "Britain",
+      "sentence": "She plans to travel around ____ by train.",
+      "translation": "她计划乘火车游览英国。",
+      "collocation": "Great Britain",
+      "collocation_prompt": "Great ____"
+    }
+  ]
+}

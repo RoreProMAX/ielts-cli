@@ -1,5 +1,5 @@
 {
-  "bundle_version": "3.3.0-public.1",
+  "bundle_version": "3.3.1-beta.1-public.1",
   "sources": {
     "v1.0.0": {
       "source_version": "1.0.0",
@@ -20,6 +20,13 @@
       "source_version": "3.3.0",
       "original_test_summary": "Ran 147 tests in 41.785s\nOK",
       "original_release_manifest_sha256": "ca2ad95ce5420a2b5e6e8b11cd699ec66f33284e430f848d3a5c51fb5e2e7655"
+    },
+    "v3.3.1-beta.1": {
+      "source_version": "3.3.1-beta.1",
+      "base_version": "3.3.0",
+      "base_commit": "1b973b0360f5f80301f49574f3a7d863f9249b20",
+      "implementation": "repository beta patch; Windows VT rendering and optional beta update channel",
+      "linux_test_summary": "Ran 173 tests; OK"
     }
   },
   "portable_patches": {

@@ -2,7 +2,7 @@
 
 一个通用、轻量的终端英语练习工具：在普通终端、Agent Desktop 的 CLI 窗口，或开发与学习的空隙里随手练几分钟，不需要打开网页或接入另一套服务。它是独立的 Python 实现，受 Qwerty 打字学词思路启发，不是上游项目的官方 fork。
 
-默认运行 `apps/v3.3.0`，仓库同时保留 `apps/v1.0.0`、`apps/v2.0.0`、`apps/v3.2.0`。五本词库合计 19,086 个有效词条，按每章 20 词组织。
+默认源码/Beta 包运行 `apps/v3.3.1-beta.1`，仓库同时保留 `apps/v1.0.0`、`apps/v2.0.0`、`apps/v3.2.0`、`apps/v3.3.0`。稳定版下载仍使用 [stable Release](https://github.com/RoreProMAX/ielts-cli/releases/latest)；Beta 使用独立的 [v3.3.1-beta.1 Release](https://github.com/RoreProMAX/ielts-cli/releases/tag/v3.3.1-beta.1)。五本词库合计 19,086 个有效词条，按每章 20 词组织。
 
 ## 项目声明
 
@@ -19,7 +19,7 @@ git clone https://github.com/RoreProMAX/ielts-cli.git
 cd ielts-cli
 ```
 
-需要 Python 3.10+。Windows 安装 `windows-curses==2.4.2`：
+需要 Python 3.10+。V3.3.1-beta.1 在 Windows 使用标准库 VT 输出与原生 console 输入后端，主版本不再依赖 PDCurses 绘制；`windows-curses==2.4.2` 仍为旧版本和对照诊断依赖：
 
 ```powershell
 py -3 -m pip install -r requirements-windows.txt
@@ -39,8 +39,8 @@ python3 launcher.py --app-version 3
 - 中选英和默写显示词库已有的完整中文释义；长释义可以翻页。
 - F7/Ctrl+D 选词库，F8/Ctrl+K 选章节，F9/Ctrl+B 进入或暂停到期复习，F11/Ctrl+Y 查看今日任务。
 - 每日任务完成后默认进入增量例句与搭配练习；当前材料覆盖 124 个词。学习过程中加入例句默认关闭，可在 Esc 菜单的学习计划中开启；从增量例句返回菜单后可继续单词学习。
-- V3.3 启动时可在后台检查 GitHub 公开 stable Release；默认开启，可从 Esc 菜单“版本与更新”或学习计划中关闭。只在用户确认后下载并安装，更新不抢题、不自动重启。
-- 自动更新从 V3.3.0 开始；V3.2.0 及更早版本需先手动切换到 V3.3.0 一次。`--no-update` 仅本次使用原入口版本并跳过检查，不修改开关。
+- V3.3.1-beta.1 启动时默认后台检查公开 stable Release；更新通道默认为 stable，Esc 菜单“版本与更新”可选择 beta。Beta 通道只接受高于当前版本的 stable/beta，不降级；只在用户确认后下载并安装，更新不抢题、不自动重启。稳定用户不会收到 Beta。
+- V3.3.0 及更早版本没有 Beta 通道入口；首次体验需手动下载 V3.3.1-beta.1，开启 beta 通道后才会检查后续 Beta。无需先安装中间版本。`--no-update` 仅本次使用原入口版本并跳过检查，不修改开关。
 - 增量练习不抬高正常新词/复习目标；到期量不足时按实际数量处理。
 - 文字练习可离线。发音依赖 PATH 中的 `ffplay`，首次取某词音频需联网，之后使用本地缓存。
 
@@ -69,7 +69,7 @@ python3 launcher.py --verify
 
 ## 当前状态与许可证
 
-V3.3 通用版已在 Linux 通过 150 项测试，含更新器与学习会话回归；远端结果见仓库 Actions。Windows/macOS 真实 Desktop 交互仍未验收。已知限制和缺陷见 [STATUS.md](docs/STATUS.md)。
+V3.3.1-beta.1 的测试与真实终端验收以当前验收记录和仓库 Actions 为准，文档不预先宣称 Windows/macOS 通过。V3.3.0 的 Windows PDCurses 中文重绘失败保留在 [STATUS.md](docs/STATUS.md) 作为历史基线。已知限制和缺陷见 [STATUS.md](docs/STATUS.md)。
 
 自有代码使用 GPL-3.0，见 [LICENSE](LICENSE)。词库来源的独立 MIT notice、固定 commit、原始 URL 和 SHA-256 见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 及各版本 `data/source.json`。
 

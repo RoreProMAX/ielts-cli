@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>IELTS CLI Portable 3.3.0 部署指南</title><style>
+<title>IELTS CLI Portable 3.3.1-beta.1 部署指南</title><style>
   :root { --blue:#1f6feb; --navy:#0b3d91; --ink:#1a2330; --mut:#5b6573;
           --code-bg:#1e2430; --code-fg:#e6edf3; --line:#e2e6ec; }
   * { box-sizing:border-box; }
@@ -59,14 +59,14 @@
 </style></head>
 <body><div class="wrap"><div class="card">
 <nav class="toc"><b>目录 <span class="reset" onclick="resetCk()">［清空勾选］</span></b><a href="#sec0">先看结论</a><a href="#sec1">系统要求和外部依赖</a><a href="#sec2">下载、解压和第一次启动</a><a href="#sec3">入口和版本选择</a><a href="#sec4">数据位置、迁移和分享</a><a href="#sec5">网络、音频和离线边界</a><a href="#sec6">V3.3 版本更新</a><a href="#sec7">Linux 后台提醒</a><a href="#sec8">故障排查</a><a href="#sec9">已测边界</a><a href="#sec10">词库来源与许可证 notice</a></nav>
-<h1>IELTS CLI Portable 3.3.0 部署指南</h1>
-<p>这是一份给新电脑使用者和朋友的单文件 ZIP 部署说明。交付包名：<code>IELTS-CLI-Portable-3.3.0.zip</code>。</p>
+<h1>IELTS CLI Portable 3.3.1-beta.1 部署指南</h1>
+<p>这是一份给新电脑使用者和朋友的单文件 ZIP 部署说明。Beta 包名：<code>IELTS-CLI-Portable-3.3.1-beta.1.zip</code>；稳定版仍从 <code>releases/latest</code> 获取。</p>
 <h2 id="sec0">先看结论</h2>
 <ul>
 <li>解压后，ZIP 根目录应直接包含 <code>launcher.py</code>、<code>start.sh</code>、<code>start.command</code>、<code>start.bat</code>；不要再进入第二层同名目录。</li>
 <li>包内含程序和 5 本词库，不含 Python、<code>ffplay</code>、网络音频缓存或学习记录。</li>
 <li>V3 默认只使用本机系统用户目录；首次运行默认不导入旧进度。</li>
-<li><code>--portable</code> 把程序数据写入 ZIP 解压目录内的 <code>user-data/versions/3.3.0/</code>，发音缓存写入 <code>user-data/cache/ielts-cli/audio/</code>。</li>
+<li><code>--portable</code> 把程序数据写入 ZIP 解压目录内的 <code>user-data/versions/3.3.1-beta.1/</code>，发音缓存写入 <code>user-data/cache/ielts-cli/audio/</code>。</li>
 <li>发音需要联网下载音频，并且本机 PATH 中有 <code>ffplay</code>。没有它仍可使用文字练习，只有播放失败。</li>
 <li>Python 和播放组件需要用户自行准备。</li>
 </ul>
@@ -74,9 +74,9 @@
 <table><thead><tr><th>平台</th><th>必需</th><th>发音播放</th><th>后台提醒</th></tr></thead><tbody>
 <tr><td>Linux</td><td>Python 3.10+（含标准库 <code>curses</code>）</td><td>FFmpeg 包中的 <code>ffplay</code></td><td>可选 <code>systemd --user</code> + <code>notify-send</code></td></tr>
 <tr><td>macOS</td><td>Python 3.10+（含标准库 <code>curses</code>）</td><td>FFmpeg 的 <code>ffplay</code></td><td>使用程序内提醒</td></tr>
-<tr><td>Windows</td><td>Python 3.10+ 与 <code>windows-curses</code></td><td>Windows FFmpeg 构建中的 <code>ffplay.exe</code></td><td>使用程序内提醒</td></tr>
+<tr><td>Windows</td><td>Python 3.10+；Beta 主路径使用标准库 VT/native console</td><td>Windows FFmpeg 构建中的 <code>ffplay.exe</code></td><td>使用程序内提醒</td></tr>
 </tbody></table>
-<p>建议使用 64 位 Python。Windows 原生终端还需要安装与当前 Python 相匹配的 <code>windows-curses</code> wheel。</p>
+<p>建议使用 64 位 Python。V3.3.1-beta.1 主路径使用标准库 VT/native console；<code>windows-curses==2.4.2</code> 保留给旧版本和对照诊断。</p>
 <h3>Windows：Python 和 windows-curses</h3>
 <ol>
 <li>从 [Python 官方 Windows 下载页](https://www.python.org/downloads/windows/) 安装 Python 3.10 或更高版本。安装器中勾选 “Add Python to PATH”（若界面提供）。也可使用 Python 官方安装管理器；官方文档给出的 WinGet 命令是：</li>
@@ -119,7 +119,7 @@ ffplay -version</code></pre>
 sudo apt install python3 python3-venv unzip</code></pre>
 <p>将 ZIP 放在任意目录。路径可以包含空格和中文，但命令中的路径必须用引号包住：</p>
 <pre class="code" data-lang="bash"><code>mkdir -p &quot;$HOME/Apps/IELTS CLI&quot;
-unzip &quot;IELTS-CLI-Portable-3.3.0.zip&quot; -d &quot;$HOME/Apps/IELTS CLI&quot;
+unzip &quot;IELTS-CLI-Portable-3.3.1-beta.1.zip&quot; -d &quot;$HOME/Apps/IELTS CLI&quot;
 cd &quot;$HOME/Apps/IELTS CLI&quot;
 chmod +x start.sh
 ./start.sh</code></pre>
@@ -139,7 +139,7 @@ chmod +x start.command
 python launcher.py --app-version 3</code></pre>
 <p>路径中的空格和中文不需要改名；PowerShell 的路径参数请保留双引号。不要直接双击 <code>launcher.py</code>，因为窗口可能在错误出现后立即关闭。</p>
 <h2 id="sec3">入口和版本选择</h2>
-<p>默认启动 V3：</p>
+<p>默认启动 V3.3.1-beta.1：</p>
 <pre class="code" data-lang="text"><code>Linux/macOS: ./start.sh              （或 ./start.command）
 Windows:     start.bat
 通用:        python launcher.py --app-version 3</code></pre>
@@ -156,6 +156,7 @@ python3 launcher.py --verify</code></pre>
 <h2 id="sec4">数据位置、迁移和分享</h2>
 <h3>默认模式</h3>
 <p>默认模式把当前版本数据放在当前系统用户目录的以下位置：</p>
+<p>以下是稳定版 V3.3.0 的既有目录；Beta 包使用同样的平台根目录下的 <code>versions/3.3.1-beta.1/</code>，两者按版本隔离。</p>
 <pre class="code" data-lang="text"><code>Linux:  ${XDG_DATA_HOME:-~/.local/share}/ielts-cli-portable/versions/3.3.0/
 macOS:  ~/Library/Application Support/IELTS-CLI-Portable/versions/3.3.0/
 Windows: %LOCALAPPDATA%\IELTS-CLI-Portable\versions\3.3.0\</code></pre>
@@ -169,16 +170,16 @@ cp -a &quot;旧包/user-data/versions/3.2.0&quot; &quot;新包/user-data/version
 <pre class="code" data-lang="bash"><code>python3 launcher.py --app-version 3 --portable</code></pre>
 <p>Windows 使用：</p>
 <pre class="code" data-lang="powershell"><code>python launcher.py --app-version 3 --portable</code></pre>
-<p>数据写入包内 <code>user-data/versions/3.3.0/</code>，发音缓存写入 <code>user-data/cache/ielts-cli/audio/</code>。整个解压目录可以复制到 U 盘或另一台电脑；目标电脑仍须有匹配的 Python、Windows 的 <code>windows-curses</code>（若适用）和 <code>ffplay</code>。复制前退出程序，复制后先运行 <code>--doctor</code> 和 <code>--verify</code>。</p>
+<p>稳定版数据写入包内 <code>user-data/versions/3.3.0/</code>；Beta 数据写入 <code>user-data/versions/3.3.1-beta.1/</code>。发音缓存写入 <code>user-data/cache/ielts-cli/audio/</code>。整个解压目录可以复制到 U 盘或另一台电脑；目标电脑仍须有匹配的 Python 和 <code>ffplay</code>。旧版本若使用 <code>windows-curses</code>，保留相应依赖；V3.3.1-beta.1 主路径不依赖 PDCurses 绘制。复制前退出程序，复制后先运行 <code>--doctor</code> 和 <code>--verify</code>。</p>
 <h3>发给朋友的清洁副本</h3>
 <p>请从原始、未启动过的 <code>IELTS-CLI-Portable-3.3.0.zip</code> 发送。压缩内容只保留程序、词库、启动脚本、来源和校验文件；自己的 <code>user-data/</code>、<code>cache/</code> 和日志不放入分享包。可解压到临时目录检查根目录和 <code>user-data/</code>，再运行 <code>--verify</code>。</p>
 <h2 id="sec5">网络、音频和离线边界</h2>
 <p>词库和终端界面可在无网络时运行。发音第一次播放某个词时需要联网下载音频，成功缓存后可离线重播；ZIP 本身不含音频缓存。</p>
 <p>没有网络时，程序给出播放失败提示，文字练习仍可继续。没有 <code>ffplay</code> 时，<code>--doctor</code> 报告缺失；安装后重新打开终端再检查。</p>
 <h2 id="sec6">V3.3 版本更新</h2>
-<p>自动更新从 V3.3.0 开始提供。V3.2.0 及更早用户需先手动安装/切换到 V3.3.0 一次，旧版不会自行更新。V3.3 启动时默认在后台检查 <code>RoreProMAX/ielts-cli</code> 的公开 stable Release。检查仅在程序运行时进行，不安装 systemd，不自动下载、安装或重启，也不打断当前学习。Esc 菜单 10“版本与更新”及学习计划中的“启动时检查稳定版本”可查看或关闭该开关；菜单内部选项编号随状态动态显示；无网络或 GitHub 限流时继续正常学习。</p>
+<p>自动更新从 V3.3.0 开始提供。V3.3.0 及更早版本没有 Beta 入口。首次需手动安装 V3.3.1-beta.1，开启 beta channel 后才会检查后续 Beta；无需先安装中间版本。V3.3.1-beta.1 启动时默认后台检查公开 stable Release；Esc 菜单 10“版本与更新”可切换 channel。稳定用户不会收到 Beta。</p>
 <p>更新页先让用户选择“下载并校验 vX”；下载完成后再选择“保存进度并重启到 vX”或“下次启动使用 vX”。选择“暂不更新，继续当前练习”只收起本次会话提示。更新器只接受 stable Release，并校验官方 asset 的 SHA-256 与 ZIP 清单；文件下载到当前进度目录 <code>updates/releases/&lt;version&gt;</code>。自动更新沿用当前同一进度目录，区别于手工复制到新版本目录的跨版本迁移。启用前先把 JSON 与 SQLite 备份到 <code>updates/backups</code>，<code>update_settings.json</code> 保存开关，<code>updates/active.json</code> 保存激活指针。旧程序和旧 ZIP 保留；<code>--no-update</code> 仅本次使用原入口版本并跳过检查，不修改用户设置。更新不上传个人词库或进度，也不升级 Python、<code>windows-curses</code>、<code>ffplay</code> 或词库。</p>
-<p>命令行配置：<code>--configure --auto-update-check on|off</code>；只读查看：<code>--update-status</code>；本次跳过：<code>--no-update</code>。测试隔离网络时设置 <code>IELTS_DISABLE_UPDATE_CHECK=1</code>。</p>
+<p>命令行配置：<code>--configure --auto-update-check on|off</code>、<code>--configure --update-channel stable|beta</code>；只读查看：<code>--update-status</code>；本次跳过：<code>--no-update</code>。测试隔离网络时设置 <code>IELTS_DISABLE_UPDATE_CHECK=1</code>。</p>
 <h2 id="sec7">Linux 后台提醒</h2>
 <p>后台提醒适用于 Linux 的 <code>systemd --user</code> 会话，并依赖 <code>notify-send</code>。Ubuntu/Debian 可运行 <code>sudo apt install libnotify-bin</code> 安装通知工具。本包使用独立的 <code>ielts-cli-portable-review.timer</code>，默认不启用；Linux 上执行：</p>
 <pre class="code" data-lang="bash"><code>python3 launcher.py --app-version 3 --reminders enable --reminder-minutes 30
@@ -202,7 +203,7 @@ python3 launcher.py --app-version 3 --reminders disable</code></pre>
 <p>各版的 <code>apps/v*/data/QWERTY-VSCODE-LICENSE.txt</code> 和来源元数据随包保留。上游仓库为 [RealKai42/qwerty-learner-vscode](https://github.com/RealKai42/qwerty-learner-vscode)，固定提交为 <code>e0dc7a09a5e0946d77b2c279f72a89daf3659b97</code>，许可证来源为该提交的 [LICENSE](https://raw.githubusercontent.com/RealKai42/qwerty-learner-vscode/e0dc7a09a5e0946d77b2c279f72a89daf3659b97/LICENSE)。</p>
 <p>词库释义未逐词校订。再分发时保留上游 notice 和来源文件。</p>
 <hr>
-<p>文档面向：<code>IELTS-CLI-Portable-3.3.0.zip</code></p>
+<p>文档面向：<code>IELTS-CLI-Portable-3.3.1-beta.1.zip</code></p>
 </div></div>
 <script>
   var KEY = "md_ck_" + location.pathname;
