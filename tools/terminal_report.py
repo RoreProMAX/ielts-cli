@@ -56,7 +56,9 @@ def write_report(output_dir: Path, report: dict, frames: list[dict]) -> None:
     (output_dir / "screens.txt").write_text(screens, encoding="utf-8")
 
     payload = _json_for_script({"report": report_data, "frames": frame_data})
-    html = """<!doctype html>
+    # Raw template keeps JavaScript escape sequences (for example ``\n`` in
+    # ``join('\\n')``) intact instead of turning them into source newlines.
+    html = r"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Terminal replay report</title>
 <style>
@@ -87,4 +89,3 @@ fill();render();
 </script></body></html>
 """ % payload
     (output_dir / "replay.html").write_text(html, encoding="utf-8")
-

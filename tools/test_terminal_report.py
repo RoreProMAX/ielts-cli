@@ -1,4 +1,7 @@
 import json
+import re
+import shutil
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -17,8 +20,23 @@ class TerminalReportTests(unittest.TestCase):
             self.assertNotIn("</script>", html.split('id="report-data"', 1)[1].split("</script>", 1)[0])
             self.assertIn("\\u003c/script\\u003e", html)
             self.assertIn('"cols":4', html)
+            self.assertIn(".join('\\n')", html)
             self.assertEqual(json.loads((Path(directory) / "frames.json").read_text()), frames)
             self.assertIn("bad </script>", (Path(directory) / "screens.txt").read_text(encoding="utf-8"))
+
+            node = shutil.which("node")
+            script_match = re.search(r"<script>\n(.*?)\n</script>", html, re.DOTALL)
+            self.assertIsNotNone(script_match)
+            if node:
+                script_path = Path(directory) / "replay.js"
+                script_path.write_text(script_match.group(1), encoding="utf-8")
+                result = subprocess.run(
+                    [node, "--check", str(script_path)],
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                )
+                self.assertEqual(result.returncode, 0, result.stderr)
 
     def test_empty_frames_make_failure_replay(self):
         report = {"schema_version": 1, "platform": "test", "python": "3", "backend": "pty", "passed": False, "steps": [], "failure": "no frames", "limits": []}
