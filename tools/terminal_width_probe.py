@@ -39,23 +39,34 @@ def console_cells():
         _fields_ = [('char', Char), ('attributes', wintypes.WORD)]
 
     api = ctypes.WinDLL('kernel32', use_last_error=True)
-    api.GetStdHandle.argtypes = [wintypes.DWORD]
-    api.GetStdHandle.restype = wintypes.HANDLE
-    handle = api.GetStdHandle(wintypes.DWORD(-11))
+    # PDCurses activates its own screen buffer. The inherited STD_OUTPUT_HANDLE
+    # can still name the original blank buffer, so open the active CONOUT$.
+    api.CreateFileW.argtypes = [wintypes.LPCWSTR, wintypes.DWORD, wintypes.DWORD,
+                               ctypes.c_void_p, wintypes.DWORD, wintypes.DWORD, wintypes.HANDLE]
+    api.CreateFileW.restype = wintypes.HANDLE
+    api.CloseHandle.argtypes = [wintypes.HANDLE]
+    api.CloseHandle.restype = wintypes.BOOL
+    handle = api.CreateFileW('CONOUT$', 0x80000000, 3, None, 3, 0, None)
+    if handle in (None, wintypes.HANDLE(-1).value):
+        raise OSError(ctypes.get_last_error(), 'Opening active CONOUT$ failed')
     api.GetConsoleScreenBufferInfo.argtypes = [wintypes.HANDLE, ctypes.POINTER(Info)]
     api.GetConsoleScreenBufferInfo.restype = wintypes.BOOL
-    info = Info()
-    if not api.GetConsoleScreenBufferInfo(handle, ctypes.byref(info)):
-        raise OSError(ctypes.get_last_error(), 'GetConsoleScreenBufferInfo failed')
-    api.ReadConsoleOutputW.argtypes = [wintypes.HANDLE, ctypes.POINTER(Cell), Coord, Coord, ctypes.POINTER(Rect)]
-    api.ReadConsoleOutputW.restype = wintypes.BOOL
-    cells = (Cell * 12)()
-    region = Rect(0, info.window.Top, 11, info.window.Top)
-    if not api.ReadConsoleOutputW(handle, cells, Coord(12, 1), Coord(0, 0), ctypes.byref(region)):
-        raise OSError(ctypes.get_last_error(), 'ReadConsoleOutputW failed')
-    return {'cursor_x': info.cursor.X, 'cursor_y': info.cursor.Y,
-            'cells': [{'x': index, 'text': cell.char.unicode, 'attributes': cell.attributes}
-                      for index, cell in enumerate(cells)]}
+    try:
+        info = Info()
+        if not api.GetConsoleScreenBufferInfo(handle, ctypes.byref(info)):
+            raise OSError(ctypes.get_last_error(), 'GetConsoleScreenBufferInfo failed')
+        api.ReadConsoleOutputW.argtypes = [wintypes.HANDLE, ctypes.POINTER(Cell), Coord, Coord, ctypes.POINTER(Rect)]
+        api.ReadConsoleOutputW.restype = wintypes.BOOL
+        cells = (Cell * 12)()
+        region = Rect(0, info.window.Top, 11, info.window.Top)
+        if not api.ReadConsoleOutputW(handle, cells, Coord(12, 1), Coord(0, 0), ctypes.byref(region)):
+            raise OSError(ctypes.get_last_error(), 'ReadConsoleOutputW failed')
+        return {'read_handle': 'CONOUT$ active screen buffer',
+                'cursor_x': info.cursor.X, 'cursor_y': info.cursor.Y,
+                'cells': [{'x': index, 'text': cell.char.unicode, 'attributes': cell.attributes}
+                          for index, cell in enumerate(cells)]}
+    finally:
+        api.CloseHandle(handle)
 
 
 def child(destination, utf8):
@@ -84,6 +95,8 @@ def child(destination, utf8):
             screen.refresh()
             try:
                 native = console_cells()
+                if sample == 'ABC':
+                    native['ascii_control_matches'] = ''.join(cell['text'] for cell in native['cells'][:3]) == 'ABC'
             except OSError as error:
                 native = {'read_error': str(error)}
             result['measurements'].append({'sample': sample, 'expected_wcswidth_columns': expected,

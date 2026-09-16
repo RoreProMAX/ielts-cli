@@ -22,6 +22,13 @@
 
 真实 PTY/ConPTY 交互与可下载回放由单独的 CI 任务执行，覆盖 Linux、macOS ARM/Intel 和 Windows；对应运行结果及范围见 [终端兼容测试](TERMINAL_TESTING.md)。它与实体终端宿主的人工验收分别记录。
 
+## 2026-09-16 真实终端回归结果
+
+- Linux、macOS 15 ARM64 与 Intel：固定的 10 步交互场景通过，含例句往返、更新设置、F9/F11、缩放、保存和重启恢复。
+- Windows Server 2025 / ConPTY：启动、单词输入、例句往返和更新菜单可运行，但中文局部重绘失败，存在文字重叠与覆盖；不应将 Windows 中文全屏界面标记为兼容通过。
+- F11 已传递到应用并触发今日任务输出。失败来自输出列宽：当前 `windows-curses 2.4.2` 的 PDCurses 将“中文”计为 2 列，双列 CJK 模型应为 4 列；显式设置 UTF-8 控制台与 locale 后仍为 2 列。
+- [真实运行与产物](https://github.com/RoreProMAX/ielts-cli/actions/runs/35054748971)保存了每个平台的回放和 Windows 宽度诊断。Windows 测试保持失败，不通过降低屏幕断言来放行；下一步需修正 Windows 绘制后端的双列字符模型。
+
 ## 已知限制与缺陷
 
 - 例句与搭配只有 124 词，不能覆盖全部字库；缺少材料时相关题型会跳过或回退。
